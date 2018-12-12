@@ -1,0 +1,1348 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ru_plot &#8212; clipt (0.0.0) 0.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tips" href="tips.html" />
+    <link rel="prev" title="clipt.plot" href="clipt.plot.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">clipt (0.0.0)</a></h1>
+
+
+
+
+
+
+
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clipt.plot.html">clipt.plot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ru_plot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ru-plot-bar">bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ru-plot-box">box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ru-plot-colors">colors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ru-plot-heatmap">heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ru-plot-histo">histo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ru-plot-scatter">scatter</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tips.html">Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="search.html">Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Todo</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ru-plot">
+<h1>ru_plot<a class="headerlink" href="#ru-plot" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ru_plot <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+</pre></div>
+</div>
+<p>help configuration and process management commands.</p>
+<p class="rubric">Options</p>
+<p class="rubric">VALUE OPTIONS:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-c">
+<code class="descname">-c</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--config</code><code class="descclassname"> &lt;config&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-c" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-ca">
+<code class="descname">-ca</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--configalias</code><code class="descclassname"> &lt;configalias&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-ca" title="Permalink to this definition">¶</a></dt>
+<dd><p>store config in alias section. use to store multiplesettings for same command</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-oc">
+<code class="descname">-oc</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--outconfig</code><code class="descclassname"> &lt;outconfig&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-oc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT TRUE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-inputalias">
+<code class="descname">--inputalias</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-inputalias</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-inputalias" title="Permalink to this definition">¶</a></dt>
+<dd><p>if true uses -ca for loading settings  [default: True]</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT FALSE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-version">
+<code class="descname">--version</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the version and exit.  [default: False]</p>
+</dd></dl>
+
+<div class="section" id="ru-plot-bar">
+<h2>bar<a class="headerlink" href="#ru-plot-bar" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ru_plot bar <span class="o">[</span>OPTIONS<span class="o">]</span> DATAF
+</pre></div>
+</div>
+<p>dataf should be a tsv or csv with the following format: xaxis label,
+series1 ,series2, etc.. category1, 0,0,… category2, 0,0,… etc…,…</p>
+<p>arguments:</p>
+<ul class="simple">
+<li>dataf: data file to plot</li>
+</ul>
+<p class="rubric">Arguments</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-arg-dataf">
+<code class="descname">DATAF</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-arg-dataf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+<p class="rubric">Options</p>
+<p class="rubric">VALUE OPTIONS:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-alpha">
+<code class="descname">-alpha</code><code class="descclassname"> &lt;alpha&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>transparency for background  [default: 0.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-axes">
+<code class="descname">-axes</code><code class="descclassname"> &lt;axes&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>enter as xname,xmin,xmax,yname,ymin,ymax - default usesmin and max of data enter xmin etc to maintain autoscale  [default: X,0,10,Y,0,ymax]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-background">
+<code class="descname">-background</code><code class="descclassname"> &lt;background&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-background" title="Permalink to this definition">¶</a></dt>
+<dd><p>background image for graph area</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-bg">
+<code class="descname">-bg</code><code class="descclassname"> &lt;bg&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-bg" title="Permalink to this definition">¶</a></dt>
+<dd><p>background color  [default: white]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-bottom">
+<code class="descname">-bottom</code><code class="descclassname"> &lt;bottom&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-bottom" title="Permalink to this definition">¶</a></dt>
+<dd><p>use with polar to set bottom of y-axis same units as axes  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-brng">
+<code class="descname">-brng</code><code class="descclassname"> &lt;brng&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-brng" title="Permalink to this definition">¶</a></dt>
+<dd><p>range within axes limits that bars are plotted  [default: 0 1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-bwidth">
+<code class="descname">-bwidth</code><code class="descclassname"> &lt;bwidth&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-bwidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>relative width of bars  [default: 0.8]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-colors">
+<code class="descname">-colors</code><code class="descclassname"> &lt;colors&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>cmap name* or space seperated list of rgb tuples 0,0,0 120,120,120 etc. if fewer than # series picks .from gradient includes ru_colors: ‘blu’, ‘org’, ‘pur’, ‘red’, ‘blg’, ‘mag’, ‘brn’, ‘grn’, ‘yel’, ‘ggr’, ‘dark’, ‘med’, ‘light’, ‘xlight’  [default: med]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-comment">
+<code class="descname">-comment</code><code class="descclassname"> &lt;comment&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>regex “^[{}].*” indicating comment line indicator  [default: #]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-dpi">
+<code class="descname">-dpi</code><code class="descclassname"> &lt;dpi&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-dpi" title="Permalink to this definition">¶</a></dt>
+<dd><p>image dpi  [default: 200]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-drange">
+<code class="descname">-drange</code><code class="descclassname"> &lt;drange&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-drange" title="Permalink to this definition">¶</a></dt>
+<dd><p>index range for data series, if None gets all</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-ecolors">
+<code class="descname">-ecolors</code><code class="descclassname"> &lt;ecolors&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-ecolors" title="Permalink to this definition">¶</a></dt>
+<dd><p>marker edge colors  [default: 1,1,1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-epositions">
+<code class="descname">-epositions</code><code class="descclassname"> &lt;epositions&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-epositions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping pointselse positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-estep">
+<code class="descname">-estep</code><code class="descclassname"> &lt;estep&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-estep" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-ew">
+<code class="descname">-ew</code><code class="descclassname"> &lt;ew&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-ew" title="Permalink to this definition">¶</a></dt>
+<dd><p>bar edge width  [default: 0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-fcol">
+<code class="descname">-fcol</code><code class="descclassname"> &lt;fcol&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-fcol" title="Permalink to this definition">¶</a></dt>
+<dd><p>colormap position for first color  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-fg">
+<code class="descname">-fg</code><code class="descclassname"> &lt;fg&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-fg" title="Permalink to this definition">¶</a></dt>
+<dd><p>foreground color  [default: black]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-height">
+<code class="descname">-height</code><code class="descclassname"> &lt;height&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-height" title="Permalink to this definition">¶</a></dt>
+<dd><p>image height  [default: 5.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-labels">
+<code class="descname">-labels</code><code class="descclassname"> &lt;labels&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>input custom series labels, by default uses file name and index or –header option</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-outf">
+<code class="descname">-outf</code><code class="descclassname"> &lt;outf&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-outf" title="Permalink to this definition">¶</a></dt>
+<dd><p>graph output file (defaults to basename of first dataf)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-positions">
+<code class="descname">-positions</code><code class="descclassname"> &lt;positions&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping points else positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-rwidth">
+<code class="descname">-rwidth</code><code class="descclassname"> &lt;rwidth&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-rwidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>relative width of bar clusters  [default: 0.95]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-step">
+<code class="descname">-step</code><code class="descclassname"> &lt;step&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-step" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-width">
+<code class="descname">-width</code><code class="descclassname"> &lt;width&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-width" title="Permalink to this definition">¶</a></dt>
+<dd><p>image width  [default: 10.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-xlabels">
+<code class="descname">-xlabels</code><code class="descclassname"> &lt;xlabels&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-xlabels" title="Permalink to this definition">¶</a></dt>
+<dd><p>input custom xaxis labels, by default uses file name androw number or –xheader option</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-xticks">
+<code class="descname">-xticks</code><code class="descclassname"> &lt;xticks&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-xticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of x-ticks/gridlines</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-y-vals">
+<code class="descname">-y_vals</code><code class="descclassname"> &lt;y_vals&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-y-vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>index for yvals  [default: -1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-yticks">
+<code class="descname">-yticks</code><code class="descclassname"> &lt;yticks&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-bar-yticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of y-ticks/gridlines</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT TRUE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-legend">
+<code class="descname">--legend</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-legend</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-legend" title="Permalink to this definition">¶</a></dt>
+<dd><p>include legend in plot  [default: True]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-polar0">
+<code class="descname">--polar0</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-polar0</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-polar0" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot center of first bar at xmin  [default: True]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-polarauto">
+<code class="descname">--polarauto</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-polarauto</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-polarauto" title="Permalink to this definition">¶</a></dt>
+<dd><p>ignore x-axis min,max and plot 0-60  [default: True]</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT FALSE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-areaonly">
+<code class="descname">--areaonly</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-areaonly</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-areaonly" title="Permalink to this definition">¶</a></dt>
+<dd><p>only plot plot area, no legend or axes, for use as background  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-front">
+<code class="descname">--front</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-front</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-front" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot background in front of data  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-header">
+<code class="descname">--header</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-header</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-header" title="Permalink to this definition">¶</a></dt>
+<dd><p>indicates that data has a header row to get series labels (overridden by labels)  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-polar">
+<code class="descname">--polar</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-polar</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-polar" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot on polar axes  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-rows">
+<code class="descname">--rows</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-rows</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>get data rows instead of columns  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-stacked">
+<code class="descname">--stacked</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-stacked</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-stacked" title="Permalink to this definition">¶</a></dt>
+<dd><p>make stacked bars  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-ticklines">
+<code class="descname">--ticklines</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ticklines</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-ticklines" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot tick lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-weatherfile">
+<code class="descname">--weatherfile</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-weatherfile</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-weatherfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>input files will be read as weather files: 0 month, 1 day, 2 hour, 3 dirnorn, 4 difhoriz, 5 globhoriz, 6 skycover  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-xgrid">
+<code class="descname">--xgrid</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-xgrid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-xgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot x grid lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-xheader">
+<code class="descname">--xheader</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-xheader</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-xheader" title="Permalink to this definition">¶</a></dt>
+<dd><p>indicates that data has a header column to get x-axis labels (overridden by xlabels)  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-ygrid">
+<code class="descname">--ygrid</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ygrid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-ygrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot y grid lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-ylog">
+<code class="descname">--ylog</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ylog</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-ylog" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot y on log scale  [default: False]</p>
+</dd></dl>
+
+<p class="rubric">HELP:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-opts">
+<code class="descname">-opts</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--opts</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>check parsed options  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-bar-debug">
+<code class="descname">--debug</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-bar-debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>show traceback on exceptions  [default: False]</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ru-plot-box">
+<h2>box<a class="headerlink" href="#ru-plot-box" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ru_plot box <span class="o">[</span>OPTIONS<span class="o">]</span> ARG1
+</pre></div>
+</div>
+<p>create histogram from data files.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">generate script options and write def</p>
+</div>
+<p class="rubric">Arguments</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-box-arg-arg1">
+<code class="descname">ARG1</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-box-arg-arg1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+<p class="rubric">Options</p>
+<p class="rubric">HELP:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-box-opts">
+<code class="descname">-opts</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--opts</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-box-opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>check parsed options  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-box-debug">
+<code class="descname">--debug</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-box-debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>show traceback on exceptions  [default: False]</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ru-plot-colors">
+<h2>colors<a class="headerlink" href="#ru-plot-colors" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ru_plot colors <span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p>create plot color palettes and formatted rgbs</p>
+<p class="rubric">Options</p>
+<p class="rubric">VALUE OPTIONS:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-colors-outf">
+<code class="descname">-outf</code><code class="descclassname"> &lt;outf&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-colors-outf" title="Permalink to this definition">¶</a></dt>
+<dd><p>output file</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT TRUE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-colors-rgb">
+<code class="descname">--rgb</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-tgb</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-colors-rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>print rgb values for radutil  [default: True]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-colors-ru">
+<code class="descname">--ru</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--mat</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-colors-ru" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot radutil colors (–mat plots matplotlib)  [default: True]</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT FALSE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-colors-radf">
+<code class="descname">--radf</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-radf</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-colors-radf" title="Permalink to this definition">¶</a></dt>
+<dd><p>print rgb values on 0-1 scale  [default: False]</p>
+</dd></dl>
+
+<p class="rubric">HELP:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-colors-opts">
+<code class="descname">-opts</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--opts</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-colors-opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>check parsed options  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-colors-debug">
+<code class="descname">--debug</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-colors-debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>show traceback on exceptions  [default: False]</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ru-plot-heatmap">
+<h2>heatmap<a class="headerlink" href="#ru-plot-heatmap" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ru_plot heatmap <span class="o">[</span>OPTIONS<span class="o">]</span> DATAF
+</pre></div>
+</div>
+<p>def plot_heatmap(fig, ax, data, colormap, vmin=None, vmax=None,
+DST=False, ticks=None, labels=None, <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs)</p>
+<p class="rubric">Arguments</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-arg-dataf">
+<code class="descname">DATAF</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-arg-dataf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+<p class="rubric">Options</p>
+<p class="rubric">VALUE OPTIONS:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-alpha">
+<code class="descname">-alpha</code><code class="descclassname"> &lt;alpha&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>transparency for background  [default: 0.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-background">
+<code class="descname">-background</code><code class="descclassname"> &lt;background&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-background" title="Permalink to this definition">¶</a></dt>
+<dd><p>background image for graph area</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-bg">
+<code class="descname">-bg</code><code class="descclassname"> &lt;bg&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-bg" title="Permalink to this definition">¶</a></dt>
+<dd><p>background color  [default: white]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-colors">
+<code class="descname">-colors</code><code class="descclassname"> &lt;colors&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>cmap name* or space seperated list of rgb tuples 0,0,0 120,120,120 etc. if fewer than # series picks .from gradient includes ru_colors: ‘blu’, ‘org’, ‘pur’, ‘red’, ‘blg’, ‘mag’, ‘brn’, ‘grn’, ‘yel’, ‘ggr’, ‘dark’, ‘med’, ‘light’, ‘xlight’  [default: med]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-comment">
+<code class="descname">-comment</code><code class="descclassname"> &lt;comment&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>regex “^[{}].*” indicating comment line indicator  [default: #]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-dpi">
+<code class="descname">-dpi</code><code class="descclassname"> &lt;dpi&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-dpi" title="Permalink to this definition">¶</a></dt>
+<dd><p>image dpi  [default: 200]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-dpy">
+<code class="descname">-dpy</code><code class="descclassname"> &lt;dpy&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-dpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>days per year (x axis shape)  [default: 365]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-drange">
+<code class="descname">-drange</code><code class="descclassname"> &lt;drange&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-drange" title="Permalink to this definition">¶</a></dt>
+<dd><p>index range for data series, if None gets all</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-fg">
+<code class="descname">-fg</code><code class="descclassname"> &lt;fg&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-fg" title="Permalink to this definition">¶</a></dt>
+<dd><p>foreground color  [default: black]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-gridc">
+<code class="descname">-gridc</code><code class="descclassname"> &lt;gridc&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-gridc" title="Permalink to this definition">¶</a></dt>
+<dd><p>opacity of gridlines (color is bg)  [default: 0.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-height">
+<code class="descname">-height</code><code class="descclassname"> &lt;height&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-height" title="Permalink to this definition">¶</a></dt>
+<dd><p>image height  [default: 5.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-hpd">
+<code class="descname">-hpd</code><code class="descclassname"> &lt;hpd&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-hpd" title="Permalink to this definition">¶</a></dt>
+<dd><p>hours per day (y axis shape)  [default: 24]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-labels">
+<code class="descname">-labels</code><code class="descclassname"> &lt;labels&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>labels for legend</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-lw">
+<code class="descname">-lw</code><code class="descclassname"> &lt;lw&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-lw" title="Permalink to this definition">¶</a></dt>
+<dd><p>lineweight of grid around cells (try .5)  [default: 0.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-outf">
+<code class="descname">-outf</code><code class="descclassname"> &lt;outf&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-outf" title="Permalink to this definition">¶</a></dt>
+<dd><p>graph output file (defaults to basename of first dataf)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-plotidx">
+<code class="descname">-plotidx</code><code class="descclassname"> &lt;plotidx&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-plotidx" title="Permalink to this definition">¶</a></dt>
+<dd><p>column idx of data to plot  [default: -1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-positions">
+<code class="descname">-positions</code><code class="descclassname"> &lt;positions&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping points else positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-pph">
+<code class="descname">-pph</code><code class="descclassname"> &lt;pph&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-pph" title="Permalink to this definition">¶</a></dt>
+<dd><p>data points per hour in annual data  [default: 1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-sh">
+<code class="descname">-sh</code><code class="descclassname"> &lt;sh&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>start hour (24 hour time)  [default: 0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-step">
+<code class="descname">-step</code><code class="descclassname"> &lt;step&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-step" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-ticks">
+<code class="descname">-ticks</code><code class="descclassname"> &lt;ticks&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-ticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>locations for legend labels (must be same # of items)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-vmax">
+<code class="descname">-vmax</code><code class="descclassname"> &lt;vmax&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-vmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>scale max</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-vmin">
+<code class="descname">-vmin</code><code class="descclassname"> &lt;vmin&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-vmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>scale max</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-width">
+<code class="descname">-width</code><code class="descclassname"> &lt;width&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-width" title="Permalink to this definition">¶</a></dt>
+<dd><p>image width  [default: 10.5]</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT TRUE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-legend">
+<code class="descname">--legend</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-legend</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-legend" title="Permalink to this definition">¶</a></dt>
+<dd><p>include legend in plot  [default: True]</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT FALSE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-areaonly">
+<code class="descname">--areaonly</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-areaonly</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-areaonly" title="Permalink to this definition">¶</a></dt>
+<dd><p>only plot plot area, no legend or axes, for use as background  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-dst">
+<code class="descname">--dst</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-dst</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-dst" title="Permalink to this definition">¶</a></dt>
+<dd><p>shift data for DST  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-front">
+<code class="descname">--front</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-front</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-front" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot background in front of data  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-ticklines">
+<code class="descname">--ticklines</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ticklines</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-ticklines" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot tick lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-weatherfile">
+<code class="descname">--weatherfile</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-weatherfile</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-weatherfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>input files will be read as weather files: 0 month, 1 day, 2 hour, 3 dirnorn, 4 difhoriz, 5 globhoriz, 6 skycover  [default: False]</p>
+</dd></dl>
+
+<p class="rubric">HELP:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-opts">
+<code class="descname">-opts</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--opts</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>check parsed options  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-heatmap-debug">
+<code class="descname">--debug</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-heatmap-debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>show traceback on exceptions  [default: False]</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ru-plot-histo">
+<h2>histo<a class="headerlink" href="#ru-plot-histo" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ru_plot histo <span class="o">[</span>OPTIONS<span class="o">]</span> DATAF
+</pre></div>
+</div>
+<p>plot histogram bar plot</p>
+<p>arguments:</p>
+<ul class="simple">
+<li>dataf: data file(s) to plot</li>
+</ul>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">generate script options and write def</p>
+</div>
+<p class="rubric">Arguments</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-arg-dataf">
+<code class="descname">DATAF</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-arg-dataf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+<p class="rubric">Options</p>
+<p class="rubric">VALUE OPTIONS:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-alpha">
+<code class="descname">-alpha</code><code class="descclassname"> &lt;alpha&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>transparency for background  [default: 0.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-axes">
+<code class="descname">-axes</code><code class="descclassname"> &lt;axes&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>enter as xname,xmin,xmax,yname,ymin,ymax - default usesmin and max of data enter xmin etc to maintain autoscale  [default: X,0,1,Y,0,ymax]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-background">
+<code class="descname">-background</code><code class="descclassname"> &lt;background&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-background" title="Permalink to this definition">¶</a></dt>
+<dd><p>background image for graph area</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-bg">
+<code class="descname">-bg</code><code class="descclassname"> &lt;bg&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-bg" title="Permalink to this definition">¶</a></dt>
+<dd><p>background color  [default: white]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-bins">
+<code class="descname">-bins</code><code class="descclassname"> &lt;bins&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-bins" title="Permalink to this definition">¶</a></dt>
+<dd><p>bins can be ‘auto’ an integer or a sequence1 2 3 4:12:2 14:16 = 1,2,3,4,6,8,10,14,15</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-bottom">
+<code class="descname">-bottom</code><code class="descclassname"> &lt;bottom&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-bottom" title="Permalink to this definition">¶</a></dt>
+<dd><p>use with polar to set bottom of y-axis same units as axes  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-brange">
+<code class="descname">-brange</code><code class="descclassname"> &lt;brange&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-brange" title="Permalink to this definition">¶</a></dt>
+<dd><p>defaults to min and max</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-bwidth">
+<code class="descname">-bwidth</code><code class="descclassname"> &lt;bwidth&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-bwidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>relative width of bars  [default: 0.8]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-colors">
+<code class="descname">-colors</code><code class="descclassname"> &lt;colors&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>cmap name* or space seperated list of rgb tuples 0,0,0 120,120,120 etc. if fewer than # series picks .from gradient includes ru_colors: ‘blu’, ‘org’, ‘pur’, ‘red’, ‘blg’, ‘mag’, ‘brn’, ‘grn’, ‘yel’, ‘ggr’, ‘dark’, ‘med’, ‘light’, ‘xlight’  [default: med]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-comment">
+<code class="descname">-comment</code><code class="descclassname"> &lt;comment&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>regex “^[{}].*” indicating comment line indicator  [default: #]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-dpi">
+<code class="descname">-dpi</code><code class="descclassname"> &lt;dpi&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-dpi" title="Permalink to this definition">¶</a></dt>
+<dd><p>image dpi  [default: 200]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-drange">
+<code class="descname">-drange</code><code class="descclassname"> &lt;drange&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-drange" title="Permalink to this definition">¶</a></dt>
+<dd><p>index range for data series, if None gets all</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-ecolors">
+<code class="descname">-ecolors</code><code class="descclassname"> &lt;ecolors&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-ecolors" title="Permalink to this definition">¶</a></dt>
+<dd><p>marker edge colors  [default: 1,1,1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-epositions">
+<code class="descname">-epositions</code><code class="descclassname"> &lt;epositions&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-epositions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping pointselse positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-estep">
+<code class="descname">-estep</code><code class="descclassname"> &lt;estep&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-estep" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-fcol">
+<code class="descname">-fcol</code><code class="descclassname"> &lt;fcol&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-fcol" title="Permalink to this definition">¶</a></dt>
+<dd><p>colormap position for first color  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-fg">
+<code class="descname">-fg</code><code class="descclassname"> &lt;fg&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-fg" title="Permalink to this definition">¶</a></dt>
+<dd><p>foreground color  [default: black]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-height">
+<code class="descname">-height</code><code class="descclassname"> &lt;height&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-height" title="Permalink to this definition">¶</a></dt>
+<dd><p>image height  [default: 5.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-labels">
+<code class="descname">-labels</code><code class="descclassname"> &lt;labels&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>input custom series labels, by default uses file name and index or –header option</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-outf">
+<code class="descname">-outf</code><code class="descclassname"> &lt;outf&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-outf" title="Permalink to this definition">¶</a></dt>
+<dd><p>graph output file (defaults to basename of first dataf)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-positions">
+<code class="descname">-positions</code><code class="descclassname"> &lt;positions&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping points else positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-rwidth">
+<code class="descname">-rwidth</code><code class="descclassname"> &lt;rwidth&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-rwidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>relative width of bars  [default: 0.95]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-step">
+<code class="descname">-step</code><code class="descclassname"> &lt;step&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-step" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-width">
+<code class="descname">-width</code><code class="descclassname"> &lt;width&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-width" title="Permalink to this definition">¶</a></dt>
+<dd><p>image width  [default: 10.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-xlabels">
+<code class="descname">-xlabels</code><code class="descclassname"> &lt;xlabels&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-xlabels" title="Permalink to this definition">¶</a></dt>
+<dd><p>input custom xaxis labels, by default uses file name androw number or –xheader option</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-xticks">
+<code class="descname">-xticks</code><code class="descclassname"> &lt;xticks&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-xticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of x-ticks/gridlines</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-y-vals">
+<code class="descname">-y_vals</code><code class="descclassname"> &lt;y_vals&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-y-vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>index for yvals  [default: -1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-yticks">
+<code class="descname">-yticks</code><code class="descclassname"> &lt;yticks&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-histo-yticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of y-ticks/gridlines</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT TRUE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-legend">
+<code class="descname">--legend</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-legend</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-legend" title="Permalink to this definition">¶</a></dt>
+<dd><p>include legend in plot  [default: True]</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT FALSE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-areaonly">
+<code class="descname">--areaonly</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-areaonly</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-areaonly" title="Permalink to this definition">¶</a></dt>
+<dd><p>only plot plot area, no legend or axes, for use as background  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-front">
+<code class="descname">--front</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-front</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-front" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot background in front of data  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-header">
+<code class="descname">--header</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-header</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-header" title="Permalink to this definition">¶</a></dt>
+<dd><p>indicates that data has a header row to get series labels (overridden by labels)  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-polar">
+<code class="descname">--polar</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-polar</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-polar" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot on polar axes  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-rows">
+<code class="descname">--rows</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-rows</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>get data rows instead of columns  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-stacked">
+<code class="descname">--stacked</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-stacked</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-stacked" title="Permalink to this definition">¶</a></dt>
+<dd><p>make stacked bars  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-tails">
+<code class="descname">--tails</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-tails</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-tails" title="Permalink to this definition">¶</a></dt>
+<dd><p>include values below and above range in first and last bin(requires -brange)  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-ticklines">
+<code class="descname">--ticklines</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ticklines</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-ticklines" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot tick lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-weatherfile">
+<code class="descname">--weatherfile</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-weatherfile</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-weatherfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>input files will be read as weather files: 0 month, 1 day, 2 hour, 3 dirnorn, 4 difhoriz, 5 globhoriz, 6 skycover  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-xgrid">
+<code class="descname">--xgrid</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-xgrid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-xgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot x grid lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-xheader">
+<code class="descname">--xheader</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-xheader</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-xheader" title="Permalink to this definition">¶</a></dt>
+<dd><p>indicates that data has a header column to get x-axis labels (overridden by xlabels)  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-ygrid">
+<code class="descname">--ygrid</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ygrid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-ygrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot y grid lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-ylog">
+<code class="descname">--ylog</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ylog</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-ylog" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot y on log scale  [default: False]</p>
+</dd></dl>
+
+<p class="rubric">HELP:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-opts">
+<code class="descname">-opts</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--opts</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>check parsed options  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-histo-debug">
+<code class="descname">--debug</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-histo-debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>show traceback on exceptions  [default: False]</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ru-plot-scatter">
+<h2>scatter<a class="headerlink" href="#ru-plot-scatter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ru_plot scatter <span class="o">[</span>OPTIONS<span class="o">]</span> DATAF
+</pre></div>
+</div>
+<p>arguments for x_vals and y_vals are a space seperated list of indices or
+index pairs. A single number is applied to all files, a comma seperated
+pair: i,j gets the jth column from the ith file. if a tuple x_val is given
+all y_data will share, else x will be index value from each file.  for
+y_val entry a single number will grab from all files, a comma pair gets one
+column of data.  use the argument -rows to get data by rows instead.</p>
+<p class="rubric">Arguments</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-arg-dataf">
+<code class="descname">DATAF</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-arg-dataf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+<p class="rubric">Options</p>
+<p class="rubric">VALUE OPTIONS:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-alpha">
+<code class="descname">-alpha</code><code class="descclassname"> &lt;alpha&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>transparency for background  [default: 0.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-autox">
+<code class="descname">-autox</code><code class="descclassname"> &lt;autox&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-autox" title="Permalink to this definition">¶</a></dt>
+<dd><p>auto assign xvals between min,max from axes</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-axes">
+<code class="descname">-axes</code><code class="descclassname"> &lt;axes&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>enter as xname,xmin,xmax,yname,ymin,ymax - default usesmin and max of data enter xmin etc to maintain autoscale  [default: X,xmin,xmax,Y,ymin,ymax]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-background">
+<code class="descname">-background</code><code class="descclassname"> &lt;background&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-background" title="Permalink to this definition">¶</a></dt>
+<dd><p>background image for graph area</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-bg">
+<code class="descname">-bg</code><code class="descclassname"> &lt;bg&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-bg" title="Permalink to this definition">¶</a></dt>
+<dd><p>background color  [default: white]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-bottom">
+<code class="descname">-bottom</code><code class="descclassname"> &lt;bottom&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-bottom" title="Permalink to this definition">¶</a></dt>
+<dd><p>use with polar to set bottom of y-axis same units as axes  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-c-vals">
+<code class="descname">-c_vals</code><code class="descclassname"> &lt;c_vals&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-c-vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>optional index for color vals, only uses 1 index</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-cmax">
+<code class="descname">-cmax</code><code class="descclassname"> &lt;cmax&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-cmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>scale max for color</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-cmin">
+<code class="descname">-cmin</code><code class="descclassname"> &lt;cmin&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-cmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>scale min for color</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-colors">
+<code class="descname">-colors</code><code class="descclassname"> &lt;colors&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>cmap name* or space seperated list of rgb tuples 0,0,0 120,120,120 etc. if fewer than # series picks .from gradient includes ru_colors: ‘blu’, ‘org’, ‘pur’, ‘red’, ‘blg’, ‘mag’, ‘brn’, ‘grn’, ‘yel’, ‘ggr’, ‘dark’, ‘med’, ‘light’, ‘xlight’  [default: med]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-comment">
+<code class="descname">-comment</code><code class="descclassname"> &lt;comment&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>regex “^[{}].*” indicating comment line indicator  [default: #]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-criteria">
+<code class="descname">-criteria</code><code class="descclassname"> &lt;criteria&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-criteria" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot markers based on criteria (either x=VAL or y=VAL)assumes single solution</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-dpi">
+<code class="descname">-dpi</code><code class="descclassname"> &lt;dpi&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-dpi" title="Permalink to this definition">¶</a></dt>
+<dd><p>image dpi  [default: 200]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-drange">
+<code class="descname">-drange</code><code class="descclassname"> &lt;drange&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-drange" title="Permalink to this definition">¶</a></dt>
+<dd><p>index range for data series, if None gets all</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-ecolors">
+<code class="descname">-ecolors</code><code class="descclassname"> &lt;ecolors&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-ecolors" title="Permalink to this definition">¶</a></dt>
+<dd><p>marker edge colors  [default: 1,1,1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-epositions">
+<code class="descname">-epositions</code><code class="descclassname"> &lt;epositions&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-epositions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping pointselse positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-estep">
+<code class="descname">-estep</code><code class="descclassname"> &lt;estep&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-estep" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-fcol">
+<code class="descname">-fcol</code><code class="descclassname"> &lt;fcol&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-fcol" title="Permalink to this definition">¶</a></dt>
+<dd><p>colormap position for first color  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-fg">
+<code class="descname">-fg</code><code class="descclassname"> &lt;fg&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-fg" title="Permalink to this definition">¶</a></dt>
+<dd><p>foreground color  [default: black]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-height">
+<code class="descname">-height</code><code class="descclassname"> &lt;height&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-height" title="Permalink to this definition">¶</a></dt>
+<dd><p>image height  [default: 5.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-labels">
+<code class="descname">-labels</code><code class="descclassname"> &lt;labels&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>input custom series labels, by default uses file name and index or –header option</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-lw">
+<code class="descname">-lw</code><code class="descclassname"> &lt;lw&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-lw" title="Permalink to this definition">¶</a></dt>
+<dd><p>line weight if fewer than # series uses last  [default: 2]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-mew">
+<code class="descname">-mew</code><code class="descclassname"> &lt;mew&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-mew" title="Permalink to this definition">¶</a></dt>
+<dd><p>marker edge width  [default: 0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-mrk">
+<code class="descname">-mrk</code><code class="descclassname"> &lt;mrk&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-mrk" title="Permalink to this definition">¶</a></dt>
+<dd><p>marker style if fewer than # series loops  [default: o]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-ms">
+<code class="descname">-ms</code><code class="descclassname"> &lt;ms&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-ms" title="Permalink to this definition">¶</a></dt>
+<dd><p>marker size if fewer than # series uses last  [default: 0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-outf">
+<code class="descname">-outf</code><code class="descclassname"> &lt;outf&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-outf" title="Permalink to this definition">¶</a></dt>
+<dd><p>graph output file (defaults to basename of first dataf)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-pery">
+<code class="descname">-pery</code><code class="descclassname"> &lt;pery&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-pery" title="Permalink to this definition">¶</a></dt>
+<dd><p>label y-axis by percentile with N bins</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-positions">
+<code class="descname">-positions</code><code class="descclassname"> &lt;positions&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping points else positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-step">
+<code class="descname">-step</code><code class="descclassname"> &lt;step&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-step" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-weax">
+<code class="descname">-weax</code><code class="descclassname"> &lt;weax&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-weax" title="Permalink to this definition">¶</a></dt>
+<dd><p>use months as x-axis (8760 data) give idx for month andday ex: 0,1 0,2 for epw 0,0 0,1 for weawhen using –weatherfile use 0,0 0,1 for both</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-width">
+<code class="descname">-width</code><code class="descclassname"> &lt;width&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-width" title="Permalink to this definition">¶</a></dt>
+<dd><p>image width  [default: 10.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-x-vals">
+<code class="descname">-x_vals</code><code class="descclassname"> &lt;x_vals&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-x-vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>index for xvals  [default: 0,0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-xticks">
+<code class="descname">-xticks</code><code class="descclassname"> &lt;xticks&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-xticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of x-ticks/gridlines</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-y-vals">
+<code class="descname">-y_vals</code><code class="descclassname"> &lt;y_vals&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-y-vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>index for yvals  [default: -1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-yticks">
+<code class="descname">-yticks</code><code class="descclassname"> &lt;yticks&gt;</code><a class="headerlink" href="#cmdoption-ru-plot-scatter-yticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of y-ticks/gridlines</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT TRUE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-legend">
+<code class="descname">--legend</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-legend</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-legend" title="Permalink to this definition">¶</a></dt>
+<dd><p>include legend in plot  [default: True]</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT FALSE):</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-areaonly">
+<code class="descname">--areaonly</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-areaonly</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-areaonly" title="Permalink to this definition">¶</a></dt>
+<dd><p>only plot plot area, no legend or axes, for use as background  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-flipxy">
+<code class="descname">--flipxy</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-flipxy</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-flipxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot x on vertical axis  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-front">
+<code class="descname">--front</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-front</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-front" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot background in front of data  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-header">
+<code class="descname">--header</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-header</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-header" title="Permalink to this definition">¶</a></dt>
+<dd><p>indicates that data has a header row to get series labels (overridden by labels)  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-polar">
+<code class="descname">--polar</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-polar</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-polar" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot on polar axes  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-reverse">
+<code class="descname">--reverse</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-reverse</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>reverse order of y data (sometimes useful with -autox)  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-rows">
+<code class="descname">--rows</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-rows</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>get data rows instead of columns  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-ticklines">
+<code class="descname">--ticklines</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ticklines</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-ticklines" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot tick lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-weatherfile">
+<code class="descname">--weatherfile</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-weatherfile</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-weatherfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>input files will be read as weather files: 0 month, 1 day, 2 hour, 3 dirnorn, 4 difhoriz, 5 globhoriz, 6 skycover  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-xgrid">
+<code class="descname">--xgrid</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-xgrid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-xgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot x grid lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-xlog">
+<code class="descname">--xlog</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-xlog</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-xlog" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot x on log scale  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-ygrid">
+<code class="descname">--ygrid</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ygrid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-ygrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot y grid lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-ylog">
+<code class="descname">--ylog</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ylog</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-ylog" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot y on log scale  [default: False]</p>
+</dd></dl>
+
+<p class="rubric">HELP:</p>
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-opts">
+<code class="descname">-opts</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--opts</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>check parsed options  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-ru-plot-scatter-debug">
+<code class="descname">--debug</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-ru-plot-scatter-debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>show traceback on exceptions  [default: False]</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2018, Stephen Wasilewski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/ru_plot.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
