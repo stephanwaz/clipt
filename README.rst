@@ -16,6 +16,19 @@ https://bitbucket.org/loisosubbelohde/clipt/get/master.zip
     cd path/to/uncompressed/folder/
     pip install .
 
+Autocomplete
+------------
+
+::
+
+    _RU_PLOT_COMPLETE=source ru_plot > clipt_complete.sh
+
+
+In your .bash_profile::
+
+    source path/to/bin/clipt_complete.sh
+
+
 Licence
 -------
 
