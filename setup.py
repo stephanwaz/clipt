@@ -35,7 +35,7 @@ setup(
     author_email='stephen@coolshadow.com',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
-        'License :: OSI Approved :: Mozilla Public License v. 2.0',
+        'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)',
         'Natural Language :: English',
         'Programming Language :: Python :: 2.7'
     ],
@@ -43,7 +43,7 @@ setup(
     entry_points={"console_scripts": ['ru_plot=clipt.cl_plot:main']},
     python_requires="~=2.7",
     install_requires=requirements,
-    license="Mozilla Public License v. 2.0",
+    license="Mozilla Public License 2.0 (MPL 2.0)",
     long_description=readme + '\n\n' + history,
     include_package_data=True,
     keywords='clipt',
