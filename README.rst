@@ -9,7 +9,7 @@ imformation about using config files.
 Installation
 ------------
 
-https://bitbucket.org/loisosubbelohde/clipt/get/master.zip
+pip install clipt
 
 ::
 
