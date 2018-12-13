@@ -2,6 +2,10 @@
 History
 =======
 
+0.1.1
+-----
+remove dependency link from setup.py
+
 0.1.0
 -----
 first stable release
