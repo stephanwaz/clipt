@@ -5,16 +5,25 @@ to aid in plotting data files using matplotlib directly from the command
 line using a extensive set of options.  See the clasp documentation for
 imformation about using config files.
 
+https://clipt.readthedocs.io/
+
+Clipt was built using clasp: https://clasp.readthedocs.io/
+which in turn depends on click: https://palletsprojects.com/p/click/
+
 
 Installation
 ------------
 
-pip install clipt
-
 ::
 
-    cd path/to/uncompressed/folder/
-    pip install .
+    pip install clipt
+
+Usage
+-----
+
+see::
+
+    cl_plot --help
 
 Autocomplete
 ------------

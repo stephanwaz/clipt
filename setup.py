@@ -40,7 +40,7 @@ setup(
         'Programming Language :: Python :: 2.7'
     ],
     description="clipt makes graphs using matplotlib from the command line",
-    entry_points={"console_scripts": ['ru_plot=clipt.cl_plot:main']},
+    entry_points={"console_scripts": ['cl_plot=clipt.cl_plot:main']},
     python_requires="~=2.7",
     install_requires=requirements,
     license="Mozilla Public License 2.0 (MPL 2.0)",
@@ -54,7 +54,8 @@ setup(
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://bitbucket.org/loisosubbelohde/clipt.git',
+    url='https://bitbucket.org/stephenwasilewski/clipt',
+    project_urls= {'documentation': 'https://clipt.readthedocs.io/'},
     version='0.1.3',
     zip_safe=True,
 )

@@ -1,3 +1,3 @@
 .. click:: clipt.cl_plot:main
-  :prog: ru_plot
+  :prog: cl_plot
   :show-nested:

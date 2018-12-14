@@ -387,8 +387,8 @@ def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
     plt.close()
 
 
-def get_colors(cmap, step=None, positions=None):
-    """get colormap from cmap name, color list or RUcolor spec
+def get_colors(cmap, step=None, positions=None, funcs=[]):
+    """get colormap from cmap name, color list or CliptColors spec
 
     Parameters
     ----------
@@ -399,15 +399,19 @@ def get_colors(cmap, step=None, positions=None):
         else positions are the sample points used to remap
     step: int or None
         # of steps to map colors using step function
+    funcs: list of custom color map functions to try before standard 
+        matplotlib cmap name check and cmap_from_list
+        func should accept a cmap argument, and step and position
+        (call cmap_tune within to utilize) and return a 
+        matplotlib.cm.ScalarMappable
 
     Returns
     -------
     colormap: matplotlib.colors.LinearSegmentedColormap
     """
-    funcs = [cmap_from_mpl, cmap_from_ru,
-             cmap_from_list]
+    efuncs = funcs + [cmap_from_mpl, cmap_from_clipt, cmap_from_list]
     e = []
-    for func in funcs:
+    for func in efuncs:
         try:
             colormap = func(cmap, step, positions)
             break
@@ -465,7 +469,7 @@ def plot_cmaps(ru=False):
     fig.set_size_inches(3, 10)
     fig.subplots_adjust(top=0.95, bottom=0.01, left=0.2, right=0.99)
     if ru:
-        axes[0].set_title('radutil colors', fontsize=14)
+        axes[0].set_title('clipt colors', fontsize=14)
     else:
         axes[0].set_title('matplotlib colors', fontsize=14)
     i = 0
@@ -818,8 +822,8 @@ def ticks_y_per(ax, ydata, tickdiv, tcol="black"):
     return ax
 
 
-class RUcolors(object):
-    """class containing 'house' colors"""
+class CliptColors(object):
+    """class containing custom clipt colors"""
 
     def __getitem__(self, key):
         return self.cdict[key]
@@ -917,15 +921,15 @@ def cmap_from_mpl(cmap, step=None, positions=None):
     return colormap
 
 
-def cmap_from_ru(cmap, step=None, positions=None):
-    """return colormap from RUcolor key"""
-    rucol = RUcolors()
+def cmap_from_clipt(cmap, step=None, positions=None):
+    """return colormap from CliptColors key"""
+    clcol = CliptColors()
     try:
-        clist = rucol[cmap]
+        clist = clcol[cmap]
     except Exception:
-        ruopts = ", ".join(rucol.cdict.keys())
-        note = "Additional 'house' values:"
-        message = "{}\n\n{}".format(note, ruopts)
+        clopts = ", ".join(clcol.cdict.keys())
+        note = "Additional clipt colors values:"
+        message = "{}\n\n{}".format(note, clopts)
         raise ValueError(message)
     else:
         colorm = colors.LinearSegmentedColormap.from_list(cmap, clist)
