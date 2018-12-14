@@ -30,7 +30,7 @@ Autocomplete
 
 ::
 
-    _RU_PLOT_COMPLETE=source ru_plot > clipt_complete.sh
+    _CL_PLOT_COMPLETE=source cl_plot > clipt_complete.sh
 
 
 In your .bash_profile::
