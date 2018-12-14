@@ -2,6 +2,10 @@
 History
 =======
 
+0.1.3
+-----
+add release to version bump
+
 0.1.2
 -----
 first release on pypi
