@@ -38,6 +38,11 @@ In your .bash_profile::
     source path/to/bin/clipt_complete.sh
 
 
+Source Code
+-----------
+
+* clipt: https://bitbucket.org/stephenwasilewski/clipt
+
 Licence
 -------
 
