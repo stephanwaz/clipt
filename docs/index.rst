@@ -14,7 +14,6 @@ clipt makes graphs using matplotlib from the command line
    :maxdepth: 3
    :hidden:
 
-   tips
    history
    genindex
    search
