@@ -327,10 +327,6 @@ def histo(ctx, dataf, **kwargs):
     arguments:
 
     * dataf: data file(s) to plot
-
-    .. todo::
-       generate script options and write def
-
 '''
     if kwargs['opts']:
         kwargs['opts'] = False
@@ -393,8 +389,8 @@ def histo(ctx, dataf, **kwargs):
               help="auto assign xvals between min,max from axes")
 @click.option('-weax', default=None, callback=clk.split_int,
               help="use months as x-axis (8760 data) give idx for month and"
-              "day ex: 0,1 0,2 for epw 0,0 0,1 for wea"
-              "when using --weatherfile use 0,0 0,1 for both")
+              "day ex: 1 2 for epw 0 1 for wea"
+              "when using --weatherfile use 0 1 for both")
 @click.option('-x_vals', default="0,0",
               callback=clk.tup_int, help="index for xvals")
 @click.option('-y_vals', default="-1", callback=clk.tup_int,
@@ -442,10 +438,12 @@ def scatter(ctx, dataf, **kwargs):
     else:
         try:
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
+            if kwargs['weax'] is not None:
+                a1['x_vals'] = [0]
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
             if kwargs['c_vals'] is not None:
                 a1['y_vals'] = kwargs['c_vals']
-                cs = mgr.read_all_data(dataf, **a1)[1][0]
+                cs = mgr.read_all_data(dataf, **a1)[1]
             else:
                 cs = None
             labels = ruplot.get_labels(labels, kwargs['labels'])

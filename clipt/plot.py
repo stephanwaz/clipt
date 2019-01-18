@@ -34,6 +34,10 @@ def tick_from_arg(ax, xs, ys, a4, kwargs):
     -------
     ax: matplotlib subplot
     """
+    if 'pery' not in kwargs:
+        pery = False
+    else:
+        pery = kwargs['pery'] is not None
     try:
         if kwargs['xlog']:
             a4['xscale'] = 'log'
@@ -60,15 +64,13 @@ def tick_from_arg(ax, xs, ys, a4, kwargs):
             kwargs[i] = False
     try:
         a4.update(get_axes(kwargs['axes'], xs, ys, kwargs['polar'],
-                           kwargs['polarauto'], kwargs['stacked']))
+                           kwargs['polarauto'], kwargs['stacked'], pery=pery))
     except Exception, ex:
         try:
-            a4.update(get_axes(kwargs['axes'], xs, ys, kwargs['stacked']))
+            a4.update(get_axes(kwargs['axes'], xs, ys, stacked=kwargs['stacked'], pery=pery))
         except Exception, ex:
-            try:
-                a4.update(get_axes(kwargs['axes'], xs, ys, kwargs['stacked']))
-            except Exception, ex:
-                pass
+            raise
+            pass
     ax = ticks(ax, **a4)
     return ax
 
@@ -96,7 +98,7 @@ def get_labels(labels, mlab):
     return labels
 
 
-def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False):
+def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False, pery=False):
     """parse axes string argument xname,xmin,xmax,yname,ymin,ymax"""
     def smin(x):
         try:
@@ -111,7 +113,10 @@ def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False):
             return None
     x = flat(xs)
     if stacked:
-        y = [sum([i[j] for i in ys]) for j in range(len(ys[0]))]
+        try:
+            y = [sum([i[j] for i in ys]) for j in range(len(ys[0]))]
+        except:
+            y = []
     else:
         y = flat(ys)
     axes = ['X', smin(x), smax(x), 'Y', smin(y), smax(y)]
@@ -130,6 +135,8 @@ def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False):
     naxes = {'labels': [axes[0], axes[3]],
              'xdata': [axes[1], axes[2]],
              'ydata': [axes[4], axes[5]]}
+    if pery:
+        naxes['ydata'] = y
     if polar and polarauto:
         naxes['xdata'] = [0, 2*math.pi]
     elif polar:
@@ -215,8 +222,8 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     """
     xmin = xdata[0]
     xmax = xdata[-1]
-    ymin = ydata[0]
-    ymax = ydata[-1]
+    ymin = min(ydata)
+    ymax = max(ydata)
     ax.xaxis.grid(linestyle="-", linewidth=0.3, color=tcol)
     ax.yaxis.grid(linestyle="-", linewidth=0.3, color=tcol, zorder=1)
     ax.xaxis.grid(xgrid)
@@ -258,15 +265,13 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
             ax.set_xticklabels(xlabels)
             ax.set_xlim(left=xmin, right=xmax)
         else:
-            axA = ax.twiny()
-            ax2 = axA.twiny()
-            ax2.remove()
-            axA.set_xlim(ax.get_xlim())
-            axA.set_xticks(np.arange(xmin+inc/2, xmax+inc/2, inc))
-            axA.set_xticklabels(xlabels, rotation='vertical')
-            ax.set_xticks(np.arange(xmin, xmax, inc))
-            ax.set_xticklabels([])
-            for t in axA.xaxis.get_ticklines():
+            ax.set_xticks(np.arange(xmin+inc/2, xmax+inc/2, inc))
+            if max([len(i) for i in xlabels]) > 10:
+                ro = 'vertical'
+            else:
+                ro = 'horizontal'
+            ax.set_xticklabels(xlabels, rotation=ro)
+            for t in ax.xaxis.get_ticklines():
                 t.set_visible(False)
     if polar:
         if bottom is not None and bottom > 0:
@@ -544,7 +549,7 @@ def plot_scatter(ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         msa = get_nth(ms, i)
         mka = get_nth_loop(mrk, i)
         mewa = get_nth_loop(mew, i)
-        if step is not None or inc >= 1:
+        if step is not None or inc > 1:
             cinc = (fcol + i*inc) % 1
         else:
             cinc = fcol + i*inc
@@ -552,12 +557,12 @@ def plot_scatter(ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         mec = emap.to_rgba(cinc)
         if cs is not None:
             if cmax is None:
-                cmax = max(cs)
+                cmax = max(flat(cs))
             if cmin is None:
-                cmin = min(cs)
+                cmin = min(flat(cs))
             plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
-                        'marker': mka, 'cmap': colormap.cmap,
-                        'vmin': cmin, 'vmax': cmax, 'c': cs,
+                        'marker': mka, 'cmap': colormap.cmap, 'linewidth': mewa,
+                        'vmin': cmin, 'vmax': cmax, 'c': cs[i], 'edgecolors': mec,
                         'norm': colormap.norm}
             plotargs.update(kwargs)
             ax.scatter(x, y, **plotargs)
@@ -743,7 +748,10 @@ def get_tick_distribution(data, divisions):
     """
     binsize = 100./divisions
     bins = np.arange(binsize, 100.+binsize, binsize)
-    ticks = np.percentile(flat(data), bins)
+    df = flat(data)
+    dmin = min(df)
+    dmax = max(df) 
+    ticks = np.percentile([i for i in df if i > 0], bins)
     ticks = [int(round(i)) for i in ticks]
     return ticks
 
