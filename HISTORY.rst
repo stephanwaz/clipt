@@ -2,6 +2,10 @@
 History
 =======
 
+0.1.6
+-----
+improve graph formatting and bug fixes in scatter and histo
+
 0.1.3
 -----
 add release to version bump
