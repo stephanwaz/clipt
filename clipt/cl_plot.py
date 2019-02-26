@@ -14,13 +14,13 @@ import matplotlib.colors as mplc
 
 import clasp.click_ext as clk
 
-from clipt import get_root
+from clipt import get_root, __version__
 import clasp.script_tools as mgr
 import clipt.plot as ruplot
 
 
 @click.group()
-@clk.shared_decs(clk.main_decs)
+@clk.shared_decs(clk.main_decs(__version__))
 def main(ctx, config, outconfig, configalias, inputalias):
     """help configuration and process management commands."""
     template = get_root() + "/templates/master.cfg"
