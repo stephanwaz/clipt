@@ -533,7 +533,7 @@ def colors(**kwargs):
             else:
                 click.echo("specify -outf to generate image", err=True)
             if kwargs['rgb'] and kwargs['ru']:
-                rucol = ruplot.RUcolors()
+                rucol = ruplot.CliptColors()
                 click.echo("      " + "".join(["{: <13}".format(i)
                                                for i in rucol.shades]))
                 for k in rucol.colors:
