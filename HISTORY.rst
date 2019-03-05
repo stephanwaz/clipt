@@ -2,6 +2,10 @@
 History
 =======
 
+0.1.7
+-----
+bug in cl_plot colors
+
 0.1.6
 -----
 improve graph formatting and bug fixes in scatter and histo
