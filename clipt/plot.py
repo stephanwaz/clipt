@@ -57,7 +57,7 @@ def tick_from_arg(ax, xs, ys, a4, kwargs):
         a4['tcol'] = kwargs['fg']
     except Exception:
         pass
-    for i in ['polar', 'stacked']:
+    for i in ['polar', 'stacked', 'polarautp']:
         try:
             kwargs[i] = kwargs[i]
         except Exception:
@@ -67,7 +67,7 @@ def tick_from_arg(ax, xs, ys, a4, kwargs):
                            kwargs['polarauto'], kwargs['stacked'], pery=pery))
     except Exception, ex:
         try:
-            a4.update(get_axes(kwargs['axes'], xs, ys, stacked=kwargs['stacked'], pery=pery))
+            a4.update(get_axes(kwargs['axes'], xs, ys, kwargs['polar'], stacked=kwargs['stacked'], pery=pery))
         except Exception, ex:
             raise
             pass
