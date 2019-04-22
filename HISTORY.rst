@@ -2,6 +2,10 @@
 History
 =======
 
+0.1.8
+-----
+proper labeling of max value when using -xticks/yticks
+
 0.1.7
 -----
 bug in cl_plot colors
