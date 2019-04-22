@@ -288,10 +288,10 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     if bottom is None:
         bottom = 0
     if yticks is not None:
-        ax.set_yticks(np.arange(bottom+ymin, ymax+bottom,
-                      (ymax-ymin)/(yticks)))
+        ax.set_yticks(np.append(np.arange(bottom+ymin, ymax+bottom,
+                      (ymax-ymin)/(yticks)),ymax+bottom))
     if xticks is not None:
-        ax.set_xticks(np.arange(xmin, xmax, (xmax-xmin)/(xticks)))
+        ax.set_xticks(np.append(np.arange(xmin, xmax, (xmax-xmin)/(xticks)),xmax))
     return ax
 
 
