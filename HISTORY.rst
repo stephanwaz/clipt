@@ -2,6 +2,10 @@
 History
 =======
 
+0.1.9
+-----
+fix polar axis readin options on scatterplot
+
 0.1.8
 -----
 proper labeling of max value when using -xticks/yticks
