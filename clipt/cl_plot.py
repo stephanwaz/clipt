@@ -59,6 +59,8 @@ shared = [
                        "remap"),
           click.option('-step', default=None, type=int,
                        help="steps for color map"),
+          click.option('-labelweight', default='bold', type=click.Choice(['ultralight', 'light', 'normal', 'regular', 'book', 'medium', 'roman', 'semibold', 'demibold', 'demi', 'bold', 'heavy', 'extra bold', 'black']),
+                       help="text weight for axes labels"),
           click.option('-width', default=10.5, type=float,
                        help="image width"),
           click.option('-height', default=5.0, type=float,
@@ -301,6 +303,9 @@ def heatmap(ctx, dataf, **kwargs):
 @click.option('-bins', default=None, callback=clk.split_float,
               help="bins can be 'auto' an integer or a sequence"
               "1 2 3 4:12:2 14:16 = 1,2,3,4,6,8,10,14,15")
+@click.option('-autobin', default='auto',
+              help="see numpy.histogram_bin_edges for options"
+              "1 2 3 4:12:2 14:16 = 1,2,3,4,6,8,10,14,15")
 @click.option('-brange', default=None, callback=clk.split_float,
               help="defaults to min and max")
 @click.option('--tails/--no-tails', default=False,
@@ -364,7 +369,7 @@ def histo(ctx, dataf, **kwargs):
             a6 = mgr.kwarg_match(ruplot.plot_histo, kwargs)
             a6.pop('labels', None)
             if kwargs['bins'] is None:
-                a6['bins'] = 'auto'
+                a6['bins'] = kwargs['autobin']
             elif len(kwargs['bins']) == 1:
                 a6['bins'] = int(kwargs['bins'][0])
             ax, handles = ruplot.plot_histo(ax, ys, labels, cmap,

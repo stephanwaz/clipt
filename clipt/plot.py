@@ -188,7 +188,7 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
           xgrid=False, ygrid=False, xscale='linear', yscale='linear',
           annualx=False, dayy=False, pery=False, ticklines=False, pph=1,
           bottom=None, bg='white', xlabels=None, dpy=365, hpd=24, sh=0,
-          polar=False, xticks=None, yticks=None):
+          polar=False, xticks=None, yticks=None, labelweight='bold'):
     """
     setup ticks/axes for plot
 
@@ -233,8 +233,8 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     ax.set_yscale(yscale)
     ax.set_xscale(xscale)
     ax.set_axisbelow(True)
-    ax.axes.set_xlabel(labels[0], weight="bold", size=9, color=tcol)
-    ax.axes.set_ylabel(labels[1], weight="bold", size=9, color=tcol)
+    ax.axes.set_xlabel(labels[0], weight=labelweight, size=9, color=tcol)
+    ax.axes.set_ylabel(labels[1], weight=labelweight, size=9, color=tcol)
     if annualx:
         ax = ticks_x_annual(ax, tcol, dpy)
     if dayy:
