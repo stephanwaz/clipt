@@ -2,6 +2,10 @@
 History
 =======
 
+0.1.10
+------
+expose additional options to CLI
+
 0.1.9
 -----
 fix polar axis readin options on scatterplot
