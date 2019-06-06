@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>cl_plot &#8212; clipt (0.1.10) 0.1.10 documentation</title>
+    <title>cl_plot &#8212; clipt (0.1.11) 0.1.11 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" src="_static/documentation_options.js"></script>
@@ -28,7 +28,7 @@
     
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">clipt (0.1.10)</a></h1>
+<h1 class="logo"><a href="index.html">clipt (0.1.11)</a></h1>
 
 
 
@@ -325,7 +325,7 @@ series1 ,series2, etc.. category1, 0,0,… category2, 0,0,… etc…,…</p>
 <dl class="option">
 <dt id="cmdoption-cl-plot-bar-polarauto">
 <code class="descname">--polarauto</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-polarauto</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-bar-polarauto" title="Permalink to this definition">¶</a></dt>
-<dd><p>ignore x-axis min,max and plot 0-60  [default: True]</p>
+<dd><p>ignore x-axis min,max and plot 0-360  [default: True]</p>
 </dd></dl>
 
 <p class="rubric">FLAGS (DEFAULT FALSE):</p>
@@ -417,22 +417,249 @@ series1 ,series2, etc.. category1, 0,0,… category2, 0,0,… etc…,…</p>
 </div>
 <div class="section" id="cl-plot-box">
 <h2>box<a class="headerlink" href="#cl-plot-box" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cl_plot box <span class="o">[</span>OPTIONS<span class="o">]</span> ARG1
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cl_plot box <span class="o">[</span>OPTIONS<span class="o">]</span> DATAF
 </pre></div>
 </div>
-<p>create histogram from data files.</p>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">generate script options and write def</p>
-</div>
+<p>create boxplot from data files.</p>
 <p class="rubric">Arguments</p>
 <dl class="option">
-<dt id="cmdoption-cl-plot-box-arg-arg1">
-<code class="descname">ARG1</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-arg-arg1" title="Permalink to this definition">¶</a></dt>
+<dt id="cmdoption-cl-plot-box-arg-dataf">
+<code class="descname">DATAF</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-arg-dataf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Required argument</p>
 </dd></dl>
 
 <p class="rubric">Options</p>
+<p class="rubric">VALUE OPTIONS:</p>
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-alpha">
+<code class="descname">-alpha</code><code class="descclassname"> &lt;alpha&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>transparency for background  [default: 0.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-axes">
+<code class="descname">-axes</code><code class="descclassname"> &lt;axes&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>enter as xname,xmin,xmax,yname,ymin,ymax - default usesmin and max of data enter xmin etc to maintain autoscale  [default: X,0,1,Y,0,ymax]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-background">
+<code class="descname">-background</code><code class="descclassname"> &lt;background&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-background" title="Permalink to this definition">¶</a></dt>
+<dd><p>background image for graph area</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-bg">
+<code class="descname">-bg</code><code class="descclassname"> &lt;bg&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-bg" title="Permalink to this definition">¶</a></dt>
+<dd><p>background color  [default: white]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-bottom">
+<code class="descname">-bottom</code><code class="descclassname"> &lt;bottom&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-bottom" title="Permalink to this definition">¶</a></dt>
+<dd><p>use with polar to set bottom of y-axis same units as axes  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-colors">
+<code class="descname">-colors</code><code class="descclassname"> &lt;colors&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>cmap name* or space seperated list of rgb tuples 0,0,0 120,120,120 etc. if fewer than # series picks .from gradient includes ru_colors: ‘blu’, ‘org’, ‘pur’, ‘red’, ‘blg’, ‘mag’, ‘brn’, ‘grn’, ‘yel’, ‘ggr’, ‘dark’, ‘med’, ‘light’, ‘xlight’  [default: med]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-comment">
+<code class="descname">-comment</code><code class="descclassname"> &lt;comment&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>regex “^[{}].*” indicating comment line indicator  [default: #]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-dpi">
+<code class="descname">-dpi</code><code class="descclassname"> &lt;dpi&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-dpi" title="Permalink to this definition">¶</a></dt>
+<dd><p>image dpi  [default: 200]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-drange">
+<code class="descname">-drange</code><code class="descclassname"> &lt;drange&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-drange" title="Permalink to this definition">¶</a></dt>
+<dd><p>index range for data series, if None gets all</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-ecolors">
+<code class="descname">-ecolors</code><code class="descclassname"> &lt;ecolors&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-ecolors" title="Permalink to this definition">¶</a></dt>
+<dd><p>marker edge colors  [default: 1,1,1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-epositions">
+<code class="descname">-epositions</code><code class="descclassname"> &lt;epositions&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-epositions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping pointselse positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-estep">
+<code class="descname">-estep</code><code class="descclassname"> &lt;estep&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-estep" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-fcol">
+<code class="descname">-fcol</code><code class="descclassname"> &lt;fcol&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-fcol" title="Permalink to this definition">¶</a></dt>
+<dd><p>colormap position for first color  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-fg">
+<code class="descname">-fg</code><code class="descclassname"> &lt;fg&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-fg" title="Permalink to this definition">¶</a></dt>
+<dd><p>foreground color  [default: black]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-height">
+<code class="descname">-height</code><code class="descclassname"> &lt;height&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-height" title="Permalink to this definition">¶</a></dt>
+<dd><p>image height  [default: 5.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-labels">
+<code class="descname">-labels</code><code class="descclassname"> &lt;labels&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>input custom series labels, by default uses file name and index or –header option</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-labelweight">
+<code class="descname">-labelweight</code><code class="descclassname"> &lt;labelweight&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-labelweight" title="Permalink to this definition">¶</a></dt>
+<dd><p>text weight for axes labels  [default: bold]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-outf">
+<code class="descname">-outf</code><code class="descclassname"> &lt;outf&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-outf" title="Permalink to this definition">¶</a></dt>
+<dd><p>graph output file (defaults to basename of first dataf)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-positions">
+<code class="descname">-positions</code><code class="descclassname"> &lt;positions&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping points else positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-rwidth">
+<code class="descname">-rwidth</code><code class="descclassname"> &lt;rwidth&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-rwidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>relative width of bars  [default: 0.95]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-step">
+<code class="descname">-step</code><code class="descclassname"> &lt;step&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-step" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-width">
+<code class="descname">-width</code><code class="descclassname"> &lt;width&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-width" title="Permalink to this definition">¶</a></dt>
+<dd><p>image width  [default: 10.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-xlabels">
+<code class="descname">-xlabels</code><code class="descclassname"> &lt;xlabels&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-xlabels" title="Permalink to this definition">¶</a></dt>
+<dd><p>input custom xaxis labels, by default uses file name androw number or –xheader option</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-xticks">
+<code class="descname">-xticks</code><code class="descclassname"> &lt;xticks&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-xticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of x-ticks/gridlines</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-y-vals">
+<code class="descname">-y_vals</code><code class="descclassname"> &lt;y_vals&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-y-vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>index for yvals  [default: -1]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-yticks">
+<code class="descname">-yticks</code><code class="descclassname"> &lt;yticks&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-box-yticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of y-ticks/gridlines</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT TRUE):</p>
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-legend">
+<code class="descname">--legend</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-legend</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-legend" title="Permalink to this definition">¶</a></dt>
+<dd><p>include legend in plot  [default: True]</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT FALSE):</p>
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-areaonly">
+<code class="descname">--areaonly</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-areaonly</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-areaonly" title="Permalink to this definition">¶</a></dt>
+<dd><p>only plot plot area, no legend or axes, for use as background  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-front">
+<code class="descname">--front</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-front</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-front" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot background in front of data  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-header">
+<code class="descname">--header</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-header</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-header" title="Permalink to this definition">¶</a></dt>
+<dd><p>indicates that data has a header row to get series labels (overridden by labels)  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-polar">
+<code class="descname">--polar</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-polar</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-polar" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot on polar axes  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-rows">
+<code class="descname">--rows</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-rows</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>get data rows instead of columns  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-ticklines">
+<code class="descname">--ticklines</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ticklines</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-ticklines" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot tick lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-weatherfile">
+<code class="descname">--weatherfile</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-weatherfile</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-weatherfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>input files will be read as weather files: 0 month, 1 day, 2 hour, 3 dirnorn, 4 difhoriz, 5 globhoriz, 6 skycover  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-xgrid">
+<code class="descname">--xgrid</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-xgrid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-xgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot x grid lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-xheader">
+<code class="descname">--xheader</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-xheader</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-xheader" title="Permalink to this definition">¶</a></dt>
+<dd><p>indicates that data has a header column to get x-axis labels (overridden by xlabels)  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-ygrid">
+<code class="descname">--ygrid</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ygrid</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-ygrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot y grid lines  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-box-ylog">
+<code class="descname">--ylog</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-ylog</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-box-ylog" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot y on log scale  [default: False]</p>
+</dd></dl>
+
 <p class="rubric">HELP:</p>
 <dl class="option">
 <dt id="cmdoption-cl-plot-box-opts">
@@ -719,10 +946,6 @@ DST=False, ticks=None, labels=None, <a href="#id1"><span class="problematic" id=
 </pre></div>
 </div>
 <p>plot histogram bar plot</p>
-<p>arguments:</p>
-<ul class="simple">
-<li>dataf: data file(s) to plot</li>
-</ul>
 <p class="rubric">Arguments</p>
 <dl class="option">
 <dt id="cmdoption-cl-plot-histo-arg-dataf">
@@ -924,6 +1147,12 @@ DST=False, ticks=None, labels=None, <a href="#id1"><span class="problematic" id=
 <dt id="cmdoption-cl-plot-histo-areaonly">
 <code class="descname">--areaonly</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-areaonly</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-histo-areaonly" title="Permalink to this definition">¶</a></dt>
 <dd><p>only plot plot area, no legend or axes, for use as background  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-histo-density">
+<code class="descname">--density</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-density</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-histo-density" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot as probability density (area sums to 1)  [default: False]</p>
 </dd></dl>
 
 <dl class="option">
@@ -1253,6 +1482,12 @@ column of data.  use the argument -rows to get data by rows instead.</p>
 <dt id="cmdoption-cl-plot-scatter-legend">
 <code class="descname">--legend</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-legend</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-scatter-legend" title="Permalink to this definition">¶</a></dt>
 <dd><p>include legend in plot  [default: True]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-scatter-polarauto">
+<code class="descname">--polarauto</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-polarauto</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-scatter-polarauto" title="Permalink to this definition">¶</a></dt>
+<dd><p>ignore x-axis min,max and plot 0-360  [default: True]</p>
 </dd></dl>
 
 <p class="rubric">FLAGS (DEFAULT FALSE):</p>

@@ -2,6 +2,10 @@
 History
 =======
 
+0.1.11
+------
+initial box plot implementation (need to work on multi-series / color options)
+
 0.1.10
 ------
 expose additional options to CLI
