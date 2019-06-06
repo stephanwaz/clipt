@@ -146,7 +146,7 @@ sharedB = [
 @click.option('--polar0/--no-polar0', default=True,
               help="plot center of first bar at xmin")
 @click.option('--polarauto/--no-polarauto', default=True,
-              help="ignore x-axis min,max and plot 0-60")
+              help="ignore x-axis min,max and plot 0-360")
 @click.option('-y_vals', default="-1", callback=clk.split_int,
               help="index for yvals")
 @click.option('-axes', default="X,0,10,Y,0,ymax",
@@ -317,6 +317,8 @@ def heatmap(ctx, dataf, **kwargs):
               help="relative width of bars")
 @click.option('--stacked/--no-stacked', default=False,
               help="make stacked bars")
+@click.option('--density/--no-density', default=False,
+              help="plot as probability density (area sums to 1)")
 @click.option('-xlabels', callback=clk.split_str,
               help="input custom xaxis labels, by default uses file name and"
               "row number or --xheader option")
@@ -328,10 +330,6 @@ def heatmap(ctx, dataf, **kwargs):
 def histo(ctx, dataf, **kwargs):
     '''
     plot histogram bar plot
-
-    arguments:
-
-    * dataf: data file(s) to plot
 '''
     if kwargs['opts']:
         kwargs['opts'] = False
@@ -408,6 +406,8 @@ def histo(ctx, dataf, **kwargs):
               help="scale min for color")
 @click.option('--flipxy/--no-flipxy', default=False,
               help="plot x on vertical axis")
+@click.option('--polarauto/--no-polarauto', default=True,
+              help="ignore x-axis min,max and plot 0-360")
 @click.option('-axes', default="X,xmin,xmax,Y,ymin,ymax",
               help="enter as xname,xmin,xmax,yname,ymin,ymax - default uses"
               "min and max of data enter xmin etc to maintain autoscale")
@@ -480,18 +480,24 @@ def scatter(ctx, dataf, **kwargs):
 
 
 @main.command('box')
-@click.argument('arg1')
-@click.option('--opts', '-opts', is_flag=True,
-              help="check parsed options")
-@click.option('--debug', is_flag=True,
-              help="show traceback on exceptions")
-def box(arg1, **kwargs):
+@click.argument('dataf', callback=clk.are_files)
+@click.option('-y_vals', default="-1", callback=clk.tup_int,
+              help="index for yvals")
+@click.option('-axes', default="X,0,1,Y,0,ymax",
+              help="enter as xname,xmin,xmax,yname,ymin,ymax - default uses"
+              "min and max of data enter xmin etc to maintain autoscale")
+@click.option('-rwidth', default=0.95, type=float,
+              help="relative width of bars")
+@click.option('-xlabels', callback=clk.split_str,
+              help="input custom xaxis labels, by default uses file name and"
+              "row number or --xheader option")
+@click.option('--xheader/--no-xheader', default=False,
+              help="indicates that data has a header column to get x-axis "
+              "labels (overridden by xlabels)")
+@clk.shared_decs(shared + sharedA)
+def box(dataf, **kwargs):
     """
-    create histogram from data files.
-
-    .. todo::
-
-       generate script options and write def
+    create boxplot from data files.
 
     """
     if kwargs['opts']:
@@ -499,10 +505,44 @@ def box(arg1, **kwargs):
         clk.echo_args(arg1, **kwargs)
     else:
         try:
-            click.echo("not implemented")
-            ###########
-            # code body
-            ###########
+            axext = ruplot.get_axes(kwargs['axes'], [], [])
+            a1 = mgr.kwarg_match(mgr.read_data, kwargs)
+            a1['autox'] = axext['xdata']
+            xs, ys, labels = mgr.read_all_data(dataf, **a1)
+            if kwargs['xheader']:
+                a1['y_vals'] = [0]
+                a1['x_vals'] = []
+                a1['coerce'] = False
+                a1['xheader'] = False
+                a1['rows'] = False
+                _, xlabels, _ = mgr.read_data(dataf[0], **a1)
+                xlabels = xlabels[0]
+            else:
+                xlabels = []
+            xlabels = ruplot.get_labels(xlabels, kwargs['xlabels'])
+            labels = ruplot.get_labels(labels, kwargs['labels'])
+            if kwargs['rows']:
+                la = labels
+                labels = xlabels
+                xlabels = la
+            a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
+            ax, fig = ruplot.plot_setup(**a3)
+            a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
+            a4.pop('labels', None)
+            a4['xlabels'] = xlabels
+            ax = ruplot.tick_from_arg(ax, xs, ys, a4, kwargs)
+            a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
+            cmap = ruplot.get_colors(kwargs['colors'], **a5)
+            a6 = mgr.kwarg_match(ruplot.plot_box, kwargs)
+            a6.pop('labels', None)
+            ax, handles = ruplot.plot_box(ax, ys, labels, cmap,
+                                            axext['ydata'], **a6)
+            if kwargs['outf']:
+                outf = kwargs['outf']
+            else:
+                outf = dataf[0].rsplit(".", 1)[0] + ".png"
+            a7 = mgr.kwarg_match(ruplot.plot_graph, kwargs)
+            ruplot.plot_graph(fig, outf, handles=handles, **a7)
         except click.Abort:
             raise
         except Exception as ex:

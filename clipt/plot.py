@@ -664,9 +664,41 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
     return ax, handles
 
 
+def plot_box(ax, data, labels, colormap, ylim, rwidth=.8,
+               step=None, **kwargs):
+    """adds box plots to ax and returns ax and handles for legend"""
+    nlab = len(labels)
+    for i in range(len(data)):
+        if i >= nlab:
+            labels.append("series{:02d}".format(i))
+    try:
+        inc = 1./(len(data)-1)
+    except ZeroDivisionError:
+        inc = 1
+    c = [colormap.to_rgba(i*inc) for i in range(len(data))]
+    plotargs = {
+        'boxprops' : {'linewidth':0,'color':c[0]},
+        'capprops' : {'color':c[0],'linewidth':2,'solid_capstyle':'butt'},
+        'whiskerprops' : {'color':c[0],'linewidth':2,'solid_capstyle':'butt'},
+        'medianprops' : {'linewidth':2,'color':'white','solid_capstyle':'butt'}
+    }
+    plotargs.update(kwargs)
+    boxplot = ax.boxplot(data, patch_artist=True, widths=rwidth, whis='range', bootstrap=1000,
+                         **plotargs)
+    handles, labels = ax.get_legend_handles_labels()
+    # if ylim[1] is None:
+    #     ymax = max(flat(boxplot[0]))*1.1
+    # else:
+    #     ymax = ylim[1]
+    # ymin = ylim[0]
+    # ax.set_ylim(bottom=ymin, top=ymax)
+    # ax.set_xlim(left=min(boxplot[1]), right=max(boxplot[1]))
+    return ax, handles
+
+
 def plot_histo(ax, data, labels, colormap, ylim, stacked=False, rwidth=.8,
                step=None, bwidth=.9, bins='auto', brange=None, tails=False,
-               ylog=False, **kwargs):
+               ylog=False, density=False, **kwargs):
     """adds histo plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(data)):
@@ -682,7 +714,7 @@ def plot_histo(ax, data, labels, colormap, ylim, stacked=False, rwidth=.8,
     plotargs = {'linewidth': 0}
     plotargs.update(kwargs)
     histo = plt.hist(data, bins=bins, log=ylog, range=brange, label=labels,
-                     color=c, rwidth=rwidth, stacked=stacked, **plotargs)
+                     color=c, rwidth=rwidth, stacked=stacked, density=density, **plotargs)
     handles, labels = ax.get_legend_handles_labels()
     if ylim[1] is None:
         ymax = max(flat(histo[0]))*1.1
