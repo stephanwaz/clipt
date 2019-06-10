@@ -4,6 +4,10 @@ History
 
 0.1.11
 ------
+polar fix for scatter plot plus variable defined marker size
+
+0.1.11
+------
 initial box plot implementation (need to work on multi-series / color options)
 
 0.1.10
