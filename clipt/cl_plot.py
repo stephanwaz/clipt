@@ -400,10 +400,17 @@ def histo(ctx, dataf, **kwargs):
               help="index for yvals")
 @click.option('-c_vals', default=None, callback=clk.tup_int,
               help="optional index for color vals, only uses 1 index")
+@click.option('-m_vals', default=None, callback=clk.tup_int,
+              help="optional index for marker size vals, only uses 1 index"
+                   " values should be prescaled to marker size output")
 @click.option('-cmax', type=float,
               help="scale max for color")
 @click.option('-cmin', type=float,
               help="scale min for color")
+@click.option('-mmax', type=float,
+              help="max for marker size")
+@click.option('-mmin', type=float,
+              help="min for marker size")
 @click.option('--flipxy/--no-flipxy', default=False,
               help="plot x on vertical axis")
 @click.option('--polarauto/--no-polarauto', default=True,
@@ -451,6 +458,11 @@ def scatter(ctx, dataf, **kwargs):
                 cs = mgr.read_all_data(dataf, **a1)[1]
             else:
                 cs = None
+            if kwargs['m_vals'] is not None:
+                a1['y_vals'] = kwargs['m_vals']
+                msd = mgr.read_all_data(dataf, **a1)[1]
+            else:
+                msd = None
             labels = ruplot.get_labels(labels, kwargs['labels'])
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
@@ -465,7 +477,7 @@ def scatter(ctx, dataf, **kwargs):
             a6 = mgr.kwarg_match(ruplot.plot_scatter, kwargs)
             a6.pop('labels', None)
             ax, handles = ruplot.plot_scatter(ax, xs, ys, labels, cmap,
-                                              emap=emap, cs=cs, **a6)
+                                              emap=emap, cs=cs, msd=msd, **a6)
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
@@ -498,7 +510,6 @@ def scatter(ctx, dataf, **kwargs):
 def box(dataf, **kwargs):
     """
     create boxplot from data files.
-
     """
     if kwargs['opts']:
         kwargs['opts'] = False

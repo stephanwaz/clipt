@@ -528,7 +528,8 @@ def plot_criteria(ax, x, y, criteria, flipxy=False,
 
 def plot_scatter(ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                  mrk='o', step=None, fcol=0.0, mew=0.0, emap=None,
-                 flipxy=False, cs=None, cmin=None, cmax=None, **kwargs):
+                 flipxy=False, cs=None, cmin=None, cmax=None,
+                 msd=None, mmin=None, mmax=None, **kwargs):
     """adds scatterplots/lines to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(ys)):
@@ -546,7 +547,14 @@ def plot_scatter(ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         emap = colormap
     for i, (x, y, l) in enumerate(zip(xs, ys, labels)):
         lwa = get_nth(lw, i)
-        msa = get_nth(ms, i)
+        if msd is not None:
+            if mmax is None:
+                mmax = max(flat(msd))
+            if mmin is None:
+                mmin = min(flat(msd))
+            msa = np.array([min(mmax,max(mi,mmin)) for mi in msd[i]])
+        else:
+            msa = get_nth(ms, i)
         mka = get_nth_loop(mrk, i)
         mewa = get_nth_loop(mew, i)
         if step is not None or inc > 1:
@@ -564,6 +572,12 @@ def plot_scatter(ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                         'marker': mka, 'cmap': colormap.cmap, 'linewidth': mewa,
                         'vmin': cmin, 'vmax': cmax, 'c': cs[i], 'edgecolors': mec,
                         'norm': colormap.norm}
+            plotargs.update(kwargs)
+            ax.scatter(x, y, **plotargs)
+        elif msd is not None:
+            plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
+                        'marker': mka, 'linewidth': mewa, 'c': [c],
+                        'edgecolors': mec}
             plotargs.update(kwargs)
             ax.scatter(x, y, **plotargs)
         else:
