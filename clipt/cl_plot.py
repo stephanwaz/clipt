@@ -8,7 +8,9 @@
 """console script for graphing data."""
 
 from __future__ import print_function
+from __future__ import division
 
+from past.utils import old_div
 from clasp import click
 import matplotlib.colors as mplc
 
@@ -609,7 +611,7 @@ def colors(**kwargs):
                                                    for i in rucol.shades]))
                     for k in rucol.colors:
                         v = rucol.cdict255[k]
-                        fmt = [" ".join(["{:06f}".format(j/255.**2.2)
+                        fmt = [" ".join(["{:06f}".format(old_div(j,255.**2.2))
                                          for j in i]) for i in v]
                         click.echo("{}:  {}".format(k, "  ".join(fmt)))
         except click.Abort:

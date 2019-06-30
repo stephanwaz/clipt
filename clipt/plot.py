@@ -8,7 +8,13 @@
 """functions for plotting with matplotlib"""
 
 from __future__ import print_function
+from __future__ import division
 
+from builtins import str
+from builtins import zip
+from builtins import range
+from builtins import object
+from past.utils import old_div
 import numpy as np
 import math
 import matplotlib.pyplot as plt
@@ -65,10 +71,10 @@ def tick_from_arg(ax, xs, ys, a4, kwargs):
     try:
         a4.update(get_axes(kwargs['axes'], xs, ys, kwargs['polar'],
                            kwargs['polarauto'], kwargs['stacked'], pery=pery))
-    except Exception, ex:
+    except Exception as ex:
         try:
             a4.update(get_axes(kwargs['axes'], xs, ys, kwargs['polar'], stacked=kwargs['stacked'], pery=pery))
-        except Exception, ex:
+        except Exception as ex:
             raise
             pass
     ax = ticks(ax, **a4)
@@ -140,7 +146,7 @@ def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False, pery=False
     if polar and polarauto:
         naxes['xdata'] = [0, 2*math.pi]
     elif polar:
-        naxes['xdata'] = [axes[1]*math.pi/180, axes[2]*math.pi/180]
+        naxes['xdata'] = [old_div(axes[1]*math.pi,180), old_div(axes[2]*math.pi,180)]
     return naxes
 
 
@@ -259,13 +265,13 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
         ax.set_ylim(bottom=ylim[0], top=ylimb[1])
         ax.get_yaxis().get_major_formatter().set_useOffset(bottom)
     if xlabels is not None and len(xlabels) > 0:
-        inc = (xmax-xmin)/len(xlabels)
+        inc = old_div((xmax-xmin),len(xlabels))
         if polar:
             ax.set_xticks(np.arange(xmin, xmax, inc))
             ax.set_xticklabels(xlabels)
             ax.set_xlim(left=xmin, right=xmax)
         else:
-            ax.set_xticks(np.arange(xmin+inc/2, xmax+inc/2, inc))
+            ax.set_xticks(np.arange(xmin+old_div(inc,2), xmax+old_div(inc,2), inc))
             if max([len(i) for i in xlabels]) > 10:
                 ro = 'vertical'
             else:
@@ -289,9 +295,9 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
         bottom = 0
     if yticks is not None:
         ax.set_yticks(np.append(np.arange(bottom+ymin, ymax+bottom,
-                      (ymax-ymin)/(yticks)),ymax+bottom))
+                      old_div((ymax-ymin),(yticks))),ymax+bottom))
     if xticks is not None:
-        ax.set_xticks(np.append(np.arange(xmin, xmax, (xmax-xmin)/(xticks)),xmax))
+        ax.set_xticks(np.append(np.arange(xmin, xmax, old_div((xmax-xmin),(xticks))),xmax))
     return ax
 
 
@@ -357,10 +363,10 @@ def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
                             min([i.ymin for i in ci])],
                            [max([i.xmax for i in ci]),
                             max([i.ymax for i in ci])]])
-            wi = width*(extent.xmax-extent.xmin)/500
-            he = height*(extent.ymax-extent.ymin)/500
-            ow = width*extent.xmin/500
-            oh = height*extent.ymin/500
+            wi = old_div(width*(extent.xmax-extent.xmin),500)
+            he = old_div(height*(extent.ymax-extent.ymin),500)
+            ow = old_div(width*extent.xmin,500)
+            oh = old_div(height*extent.ymin,500)
             extent = Bbox([[ow, oh], [wi+ow, he+oh]])
             plt.savefig(saveimage, dpi=dpi, bbox_inches=extent, aspect='auto',
                         facecolor=bg, pad_inches=0)
@@ -420,7 +426,7 @@ def get_colors(cmap, step=None, positions=None, funcs=[]):
         try:
             colormap = func(cmap, step, positions)
             break
-        except Exception, err:
+        except Exception as err:
             e.append(str(err))
             continue
     else:
@@ -537,10 +543,10 @@ def plot_scatter(ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
             labels.append("series{:02d}".format(i))
     handles = []
     if step is not None:
-        inc = (1.-fcol)/(step-1)
+        inc = old_div((1.-fcol),(step-1))
     else:
         try:
-            inc = (1.-fcol)/(len(ys)-1)
+            inc = old_div((1.-fcol),(len(ys)-1))
         except ZeroDivisionError:
             inc = 1
     if emap is None:
@@ -603,9 +609,9 @@ def plot_heatmap(fig, ax, data, colormap, vmin=None, vmax=None,
     """adds heatmap and colorbar to ax returns ax"""
     xlim = ax.axes.get_xlim()
     xrng = abs(xlim[1]-xlim[0])
-    ppd = int(len(data)/xrng)
+    ppd = int(old_div(len(data),xrng))
     if dst:
-        data = shift_data(data, ppd/hpd, hpd=hpd, dpy=dpy, sh=sh)
+        data = shift_data(data, old_div(ppd,hpd), hpd=hpd, dpy=dpy, sh=sh)
     try:
         mtx = np.reshape(data, (int(xrng), ppd))
         tmtx = np.transpose(mtx)
@@ -648,16 +654,16 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
     xlim = [xl[0]+brng[0]*(xl[1]-xl[0]), xl[0]+brng[1]*(xl[1]-xl[0])]
     xrng = abs(xlim[1]-xlim[0])/float(len(xs[0]))
     lxs = len(xs[0])
-    width = xrng/nlab*rwidth
+    width = old_div(xrng,nlab*rwidth)
     try:
-        xsc = (lxs - 1.0)/lxs
+        xsc = old_div((lxs - 1.0),lxs)
     except ZeroDivisionError:
         xsc = 1
     xsc = xsc * (brng[1] - brng[0])
     if polar and polar0:
         off0 = brng[0] * abs(xl[1]-xl[0])
     else:
-        off0 = xrng/2-width*(nlab-1)/2 + xlim[0]
+        off0 = old_div(xrng,2)-old_div(width*(nlab-1),2) + xlim[0]
     w2 = width*bwidth
     bot = 0
     for i, (x, y, l) in enumerate(zip(xs, ys, labels)):
@@ -906,7 +912,7 @@ class CliptColors(object):
                     (194, 214, 154), (215, 228, 188)]
         }
         self.cdict = {}
-        for k, v in self.cdict255.iteritems():
+        for k, v in self.cdict255.items():
             self.cdict[k] = [tuple(i/255. for i in j) for j in v]
         self.colors = ['blu', 'org', 'pur', 'red', 'blg',
                        'mag', 'brn', 'grn', 'yel', 'ggr']
@@ -981,7 +987,7 @@ def cmap_from_clipt(cmap, step=None, positions=None):
     try:
         clist = clcol[cmap]
     except Exception:
-        clopts = ", ".join(clcol.cdict.keys())
+        clopts = ", ".join(list(clcol.cdict.keys()))
         note = "Additional clipt colors values:"
         message = "{}\n\n{}".format(note, clopts)
         raise ValueError(message)
