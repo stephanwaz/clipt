@@ -179,12 +179,8 @@ def plot_setup(fg='black', bg='white', polar=False, areaonly=False, params={}):
     rcParams.update(defparam)
     fig = plt.figure()
     if areaonly:
-        if polar:
-            ax = fig.add_subplot(1, 1, 1, position=[0, 0, 1, 1], facecolor=bg,
-                                 polar=polar, frame_on=True)
-        else:
-            ax = fig.add_subplot(1, 1, 1, position=[0, 0, 1, 1], facecolor=bg,
-                                 polar=polar, frame_on=False)
+        ax = fig.add_subplot(1, 1, 1, position=[0, 0, 1, 1], facecolor=bg,
+                             polar=polar, frame_on=polar)
     else:
         ax = fig.add_subplot(1, 1, 1, facecolor=bg, polar=polar)
     return ax, fig
@@ -363,11 +359,12 @@ def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
                             min([i.ymin for i in ci])],
                            [max([i.xmax for i in ci]),
                             max([i.ymax for i in ci])]])
-            wi = old_div(width*(extent.xmax-extent.xmin),500)
-            he = old_div(height*(extent.ymax-extent.ymin),500)
+            wi = old_div(width*(extent.xmax-extent.xmin),250)
+            he = old_div(height*(extent.ymax-extent.ymin),250)
             ow = old_div(width*extent.xmin,500)
             oh = old_div(height*extent.ymin,500)
             extent = Bbox([[ow, oh], [wi+ow, he+oh]])
+            # plt.savefig(saveimage, dpi=dpi, bbox_inches='tight', facecolor=bg)
             plt.savefig(saveimage, dpi=dpi, bbox_inches=extent, aspect='auto',
                         facecolor=bg, pad_inches=0)
         else:
