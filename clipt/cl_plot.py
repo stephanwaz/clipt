@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Copyright (c) 2018 Stephen Wasilewski
 # =======================================================================
 # This Source Code Form is subject to the terms of the Mozilla Public
@@ -632,3 +634,7 @@ def printconfig(ctx, opts, **kwargs):
     if kwargs['outconfig']:
         clk.print_config(ctx, opts, kwargs['outconfig'], kwargs['config'],
                          kwargs['configalias'])
+
+
+if __name__ == '__main__':
+    main()
