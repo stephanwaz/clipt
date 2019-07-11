@@ -330,7 +330,7 @@ def add_colorbar(fig, pc, axes=[0.3, 0.0, 0.4, 0.02],
 
 def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
                handles=[], dpi=200, bbox_to_anchor=(1.05, 1),
-               loc=2, legend=False, format='png', background=None,
+               loc=2, legend=False, background=None,
                front=False, alpha=.5, areaonly=False, polar=False):
     """add legend and save image of plot"""
     fig.set_size_inches(width, height)

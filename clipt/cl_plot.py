@@ -574,6 +574,10 @@ def box(dataf, **kwargs):
               help="print rgb values for radutil")
 @click.option('--radf/--no-radf', default=False,
               help="print rgb values on 0-1 scale")
+@click.option('-mpal',
+              help="matplotlib palette to print r,g,b vals")
+@click.option('-mpaldiv', default=10,
+              help="number of segments")
 @click.option('--opts', '-opts', is_flag=True,
               help="check parsed options")
 @click.option('--debug', is_flag=True,
@@ -613,9 +617,21 @@ def colors(**kwargs):
                                                    for i in rucol.shades]))
                     for k in rucol.colors:
                         v = rucol.cdict255[k]
-                        fmt = [" ".join(["{:06f}".format(old_div(j,255.**2.2))
+                        fmt = [" ".join(["{:06f}".format(old_div(j,255.)**2.2)
                                          for j in i]) for i in v]
                         click.echo("{}:  {}".format(k, "  ".join(fmt)))
+            if kwargs['mpal'] is not None:
+                cmap = ruplot.get_colors(kwargs['mpal'])
+                click.echo("\ncolor palette: {} in {} steps:".format(kwargs['mpal'], kwargs['mpaldiv']))
+                for i in range(kwargs['mpaldiv']):
+                    c = cmap.to_rgba(i/(kwargs['mpaldiv'] - 1.0))
+                    click.echo("{:03d},{:03d},{:03d}".format(*[int(j*255) for j in c[0:3]]))
+                if kwargs['radf']:
+                    click.echo("\n ungammad 0-1:")
+                    for i in range(kwargs['mpaldiv']):
+                        c = cmap.to_rgba(i/(kwargs['mpaldiv'] - 1.0))
+                        click.echo("{:06f} {:06f} {:06f}".format(*[j**2.2 for j in c[0:3]]))
+                    
         except click.Abort:
             raise
         except Exception as ex:
