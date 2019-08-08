@@ -19,6 +19,8 @@ from builtins import object
 from past.utils import old_div
 import numpy as np
 import math
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 from matplotlib.patches import Circle
@@ -309,19 +311,19 @@ def plot_legend(handles, bbox_to_anchor=(1.05, 1), loc=2,
 
 
 def add_colorbar(fig, pc, axes=[0.3, 0.0, 0.4, 0.02],
-                 ticks=None, ticklabels=None):
+                 ticks=None, ticklabels=None, orientation='horizontal'):
     """add colorbar scale to figure below plot"""
     cbaxes = fig.add_axes(axes)
     if ticklabels is not None:
         if ticks is None:
             vmin, vmax = pc.get_clim()
             ticks = np.linspace(vmin, vmax, len(ticklabels))
-        cb = fig.colorbar(pc, orientation="horizontal",
+        cb = fig.colorbar(pc, orientation=orientation,
                           cax=cbaxes, ticks=ticks)
         if ticklabels is not None:
             cb.ax.set_xticklabels(ticklabels)
     else:
-        cb = fig.colorbar(pc, orientation="horizontal", cax=cbaxes)
+        cb = fig.colorbar(pc, orientation=orientation, cax=cbaxes)
     cb.ax.tick_params(labelsize=8)
     cb.outline.set_linewidth(.5)
     for t in cb.ax.get_xticklines():
@@ -384,7 +386,8 @@ def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
             if background is not None:
                 im = plt.imread(background)
                 ax = fig.axes[0]
-                ax2 = ax.twinx()
+                # ax2 = ax.twinx()
+                ax2 = fig.add_subplot(1, 1, 1, label='background')
                 plt.imshow(im, extent=ax2.get_xlim() + ax2.get_ylim(),
                            alpha=alpha, aspect='auto')
                 if front:
@@ -531,10 +534,10 @@ def plot_criteria(ax, x, y, criteria, flipxy=False,
         ax.plot(filtx, filty, **kwargs)
 
 
-def plot_scatter(ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
+def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                  mrk='o', step=None, fcol=0.0, mew=0.0, emap=None,
                  flipxy=False, cs=None, cmin=None, cmax=None,
-                 msd=None, mmin=None, mmax=None, **kwargs):
+                 msd=None, mmin=None, mmax=None, legend=True, **kwargs):
     """adds scatterplots/lines to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(ys)):
@@ -579,6 +582,9 @@ def plot_scatter(ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                         'norm': colormap.norm}
             plotargs.update(kwargs)
             ax.scatter(x, y, **plotargs)
+            if legend:
+                pc = cmx.ScalarMappable(norm=colormap.norm, cmap=colormap.cmap)
+                add_colorbar(fig, colormap, axes = [1.05, .2, .1, .6], orientation='vertical')
         elif msd is not None:
             plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
                         'marker': mka, 'linewidth': mewa, 'c': [c],

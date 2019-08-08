@@ -480,13 +480,15 @@ def scatter(ctx, dataf, **kwargs):
             emap = ruplot.get_colors(kwargs['ecolors'], **a5)
             a6 = mgr.kwarg_match(ruplot.plot_scatter, kwargs)
             a6.pop('labels', None)
-            ax, handles = ruplot.plot_scatter(ax, xs, ys, labels, cmap,
+            ax, handles = ruplot.plot_scatter(fig, ax, xs, ys, labels, cmap,
                                               emap=emap, cs=cs, msd=msd, **a6)
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
                 outf = dataf[0].rsplit(".", 1)[0] + ".png"
             a7 = mgr.kwarg_match(ruplot.plot_graph, kwargs)
+            if cs is not None:
+                a7['legend'] = False
             ruplot.plot_graph(fig, outf, handles=handles, **a7)
         except click.Abort:
             raise
