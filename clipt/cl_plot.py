@@ -480,6 +480,7 @@ def scatter(ctx, dataf, **kwargs):
             emap = ruplot.get_colors(kwargs['ecolors'], **a5)
             a6 = mgr.kwarg_match(ruplot.plot_scatter, kwargs)
             a6.pop('labels', None)
+            a6['legend'] = kwargs['legend'] and not kwargs['areaonly']
             ax, handles = ruplot.plot_scatter(fig, ax, xs, ys, labels, cmap,
                                               emap=emap, cs=cs, msd=msd, **a6)
             if kwargs['outf']:
