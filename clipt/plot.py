@@ -363,8 +363,8 @@ def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
                             min([i.ymin for i in ci])],
                            [max([i.xmax for i in ci]),
                             max([i.ymax for i in ci])]])
-            wi = old_div(width*(extent.xmax-extent.xmin),250)
-            he = old_div(height*(extent.ymax-extent.ymin),250)
+            wi = old_div(width*(extent.xmax-extent.xmin),dpi*2)
+            he = old_div(height*(extent.ymax-extent.ymin),dpi*2)
             ow = old_div(width*extent.xmin,500)
             oh = old_div(height*extent.ymin,500)
             extent = Bbox([[ow, oh], [wi+ow, he+oh]])
