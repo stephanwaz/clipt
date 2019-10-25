@@ -363,10 +363,10 @@ def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
                             min([i.ymin for i in ci])],
                            [max([i.xmax for i in ci]),
                             max([i.ymax for i in ci])]])
-            wi = old_div(width*(extent.xmax-extent.xmin),250)
-            he = old_div(height*(extent.ymax-extent.ymin),250)
-            ow = old_div(width*extent.xmin,500)
-            oh = old_div(height*extent.ymin,500)
+            wi = old_div(2*(extent.xmax-extent.xmin),dpi)
+            he = old_div(2*(extent.ymax-extent.ymin),dpi)
+            ow = old_div(extent.xmin,dpi)
+            oh = old_div(extent.ymin,dpi)
             extent = Bbox([[ow, oh], [wi+ow, he+oh]])
             # plt.savefig(saveimage, dpi=dpi, bbox_inches='tight', facecolor=bg)
             plt.savefig(saveimage, dpi=dpi, bbox_inches=extent, aspect='auto',
