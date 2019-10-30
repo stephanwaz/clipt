@@ -424,6 +424,8 @@ def histo(ctx, dataf, **kwargs):
               "min and max of data enter xmin etc to maintain autoscale")
 @click.option('--xlog/--no-xlog', default=False,
               help="plot x on log scale")
+@click.option('--diagonal/--no-diagonal', default=False,
+              help="add diagonal gridline")
 @click.option('-pery', default=None, type=int,
               help="label y-axis by percentile with N bins")
 @click.option('--reverse/--no-reverse', default=False,
@@ -483,6 +485,8 @@ def scatter(ctx, dataf, **kwargs):
             a6['legend'] = kwargs['legend'] and not kwargs['areaonly']
             ax, handles = ruplot.plot_scatter(fig, ax, xs, ys, labels, cmap,
                                               emap=emap, cs=cs, msd=msd, **a6)
+            if kwargs['diagonal']:
+                ax.plot(ax.get_xlim(), ax.get_ylim(), lw=0.6, ls='--', color='black', ms=0)
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:

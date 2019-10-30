@@ -702,13 +702,14 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8,
         inc = 1
     c = [colormap.to_rgba(i*inc) for i in range(len(data))]
     plotargs = {
-        'boxprops' : {'linewidth':0,'color':c[0]},
+        'boxprops' : {'linewidth':0,'facecolor':c[0]},
         'capprops' : {'color':c[0],'linewidth':2,'solid_capstyle':'butt'},
         'whiskerprops' : {'color':c[0],'linewidth':2,'solid_capstyle':'butt'},
-        'medianprops' : {'linewidth':2,'color':'white','solid_capstyle':'butt'}
+        'medianprops' : {'linewidth':2,'color':'white','solid_capstyle':'butt'},
+        'flierprops' : {'marker':'x', 'mec':c[0], 'mew':.2, 'ms':2}
     }
     plotargs.update(kwargs)
-    boxplot = ax.boxplot(data, patch_artist=True, widths=rwidth, whis='range', bootstrap=1000,
+    boxplot = ax.boxplot(data, patch_artist=True, widths=rwidth, bootstrap=1000,
                          **plotargs)
     handles, labels = ax.get_legend_handles_labels()
     # if ylim[1] is None:
