@@ -706,7 +706,7 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8,
         'capprops' : {'color':c[0],'linewidth':2,'solid_capstyle':'butt'},
         'whiskerprops' : {'color':c[0],'linewidth':2,'solid_capstyle':'butt'},
         'medianprops' : {'linewidth':2,'color':'white','solid_capstyle':'butt'},
-        'flierprops' : {'marker':'x', 'mec':c[0], 'mew':.2, 'ms':2}
+        'flierprops' : {'marker':'x', 'markeredgecolor':c[0], 'markeredgewidth':.2, 'markersize':2}
     }
     plotargs.update(kwargs)
     boxplot = ax.boxplot(data, patch_artist=True, widths=rwidth, bootstrap=1000,
