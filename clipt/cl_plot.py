@@ -25,11 +25,12 @@ import clipt.plot as ruplot
 
 @click.group()
 @clk.shared_decs(clk.main_decs(__version__))
-def main(ctx, config, outconfig, configalias, inputalias):
-    """help configuration and process management commands."""
+def plot(ctx, config, outconfig, configalias, inputalias):
+    """scripts for plotting data from the command line."""
     template = get_root() + "/templates/master.cfg"
     clk.get_config(ctx, config, outconfig, configalias, inputalias, template)
 
+main = plot # backwards compatibility
 
 # used by all
 shared = [
@@ -135,7 +136,7 @@ sharedB = [
 ]
 
 
-@main.command('bar')
+@plot.command('bar')
 @click.argument('dataf', callback=clk.are_files)
 @click.option('-rwidth', default=0.95, type=float,
               help="relative width of bar clusters")
@@ -227,7 +228,7 @@ def bar(ctx, dataf, **kwargs):
     return 'bar', kwargs, ctx
 
 
-@main.command('heatmap')
+@plot.command('heatmap')
 @click.argument('dataf', callback=clk.is_file)
 @click.option('-pph', default=1, type=int,
               help="data points per hour in annual data")
@@ -297,7 +298,7 @@ def heatmap(ctx, dataf, **kwargs):
     return 'heatmap', kwargs, ctx
 
 
-@main.command('histo')
+@plot.command('histo')
 @click.argument('dataf', callback=clk.are_files)
 @click.option('-y_vals', default="-1", callback=clk.tup_int,
               help="index for yvals")
@@ -389,7 +390,7 @@ def histo(ctx, dataf, **kwargs):
     return 'histo', kwargs, ctx
 
 
-@main.command('scatter')
+@plot.command('scatter')
 @click.argument('dataf', callback=clk.are_files)
 @click.option('-autox', default=None,
               callback=clk.split_float,
@@ -502,7 +503,7 @@ def scatter(ctx, dataf, **kwargs):
     return 'scatter', kwargs, ctx
 
 
-@main.command('box')
+@plot.command('box')
 @click.argument('dataf', callback=clk.are_files)
 @click.option('-y_vals', default="-1", callback=clk.tup_int,
               help="index for yvals")
@@ -572,7 +573,7 @@ def box(dataf, **kwargs):
     return 'box', kwargs
 
 
-@main.command('colors')
+@plot.command('colors')
 @click.option('-outf',
               help="output file")
 @click.option('--ru/--mat', default=True,
@@ -646,7 +647,7 @@ def colors(**kwargs):
     return 'box', kwargs
 
 
-@main.resultcallback()
+@plot.resultcallback()
 @click.pass_context
 def printconfig(ctx, opts, **kwargs):
     """callback to save config file"""

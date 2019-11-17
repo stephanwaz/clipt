@@ -41,7 +41,7 @@ setup(
         'Programming Language :: Python :: 3.7',
     ],
     description="clipt makes graphs using matplotlib from the command line",
-    entry_points={"console_scripts": ['cl_plot=clipt.cl_plot:main']},
+    entry_points={"console_scripts": ['cl_plot=clipt.cl_plot:plot']},
     python_requires=">=3.6",
     install_requires=requirements,
     license="Mozilla Public License 2.0 (MPL 2.0)",
