@@ -525,7 +525,7 @@ def box(dataf, **kwargs):
     """
     if kwargs['opts']:
         kwargs['opts'] = False
-        clk.echo_args(arg1, **kwargs)
+        clk.echo_args(dataf, **kwargs)
     else:
         try:
             axext = ruplot.get_axes(kwargs['axes'], [], [])

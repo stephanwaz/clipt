@@ -324,7 +324,7 @@ def add_colorbar(fig, pc, axes=[0.3, 0.0, 0.4, 0.02],
             cb.ax.set_xticklabels(ticklabels)
     else:
         cb = fig.colorbar(pc, orientation=orientation, cax=cbaxes)
-    cb.ax.tick_params(labelsize=8)
+    cb.ax.tick_params(labelsize=8, width=.5)
     cb.outline.set_linewidth(.5)
     for t in cb.ax.get_xticklines():
         t.set_visible(False)
@@ -339,64 +339,27 @@ def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
     if legend and not areaonly:
         plot_legend(handles=handles, bbox_to_anchor=bbox_to_anchor,
                     loc=loc, bg=bg, fg=fg)
-    if polar:
-        if background is not None:
-            im = plt.imread(background)
-            ax = fig.axes[0]
-            ax2 = fig.add_axes([0, 0, 1, 1])
-            extent = ax2.get_xlim() + ax2.get_ylim()
-            plt.imshow(im, extent=extent, alpha=alpha, aspect='auto')
-            if front:
-                ax.set_zorder(ax2.get_zorder()-1)
-            else:
-                ax.set_zorder(ax2.get_zorder()+1)
-                ax.patch.set_visible(False)
-            ax2.axis('off')
-        if areaonly:
-            ax = fig.axes[0]
-            ax.axes.set_xlabel("")
-            ax.axes.set_ylabel("")
-            ax.xaxis.set_ticklabels([])
-            ci = [i.get_extents() for i in ax.get_children()
-                  if type(i) == Circle]
-            extent = Bbox([[min([i.xmin for i in ci]),
-                            min([i.ymin for i in ci])],
-                           [max([i.xmax for i in ci]),
-                            max([i.ymax for i in ci])]])
-            wi = old_div(2*(extent.xmax-extent.xmin),dpi)
-            he = old_div(2*(extent.ymax-extent.ymin),dpi)
-            ow = old_div(extent.xmin,dpi)
-            oh = old_div(extent.ymin,dpi)
-            extent = Bbox([[ow, oh], [wi+ow, he+oh]])
-            # plt.savefig(saveimage, dpi=dpi, bbox_inches='tight', facecolor=bg)
-            plt.savefig(saveimage, dpi=dpi, bbox_inches=extent, aspect='auto',
-                        facecolor=bg, pad_inches=0)
-        else:
-            plt.savefig(saveimage, dpi=dpi, bbox_inches='tight', facecolor=bg)
+    ax = fig.axes[0]
+    if areaonly:
+        ax.axes.set_xlabel("")
+        ax.axes.set_ylabel("")
+        ax.xaxis.set_ticklabels([])
+        ax2 = fig.add_axes([0, 0, 1, 1])
+        plargs = dict(bbox_inches=None, aspect='auto', pad_inches=0)
     else:
-        if areaonly:
-            ax = fig.axes[0]
-            if background is not None:
-                im = plt.imread(background)
-                ax.imshow(im, extent=ax.get_xlim() + ax.get_ylim(),
-                          alpha=alpha, aspect='auto')
-            plt.savefig(saveimage, dpi=dpi, bbox_inches=None, aspect='auto',
-                        facecolor=bg, pad_inches=0)
-        else:
-            if background is not None:
-                im = plt.imread(background)
-                ax = fig.axes[0]
-                # ax2 = ax.twinx()
-                ax2 = fig.add_subplot(1, 1, 1, label='background')
-                plt.imshow(im, extent=ax2.get_xlim() + ax2.get_ylim(),
-                           alpha=alpha, aspect='auto')
-                if front:
-                    ax.set_zorder(ax2.get_zorder()-1)
-                else:
-                    ax.set_zorder(ax2.get_zorder()+1)
-                    ax.patch.set_visible(False)
-                ax2.axis('off')
-            plt.savefig(saveimage, dpi=dpi, bbox_inches='tight', facecolor=bg)
+        ax2 = fig.add_subplot(1, 1, 1, label='background')
+        plargs = dict(bbox_inches='tight')
+    extent = ax2.get_xlim() + ax2.get_ylim()
+    if background is not None:
+        im = plt.imread(background)
+        plt.imshow(im, extent=extent, alpha=alpha, aspect='auto')
+    if front:
+        ax.set_zorder(ax2.get_zorder()-1)
+    else:
+        ax.set_zorder(ax2.get_zorder()+1)
+        ax.patch.set_visible(False)
+    ax2.axis('off')
+    plt.savefig(saveimage, dpi=dpi, facecolor=bg, **plargs)
     plt.close()
 
 
@@ -537,7 +500,8 @@ def plot_criteria(ax, x, y, criteria, flipxy=False,
 def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                  mrk='o', step=None, fcol=0.0, mew=0.0, emap=None,
                  flipxy=False, cs=None, cmin=None, cmax=None,
-                 msd=None, mmin=None, mmax=None, legend=True, **kwargs):
+                 msd=None, mmin=None, mmax=None, legend=True, polar=False,
+                 **kwargs):
     """adds scatterplots/lines to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(ys)):
@@ -584,7 +548,10 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
             ax.scatter(x, y, **plotargs)
             if legend:
                 pc = cmx.ScalarMappable(norm=colormap.norm, cmap=colormap.cmap)
-                add_colorbar(fig, colormap, axes = [1.05, .2, .1, .6], orientation='vertical')
+                if polar:
+                    add_colorbar(fig, colormap, axes = [1, 0.11, .02, 0.77], orientation='vertical')
+                else:
+                    add_colorbar(fig, colormap, axes = [.92, 0.11, .02, 0.77], orientation='vertical')
         elif msd is not None:
             plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
                         'marker': mka, 'linewidth': mewa, 'c': [c],
