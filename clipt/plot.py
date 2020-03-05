@@ -23,7 +23,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
-from matplotlib.patches import Circle
+from matplotlib.patches import Circle, Patch
 import matplotlib.colors as colors
 import matplotlib.cm as cmx
 from matplotlib.transforms import Bbox
@@ -78,7 +78,7 @@ def tick_from_arg(ax, xs, ys, a4, kwargs):
     except Exception as ex:
         try:
             a4.update(get_axes(kwargs['axes'], xs, ys, kwargs['polar'], stacked=kwargs['stacked'], pery=pery))
-        except Exception as ex:
+        except Exception as ex: 
             raise
             pass
     ax = ticks(ax, **a4)
@@ -656,36 +656,52 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
     return ax, handles
 
 
-def plot_box(ax, data, labels, colormap, ylim, rwidth=.8,
-               step=None, **kwargs):
+def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
+             mew=0.5, ms=3.0, lw=1.0, clw=1.0, clbg=True, fillalpha=1.0,
+             series=1, bg='white', inline=False, **kwargs):
     """adds box plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
-    for i in range(len(data)):
+    for i in range(series):
         if i >= nlab:
             labels.append("series{:02d}".format(i))
-    try:
-        inc = 1./(len(data)-1)
-    except ZeroDivisionError:
-        inc = 1
-    c = [colormap.to_rgba(i*inc) for i in range(len(data))]
-    plotargs = {
-        'boxprops' : {'linewidth':0,'facecolor':c[0]},
-        'capprops' : {'color':c[0],'linewidth':2,'solid_capstyle':'butt'},
-        'whiskerprops' : {'color':c[0],'linewidth':2,'solid_capstyle':'butt'},
-        'medianprops' : {'linewidth':2,'color':'white','solid_capstyle':'butt'},
-        'flierprops' : {'marker':'x', 'markeredgecolor':c[0], 'markeredgewidth':.2, 'markersize':2}
-    }
-    plotargs.update(kwargs)
-    boxplot = ax.boxplot(data, patch_artist=True, widths=rwidth, bootstrap=1000,
-                         **plotargs)
-    handles, labels = ax.get_legend_handles_labels()
-    # if ylim[1] is None:
-    #     ymax = max(flat(boxplot[0]))*1.1
-    # else:
-    #     ymax = ylim[1]
-    # ymin = ylim[0]
-    # ax.set_ylim(bottom=ymin, top=ymax)
-    # ax.set_xlim(left=min(boxplot[1]), right=max(boxplot[1]))
+    nlab = len(labels)
+    if step is not None:
+        inc = 1./(step-1)
+    else:
+        try:
+            inc = 1./(series-1)
+        except ZeroDivisionError:
+            inc = 1
+    chunksize = int(len(data)/series)
+    handles = []
+    for i in range(series):
+        c = colormap.to_rgba(i*inc)
+        if clbg:
+            medianc = bg
+        else:
+            medianc = c
+        facecolor = c[0:3] + (fillalpha,)
+        plotargs = {
+            'boxprops' : {'linewidth':lw,'facecolor':facecolor, 'color':c},
+            'capprops' : {'color':c,'linewidth':lw,'solid_capstyle':'butt'},
+            'whiskerprops' : {'color':c,'linewidth':lw,'solid_capstyle':'butt'},
+            'medianprops' : {'linewidth':clw,'color':medianc,'solid_capstyle':'butt'},
+            'flierprops' : {'marker':mark, 'markeredgecolor':c, 'markeredgewidth':mew, 'markersize':ms}
+        }
+        plotargs.update(kwargs)
+        if inline:
+            x = np.arange(2, len(data), series)
+            sw = series
+        else:
+            x = np.arange(i, len(data), series)
+            sw = 1
+        boxplot = ax.boxplot(data[i*chunksize:i*chunksize+chunksize],
+                             patch_artist=True, widths=rwidth*sw, bootstrap=1000,
+                             positions=x , manage_ticks=False,
+                             **plotargs)
+        handles.append(Patch(color=c, label=labels[i]))
+    lims = ax.dataLim
+    ax.set_xlim(left=lims.x0-rwidth, right=lims.x1+rwidth)
     return ax, handles
 
 

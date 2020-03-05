@@ -511,14 +511,50 @@ def scatter(ctx, dataf, **kwargs):
               help="enter as xname,xmin,xmax,yname,ymin,ymax - default uses"
               "min and max of data enter xmin etc to maintain autoscale")
 @click.option('-rwidth', default=0.95, type=float,
-              help="relative width of bars")
+              help="relative width of boxs")
 @click.option('-xlabels', callback=clk.split_str,
               help="input custom xaxis labels, by default uses file name and"
               "row number or --xheader option")
+@click.option('-mark', default='x',
+              help="mark for flyers")
+@click.option('-ms', default=3.0,
+              help="size for flyers")
+@click.option('-mew', default=.5,
+              help="edge weight for flyers")
+@click.option('-lw', default=1.,
+              help="linewidth for box and whiskers")
+@click.option('-clw', default=1.,
+              help="linewidth for median line")
+@click.option('-series', default=1,
+              help="number of series to plot data in")
+@click.option('--clbg/--no-clbg', default=True,
+              help="median line uses -bg")
+@click.option('-fillalpha', default=1.0,
+              help="alpha for fill color (matches line color)")
 @click.option('--xheader/--no-xheader', default=False,
               help="indicates that data has a header column to get x-axis "
               "labels (overridden by xlabels)")
-@clk.shared_decs(shared + sharedA)
+@click.option('-fcol', default=0.0, type=float,
+              help="colormap position for first color")
+@click.option('--xgrid/--no-xgrid', default=False,
+              help="plot x grid lines")
+@click.option('--ygrid/--no-ygrid', default=False,
+              help="plot y grid lines")
+@click.option('-yticks', type=int,
+              help="number of y-ticks/gridlines")
+@click.option('-labels', callback=clk.split_str,
+              help="input custom x-axis labels, by default uses "
+              "file name and index or --header option")
+@click.option('--rows/--no-rows', default=False,
+              help="get data rows instead of columns")
+@click.option('--ylog/--no-ylog', default=False,
+              help="plot y on log scale")
+@click.option('--inline/--no-inline', default=False,
+              help="keep boxes inline")
+@click.option('--header/--no-header', default=False,
+              help="indicates that data has a header row to get "
+              "series labels (overridden by labels)")
+@clk.shared_decs(shared)
 def box(dataf, **kwargs):
     """
     create boxplot from data files.
@@ -530,7 +566,7 @@ def box(dataf, **kwargs):
         try:
             axext = ruplot.get_axes(kwargs['axes'], [], [])
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
-            a1['autox'] = axext['xdata']
+            a1['autox'] = [0, 1]
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
             if kwargs['xheader']:
                 a1['y_vals'] = [0]
@@ -553,7 +589,7 @@ def box(dataf, **kwargs):
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
             a4.pop('labels', None)
             a4['xlabels'] = xlabels
-            ax = ruplot.tick_from_arg(ax, xs, ys, a4, kwargs)
+            ax = ruplot.tick_from_arg(ax, [0, len(ys)], ys, a4, kwargs)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
             a6 = mgr.kwarg_match(ruplot.plot_box, kwargs)
