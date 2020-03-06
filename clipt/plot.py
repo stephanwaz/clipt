@@ -657,9 +657,62 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
 
 
 def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
-             mew=0.5, ms=3.0, lw=1.0, clw=1.0, clbg=True, fillalpha=1.0,
-             series=1, bg='white', inline=False, **kwargs):
+             mew=0.5, ms=3.0, lw=1.0, clw=1.0, clbg=True, fillalpha=1.0, notch=False,
+             series=1, bg='white', inline=False, mean=False, **kwargs):
     """adds box plots to ax and returns ax and handles for legend"""
+    nlab = len(labels)
+    for i in range(series):
+        if i >= nlab:
+            labels.append("series{:02d}".format(i))
+    nlab = len(labels)
+    if step is not None:
+        inc = 1./(step-1)
+    else:
+        try:
+            inc = 1./(series-1)
+        except ZeroDivisionError:
+            inc = 1
+    chunksize = int(len(data)/series)
+    handles = []
+    
+    for i in range(series):
+        c = colormap.to_rgba(i*inc)
+        if clbg:
+            medianc = bg
+        else:
+            medianc = c
+        facecolor = c[0:3] + (fillalpha,)
+        plotargs = {
+            'boxprops' : {'linewidth':lw,'facecolor':facecolor, 'color':c},
+            'capprops' : {'color':c,'linewidth':lw,'solid_capstyle':'butt'},
+            'whiskerprops' : {'color':c,'linewidth':lw,'solid_capstyle':'butt'},
+            'medianprops' : {'linewidth':clw*(not mean),'color':medianc,'solid_capstyle':'butt'},
+            'meanprops' : {'linewidth':clw,'color':medianc,
+                           'solid_capstyle':'butt', 'ls':'-', 'marker':'o',
+                           'ms':clw*2, 'mfc':medianc, 'mew':0},
+            'flierprops' : {'marker':mark, 'markeredgecolor':c, 'markeredgewidth':mew, 'markersize':ms}
+        }
+        plotargs.update(kwargs)
+        if inline:
+            x = np.arange(2, len(data), series)
+            sw = series
+        else:
+            x = np.arange(i, len(data), series)
+            sw = 1
+        boxplot = ax.boxplot(data[i*chunksize:i*chunksize+chunksize], notch=notch,
+                             patch_artist=True, widths=rwidth*sw, bootstrap=1000,
+                             positions=x , manage_ticks=False, showmeans=mean, meanline=not notch,
+                             **plotargs)
+        handles.append(Patch(color=c, label=labels[i]))
+    lims = ax.dataLim
+    ax.set_xlim(left=lims.x0-rwidth, right=lims.x1+rwidth)
+    return ax, handles
+
+
+def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
+                clw=1.0, clbg=True, fillalpha=1.0, median=True,
+                series=1, bg='white', inline=False, mean=False, **kwargs):
+    """adds violin plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(series):
         if i >= nlab:
@@ -680,25 +733,26 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
             medianc = bg
         else:
             medianc = c
-        facecolor = c[0:3] + (fillalpha,)
-        plotargs = {
-            'boxprops' : {'linewidth':lw,'facecolor':facecolor, 'color':c},
-            'capprops' : {'color':c,'linewidth':lw,'solid_capstyle':'butt'},
-            'whiskerprops' : {'color':c,'linewidth':lw,'solid_capstyle':'butt'},
-            'medianprops' : {'linewidth':clw,'color':medianc,'solid_capstyle':'butt'},
-            'flierprops' : {'marker':mark, 'markeredgecolor':c, 'markeredgewidth':mew, 'markersize':ms}
-        }
-        plotargs.update(kwargs)
         if inline:
             x = np.arange(2, len(data), series)
             sw = series
         else:
             x = np.arange(i, len(data), series)
             sw = 1
-        boxplot = ax.boxplot(data[i*chunksize:i*chunksize+chunksize],
-                             patch_artist=True, widths=rwidth*sw, bootstrap=1000,
-                             positions=x , manage_ticks=False,
-                             **plotargs)
+        
+        vplot = ax.violinplot(data[i*chunksize:i*chunksize+chunksize],
+                              showmeans=mean, showmedians=median,
+                              widths=rwidth*sw, positions=x)
+        for vp in vplot['bodies']:
+            vp.set_facecolor(c)
+            vp.set_alpha(fillalpha)
+        for vp in [ vplot[i] for i in ['cmins', 'cmaxes', 'cbars', 'cmeans']]:
+            vp.set_edgecolor(c)
+            vp.set_linewidth(lw)
+        for vp in [ vplot[i] for i in ['cmedians']]:
+            vp.set_edgecolor(c)
+            vp.set_linewidth(clw)
+        vplot['cmeans'].set_linestyle(':')
         handles.append(Patch(color=c, label=labels[i]))
     lims = ax.dataLim
     ax.set_xlim(left=lims.x0-rwidth, right=lims.x1+rwidth)

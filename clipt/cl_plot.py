@@ -549,6 +549,10 @@ def scatter(ctx, dataf, **kwargs):
               help="get data rows instead of columns")
 @click.option('--ylog/--no-ylog', default=False,
               help="plot y on log scale")
+@click.option('--mean/--median', default=False,
+              help="plot mean line or median line")
+@click.option('--notch/--no-notch', default=False,
+              help="plot notch for 95\% confidence interval")
 @click.option('--inline/--no-inline', default=False,
               help="keep boxes inline")
 @click.option('--header/--no-header', default=False,
@@ -607,6 +611,112 @@ def box(dataf, **kwargs):
         except Exception as ex:
             clk.print_except(ex, kwargs['debug'])
     return 'box', kwargs
+
+
+@plot.command('violin')
+@click.argument('dataf', callback=clk.are_files)
+@click.option('-y_vals', default="-1", callback=clk.tup_int,
+              help="index for yvals")
+@click.option('-axes', default="X,0,1,Y,0,ymax",
+              help="enter as xname,xmin,xmax,yname,ymin,ymax - default uses"
+              "min and max of data enter xmin etc to maintain autoscale")
+@click.option('-rwidth', default=0.95, type=float,
+              help="relative width of boxs")
+@click.option('-xlabels', callback=clk.split_str,
+              help="input custom xaxis labels, by default uses file name and"
+              "row number or --xheader option")
+@click.option('-lw', default=1.,
+              help="linewidth for extrema and vertical line")
+@click.option('-clw', default=1.,
+              help="linewidth for median line")
+@click.option('-series', default=1,
+              help="number of series to plot data in")
+@click.option('--clbg/--no-clbg', default=True,
+              help="median line uses -bg")
+@click.option('-fillalpha', default=1.0,
+              help="alpha for fill color (matches line color)")
+@click.option('--xheader/--no-xheader', default=False,
+              help="indicates that data has a header column to get x-axis "
+              "labels (overridden by xlabels)")
+@click.option('-fcol', default=0.0, type=float,
+              help="colormap position for first color")
+@click.option('--xgrid/--no-xgrid', default=False,
+              help="plot x grid lines")
+@click.option('--ygrid/--no-ygrid', default=False,
+              help="plot y grid lines")
+@click.option('-yticks', type=int,
+              help="number of y-ticks/gridlines")
+@click.option('-labels', callback=clk.split_str,
+              help="input custom x-axis labels, by default uses "
+              "file name and index or --header option")
+@click.option('--rows/--no-rows', default=False,
+              help="get data rows instead of columns")
+@click.option('--ylog/--no-ylog', default=False,
+              help="plot y on log scale")
+@click.option('--mean/--no-mean', default=False,
+              help="plot mean dot")
+@click.option('--median/--no-median', default=True,
+              help="plot median line")
+@click.option('--inline/--no-inline', default=False,
+              help="keep violins inline")
+@click.option('--header/--no-header', default=False,
+              help="indicates that data has a header row to get "
+              "series labels (overridden by labels)")
+@clk.shared_decs(shared)
+def violin(dataf, **kwargs):
+    """
+    create violinplot from data files.
+    """
+    if kwargs['opts']:
+        kwargs['opts'] = False
+        clk.echo_args(dataf, **kwargs)
+    else:
+        try:
+            axext = ruplot.get_axes(kwargs['axes'], [], [])
+            a1 = mgr.kwarg_match(mgr.read_data, kwargs)
+            a1['autox'] = [0, 1]
+            xs, ys, labels = mgr.read_all_data(dataf, **a1)
+            if kwargs['xheader']:
+                a1['y_vals'] = [0]
+                a1['x_vals'] = []
+                a1['coerce'] = False
+                a1['xheader'] = False
+                a1['rows'] = False
+                _, xlabels, _ = mgr.read_data(dataf[0], **a1)
+                xlabels = xlabels[0]
+            else:
+                xlabels = []
+            xlabels = ruplot.get_labels(xlabels, kwargs['xlabels'])
+            labels = ruplot.get_labels(labels, kwargs['labels'])
+            if kwargs['rows']:
+                la = labels
+                labels = xlabels
+                xlabels = la
+            a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
+            ax, fig = ruplot.plot_setup(**a3)
+            a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
+            a4.pop('labels', None)
+            a4['xlabels'] = xlabels
+            ax = ruplot.tick_from_arg(ax, [0, len(ys)], ys, a4, kwargs)
+            a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
+            cmap = ruplot.get_colors(kwargs['colors'], **a5)
+            a6 = mgr.kwarg_match(ruplot.plot_box, kwargs)
+            a6.pop('labels', None)
+            ax, handles = ruplot.plot_violin(ax, ys, labels, cmap,
+                                             axext['ydata'], **a6)
+            if kwargs['outf']:
+                outf = kwargs['outf']
+            else:
+                outf = dataf[0].rsplit(".", 1)[0] + ".png"
+            a7 = mgr.kwarg_match(ruplot.plot_graph, kwargs)
+            ruplot.plot_graph(fig, outf, handles=handles, **a7)
+        except click.Abort:
+            raise
+        except Exception as ex:
+            clk.print_except(ex, kwargs['debug'])
+    return 'violin', kwargs
+
+
 
 
 @plot.command('colors')
