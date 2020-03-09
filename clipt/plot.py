@@ -194,7 +194,8 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
           xgrid=False, ygrid=False, xscale='linear', yscale='linear',
           annualx=False, dayy=False, pery=False, ticklines=False, pph=1,
           bottom=None, bg='white', xlabels=None, dpy=365, hpd=24, sh=0,
-          polar=False, xticks=None, yticks=None, labelweight='bold'):
+          polar=False, xticks=None, yticks=None, labelweight='bold',
+          matchxy=False):
     """
     setup ticks/axes for plot
 
@@ -230,6 +231,11 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     xmax = xdata[-1]
     ymin = min(ydata)
     ymax = max(ydata)
+    if matchxy:
+        xmin = min(xmin, ymin)
+        xmax = max(xmax, ymax)
+        ymin = xmin
+        ymax = xmax
     ax.xaxis.grid(linestyle="-", linewidth=0.3, color=tcol)
     ax.yaxis.grid(linestyle="-", linewidth=0.3, color=tcol, zorder=1)
     ax.xaxis.grid(xgrid)

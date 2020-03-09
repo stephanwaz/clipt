@@ -427,6 +427,8 @@ def histo(ctx, dataf, **kwargs):
               help="plot x on log scale")
 @click.option('--diagonal/--no-diagonal', default=False,
               help="add diagonal gridline")
+@click.option('--matchxy/--no-matchxy', default=False,
+              help="use same range for x and y")
 @click.option('-pery', default=None, type=int,
               help="label y-axis by percentile with N bins")
 @click.option('--reverse/--no-reverse', default=False,
