@@ -632,7 +632,7 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
     xlim = [xl[0]+brng[0]*(xl[1]-xl[0]), xl[0]+brng[1]*(xl[1]-xl[0])]
     xrng = abs(xlim[1]-xlim[0])/float(len(xs[0]))
     lxs = len(xs[0])
-    width = old_div(xrng,nlab*rwidth)
+    width = old_div(xrng,nlab)*rwidth
     try:
         xsc = old_div((lxs - 1.0),lxs)
     except ZeroDivisionError:
