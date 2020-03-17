@@ -9,13 +9,13 @@ __all__ = ['plot', 'cl_plot']
 
 
 def get_root(inside=True, pyenv=False):
-    """return root directory of radutil install"""
+    """return root directory of clipt install"""
 
     import sys
 
     if pyenv:
         return sys.executable.rsplit("/bin", 1)[0]
     elif inside:
-        return __file__.rsplit("radutil", 1)[0] + "radutil"
+        return __file__.rsplit("clipt", 1)[0] + "clipt"
     else:
-        return __file__.rsplit("/radutil", 1)[0]
+        return __file__.rsplit("/clipt", 1)[0]
