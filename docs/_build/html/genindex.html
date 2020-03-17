@@ -1,19 +1,18 @@
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Index &#8212; clipt (1.0.0) 1.0.0 documentation</title>
+    <meta charset="utf-8" />
+    <title>Index &#8212; clipt (1.0.1) 1.0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -27,7 +26,7 @@
     
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">clipt (1.0.0)</a></h1>
+<h1 class="logo"><a href="index.html">clipt (1.0.1)</a></h1>
 
 
 
@@ -49,13 +48,11 @@
 
 
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -87,7 +84,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
-    --areaonly, --no-areaonly
+    --areaonly
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-areaonly">cl_plot-bar command line option</a>
@@ -99,6 +96,31 @@
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-areaonly">cl_plot-histo command line option</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-areaonly">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-areaonly">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --clbg
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-clbg">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-clbg">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --config &lt;PATH&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-c">cl_plot command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --configalias &lt;TEXT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-ca">cl_plot command line option</a>
 </li>
       </ul></li>
       <li>
@@ -117,30 +139,39 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-debug">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-debug">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    --density, --no-density
+    --density
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-density">cl_plot-histo command line option</a>
 </li>
       </ul></li>
       <li>
-    --dst, --no-dst
+    --diagonal
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-diagonal">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --dst
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dst">cl_plot-heatmap command line option</a>
 </li>
       </ul></li>
       <li>
-    --flipxy, --no-flipxy
+    --flipxy
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-flipxy">cl_plot-scatter command line option</a>
 </li>
       </ul></li>
       <li>
-    --front, --no-front
+    --front
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-front">cl_plot-bar command line option</a>
@@ -153,9 +184,11 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-front">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-front">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    --header, --no-header
+    --header
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-header">cl_plot-bar command line option</a>
@@ -166,16 +199,27 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-header">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-header">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    --inputalias, --no-inputalias
+    --inline
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-inline">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-inline">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --inputalias
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-inputalias">cl_plot command line option</a>
 </li>
       </ul></li>
       <li>
-    --legend, --no-legend
+    --legend
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-legend">cl_plot-bar command line option</a>
@@ -188,14 +232,193 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-legend">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-legend">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    --polar, --no-polar
+    --mat
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-ru">cl_plot-colors command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --matchxy
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-matchxy">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --mean
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-mean">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-mean">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --median
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-mean">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-median">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-areaonly
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-areaonly">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-areaonly">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-areaonly">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-areaonly">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-areaonly">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-areaonly">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-clbg
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-clbg">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-clbg">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-density
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-density">cl_plot-histo command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-diagonal
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-diagonal">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-dst
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dst">cl_plot-heatmap command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-flipxy
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-flipxy">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-front
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-front">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-front">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-front">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-front">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-front">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-front">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-header
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-header">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-header">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-header">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-header">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-header">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-inline
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-inline">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-inline">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-inputalias
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-inputalias">cl_plot command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-legend
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-legend">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-legend">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-legend">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-legend">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-legend">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-legend">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-matchxy
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-matchxy">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-mean
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-mean">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-median
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-median">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-notch
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-notch">cl_plot-box command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-polar
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-polar">cl_plot-box command line option</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-polar">cl_plot-histo command line option</a>
 </li>
@@ -203,14 +426,14 @@
 </li>
       </ul></li>
       <li>
-    --polar0, --no-polar0
+    --no-polar0
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar0">cl_plot-bar command line option</a>
 </li>
       </ul></li>
       <li>
-    --polarauto, --no-polarauto
+    --no-polarauto
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polarauto">cl_plot-bar command line option</a>
@@ -219,28 +442,21 @@
 </li>
       </ul></li>
       <li>
-    --radf, --no-radf
+    --no-radf
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-colors-radf">cl_plot-colors command line option</a>
 </li>
       </ul></li>
       <li>
-    --reverse, --no-reverse
+    --no-reverse
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-reverse">cl_plot-scatter command line option</a>
 </li>
       </ul></li>
       <li>
-    --rgb, --no-tgb
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-rgb">cl_plot-colors command line option</a>
-</li>
-      </ul></li>
-      <li>
-    --rows, --no-rows
+    --no-rows
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-rows">cl_plot-bar command line option</a>
@@ -251,16 +467,11 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-rows">cl_plot-scatter command line option</a>
 </li>
-      </ul></li>
-      <li>
-    --ru, --mat
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-ru">cl_plot-colors command line option</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-rows">cl_plot-violin command line option</a>
 </li>
       </ul></li>
       <li>
-    --stacked, --no-stacked
+    --no-stacked
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-stacked">cl_plot-bar command line option</a>
@@ -269,14 +480,21 @@
 </li>
       </ul></li>
       <li>
-    --tails, --no-tails
+    --no-tails
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-tails">cl_plot-histo command line option</a>
 </li>
       </ul></li>
       <li>
-    --ticklines, --no-ticklines
+    --no-tgb
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-rgb">cl_plot-colors command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --no-ticklines
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ticklines">cl_plot-bar command line option</a>
@@ -289,16 +507,11 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ticklines">cl_plot-scatter command line option</a>
 </li>
-      </ul></li>
-      <li>
-    --version
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-version">cl_plot command line option</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ticklines">cl_plot-violin command line option</a>
 </li>
       </ul></li>
       <li>
-    --weatherfile, --no-weatherfile
+    --no-weatherfile
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-weatherfile">cl_plot-bar command line option</a>
@@ -311,9 +524,11 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-weatherfile">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-weatherfile">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    --xgrid, --no-xgrid
+    --no-xgrid
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xgrid">cl_plot-bar command line option</a>
@@ -324,9 +539,11 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xgrid">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xgrid">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    --xheader, --no-xheader
+    --no-xheader
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xheader">cl_plot-bar command line option</a>
@@ -335,16 +552,18 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xheader">cl_plot-histo command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xheader">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    --xlog, --no-xlog
+    --no-xlog
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xlog">cl_plot-scatter command line option</a>
 </li>
       </ul></li>
       <li>
-    --ygrid, --no-ygrid
+    --no-ygrid
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ygrid">cl_plot-bar command line option</a>
@@ -355,9 +574,11 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ygrid">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ygrid">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    --ylog, --no-ylog
+    --no-ylog
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ylog">cl_plot-bar command line option</a>
@@ -368,426 +589,18 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ylog">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ylog">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    -alpha &lt;alpha&gt;
+    --notch
 
       <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-alpha">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-alpha">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-alpha">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-alpha">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-alpha">cl_plot-scatter command line option</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-notch">cl_plot-box command line option</a>
 </li>
       </ul></li>
       <li>
-    -autobin &lt;autobin&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-autobin">cl_plot-histo command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -autox &lt;autox&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-autox">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -axes &lt;axes&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-axes">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-axes">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-axes">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-axes">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -background &lt;background&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-background">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-background">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-background">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-background">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-background">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -bg &lt;bg&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bg">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-bg">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-bg">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bg">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-bg">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -bins &lt;bins&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bins">cl_plot-histo command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -bottom &lt;bottom&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bottom">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-bottom">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bottom">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-bottom">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -brange &lt;brange&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-brange">cl_plot-histo command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -brng &lt;brng&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-brng">cl_plot-bar command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -bwidth &lt;bwidth&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bwidth">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bwidth">cl_plot-histo command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -c, --config &lt;config&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-c">cl_plot command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -c_vals &lt;c_vals&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-c-vals">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -ca, --configalias &lt;configalias&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-ca">cl_plot command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -cmax &lt;cmax&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-cmax">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -cmin &lt;cmin&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-cmin">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -colors &lt;colors&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-colors">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-colors">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-colors">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-colors">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-colors">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -comment &lt;comment&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-comment">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-comment">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-comment">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-comment">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-comment">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    -criteria &lt;criteria&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-criteria">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -dpi &lt;dpi&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-dpi">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-dpi">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dpi">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-dpi">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-dpi">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -dpy &lt;dpy&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dpy">cl_plot-heatmap command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -drange &lt;drange&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-drange">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-drange">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-drange">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-drange">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-drange">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -ecolors &lt;ecolors&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ecolors">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ecolors">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ecolors">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ecolors">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -epositions &lt;epositions&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-epositions">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-epositions">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-epositions">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-epositions">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -estep &lt;estep&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-estep">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-estep">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-estep">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-estep">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -ew &lt;ew&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ew">cl_plot-bar command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -fcol &lt;fcol&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-fcol">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fcol">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-fcol">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-fcol">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -fg &lt;fg&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-fg">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fg">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-fg">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-fg">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-fg">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -gridc &lt;gridc&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-gridc">cl_plot-heatmap command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -height &lt;height&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-height">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-height">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-height">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-height">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-height">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -hpd &lt;hpd&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-hpd">cl_plot-heatmap command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -labels &lt;labels&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-labels">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-labels">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-labels">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-labels">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-labels">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -labelweight &lt;labelweight&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-labelweight">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-labelweight">cl_plot-box command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-labelweight">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-labelweight">cl_plot-histo command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-labelweight">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -lw &lt;lw&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-lw">cl_plot-heatmap command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-lw">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -m_vals &lt;m_vals&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-m-vals">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -mew &lt;mew&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mew">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -mmax &lt;mmax&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mmax">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -mmin &lt;mmin&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mmin">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -mrk &lt;mrk&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mrk">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -ms &lt;ms&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ms">cl_plot-scatter command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -oc, --outconfig &lt;outconfig&gt;
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-oc">cl_plot command line option</a>
-</li>
-      </ul></li>
-      <li>
-    -opts, --opts
+    --opts
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-opts">cl_plot-bar command line option</a>
@@ -802,9 +615,726 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-opts">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-opts">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    -outf &lt;outf&gt;
+    --outconfig &lt;PATH&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-oc">cl_plot command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --polar
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-polar">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-polar">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --polar0
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar0">cl_plot-bar command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --polarauto
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polarauto">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-polarauto">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --radf
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-radf">cl_plot-colors command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --reverse
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-reverse">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --rgb
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-rgb">cl_plot-colors command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --rows
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-rows">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-rows">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-rows">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-rows">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-rows">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --ru
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-ru">cl_plot-colors command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --stacked
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-stacked">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-stacked">cl_plot-histo command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --tails
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-tails">cl_plot-histo command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --ticklines
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ticklines">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ticklines">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-ticklines">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ticklines">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ticklines">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ticklines">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --version
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-version">cl_plot command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --weatherfile
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-weatherfile">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-weatherfile">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-weatherfile">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-weatherfile">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-weatherfile">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-weatherfile">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --xgrid
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xgrid">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xgrid">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xgrid">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xgrid">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xgrid">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --xheader
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xheader">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xheader">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xheader">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xheader">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --xlog
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xlog">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --ygrid
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ygrid">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ygrid">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ygrid">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ygrid">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ygrid">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --ylog
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ylog">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ylog">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ylog">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ylog">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ylog">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    -alpha &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-alpha">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-alpha">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-alpha">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-alpha">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-alpha">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-alpha">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -autobin &lt;TEXT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-autobin">cl_plot-histo command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -autox &lt;FLOATS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-autox">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -axes &lt;TEXT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-axes">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-axes">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-axes">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-axes">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-axes">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -background &lt;PATH&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-background">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-background">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-background">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-background">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-background">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-background">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -bg &lt;TEXT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bg">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-bg">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-bg">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bg">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-bg">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-bg">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -bins &lt;FLOATS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bins">cl_plot-histo command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -bottom &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bottom">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bottom">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-bottom">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -brange &lt;FLOATS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-brange">cl_plot-histo command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -brng &lt;FLOATS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-brng">cl_plot-bar command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -bwidth &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bwidth">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bwidth">cl_plot-histo command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -c
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-c">cl_plot command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -c_vals &lt;INTS INTS,INTS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-c-vals">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -ca
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-ca">cl_plot command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -clw &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-clw">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-clw">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -cmax &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-cmax">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -cmin &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-cmin">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -colors &lt;COLORS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-colors">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-colors">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-colors">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-colors">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-colors">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-colors">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -comment &lt;TEXT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-comment">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-comment">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-comment">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-comment">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-comment">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-comment">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -criteria &lt;TEXT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-criteria">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -dpi &lt;INTEGER&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-dpi">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-dpi">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dpi">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-dpi">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-dpi">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-dpi">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -dpy &lt;INTEGER&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dpy">cl_plot-heatmap command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -drange &lt;INTS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-drange">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-drange">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-drange">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-drange">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-drange">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-drange">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -ecolors &lt;COLORS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ecolors">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ecolors">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ecolors">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -epositions &lt;FLOATS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-epositions">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-epositions">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-epositions">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -estep &lt;INTEGER&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-estep">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-estep">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-estep">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -ew &lt;FLOATS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ew">cl_plot-bar command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -fcol &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-fcol">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fcol">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-fcol">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-fcol">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-fcol">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -fg &lt;TEXT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-fg">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fg">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-fg">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-fg">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-fg">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-fg">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -fillalpha &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fillalpha">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-fillalpha">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -gridc &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-gridc">cl_plot-heatmap command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -height &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-height">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-height">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-height">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-height">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-height">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-height">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -hpd &lt;INTEGER&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-hpd">cl_plot-heatmap command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -labels &lt;TEXTS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-labels">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-labels">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-labels">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-labels">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-labels">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-labels">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -labelweight &lt;CHOICE&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-labelweight">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-labelweight">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-labelweight">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-labelweight">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-labelweight">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-labelweight">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -lw &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-lw">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-lw">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-lw">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -lw &lt;FLOATS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-lw">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -m_vals &lt;INTS INTS,INTS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-m-vals">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -mark &lt;TEXT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-mark">cl_plot-box command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -mew &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-mew">cl_plot-box command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -mew &lt;FLOATS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mew">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -mmax &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mmax">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -mmin &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mmin">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -mpal &lt;TEXT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-mpal">cl_plot-colors command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -mpaldiv &lt;INTEGER&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-mpaldiv">cl_plot-colors command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -mrk &lt;TEXTS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mrk">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -ms &lt;FLOAT&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ms">cl_plot-box command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -ms &lt;FLOATS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ms">cl_plot-scatter command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -oc
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-oc">cl_plot command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -opts
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-opts">cl_plot-bar command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-opts">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-opts">cl_plot-colors command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-opts">cl_plot-heatmap command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-opts">cl_plot-histo command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-opts">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-opts">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -outf &lt;TEXT&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-outf">cl_plot-bar command line option</a>
@@ -819,23 +1349,25 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-outf">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-outf">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    -pery &lt;pery&gt;
+    -pery &lt;INTEGER&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-pery">cl_plot-scatter command line option</a>
 </li>
       </ul></li>
       <li>
-    -plotidx &lt;plotidx&gt;
+    -plotidx &lt;INTEGER&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-plotidx">cl_plot-heatmap command line option</a>
 </li>
       </ul></li>
       <li>
-    -positions &lt;positions&gt;
+    -positions &lt;FLOATS&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-positions">cl_plot-bar command line option</a>
@@ -848,16 +1380,18 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-positions">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-positions">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    -pph &lt;pph&gt;
+    -pph &lt;INTEGER&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-pph">cl_plot-heatmap command line option</a>
 </li>
       </ul></li>
       <li>
-    -rwidth &lt;rwidth&gt;
+    -rwidth &lt;FLOAT&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-rwidth">cl_plot-bar command line option</a>
@@ -866,16 +1400,27 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-rwidth">cl_plot-histo command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-rwidth">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    -sh &lt;sh&gt;
+    -series &lt;INTEGER&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-series">cl_plot-box command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-series">cl_plot-violin command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -sh &lt;INTEGER&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-sh">cl_plot-heatmap command line option</a>
 </li>
       </ul></li>
       <li>
-    -step &lt;step&gt;
+    -step &lt;INTEGER&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-step">cl_plot-bar command line option</a>
@@ -888,37 +1433,39 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-step">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-step">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    -ticks &lt;ticks&gt;
+    -ticks &lt;FLOATS&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-ticks">cl_plot-heatmap command line option</a>
 </li>
       </ul></li>
       <li>
-    -vmax &lt;vmax&gt;
+    -vmax &lt;FLOAT&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-vmax">cl_plot-heatmap command line option</a>
 </li>
       </ul></li>
       <li>
-    -vmin &lt;vmin&gt;
+    -vmin &lt;FLOAT&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-vmin">cl_plot-heatmap command line option</a>
 </li>
       </ul></li>
       <li>
-    -weax &lt;weax&gt;
+    -weax &lt;INTS&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-weax">cl_plot-scatter command line option</a>
 </li>
       </ul></li>
       <li>
-    -width &lt;width&gt;
+    -width &lt;FLOAT&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-width">cl_plot-bar command line option</a>
@@ -931,16 +1478,18 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-width">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-width">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    -x_vals &lt;x_vals&gt;
+    -x_vals &lt;INTS INTS,INTS&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-x-vals">cl_plot-scatter command line option</a>
 </li>
       </ul></li>
       <li>
-    -xlabels &lt;xlabels&gt;
+    -xlabels &lt;TEXTS&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xlabels">cl_plot-bar command line option</a>
@@ -949,14 +1498,14 @@
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xlabels">cl_plot-histo command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xlabels">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    -xticks &lt;xticks&gt;
+    -xticks &lt;INTEGER&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xticks">cl_plot-bar command line option</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xticks">cl_plot-box command line option</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xticks">cl_plot-histo command line option</a>
 </li>
@@ -964,20 +1513,27 @@
 </li>
       </ul></li>
       <li>
-    -y_vals &lt;y_vals&gt;
+    -y_vals &lt;INTS INTS,INTS&gt;
 
       <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-y-vals">cl_plot-bar command line option</a>
-</li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-box-y-vals">cl_plot-box command line option</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-y-vals">cl_plot-histo command line option</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-y-vals">cl_plot-scatter command line option</a>
 </li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-y-vals">cl_plot-violin command line option</a>
+</li>
       </ul></li>
       <li>
-    -yticks &lt;yticks&gt;
+    -y_vals &lt;INTS&gt;
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-y-vals">cl_plot-bar command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -yticks &lt;INTEGER&gt;
 
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-yticks">cl_plot-bar command line option</a>
@@ -987,6 +1543,8 @@
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-yticks">cl_plot-histo command line option</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-yticks">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-yticks">cl_plot-violin command line option</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1007,112 +1565,152 @@
     cl_plot command line option
 
       <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-inputalias">--inputalias, --no-inputalias</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-c">--config &lt;PATH&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-ca">--configalias &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-inputalias">--inputalias</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-inputalias">--no-inputalias</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-oc">--outconfig &lt;PATH&gt;</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-version">--version</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-c">-c, --config &lt;config&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-c">-c</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-ca">-ca, --configalias &lt;configalias&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-ca">-ca</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-oc">-oc, --outconfig &lt;outconfig&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-oc">-oc</a>
 </li>
       </ul></li>
       <li>
     cl_plot-bar command line option
 
       <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-areaonly">--areaonly, --no-areaonly</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-areaonly">--areaonly</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-debug">--debug</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-front">--front, --no-front</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-front">--front</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-header">--header, --no-header</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-header">--header</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-legend">--legend, --no-legend</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-legend">--legend</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar">--polar, --no-polar</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-areaonly">--no-areaonly</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar0">--polar0, --no-polar0</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-front">--no-front</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polarauto">--polarauto, --no-polarauto</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-header">--no-header</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-rows">--rows, --no-rows</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-legend">--no-legend</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-stacked">--stacked, --no-stacked</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar">--no-polar</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ticklines">--ticklines, --no-ticklines</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar0">--no-polar0</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-weatherfile">--weatherfile, --no-weatherfile</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polarauto">--no-polarauto</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xgrid">--xgrid, --no-xgrid</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-rows">--no-rows</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xheader">--xheader, --no-xheader</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-stacked">--no-stacked</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ygrid">--ygrid, --no-ygrid</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ticklines">--no-ticklines</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ylog">--ylog, --no-ylog</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-weatherfile">--no-weatherfile</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-alpha">-alpha &lt;alpha&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xgrid">--no-xgrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-axes">-axes &lt;axes&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xheader">--no-xheader</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-background">-background &lt;background&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ygrid">--no-ygrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bg">-bg &lt;bg&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ylog">--no-ylog</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bottom">-bottom &lt;bottom&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-opts">--opts</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-brng">-brng &lt;brng&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar">--polar</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bwidth">-bwidth &lt;bwidth&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polar0">--polar0</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-colors">-colors &lt;colors&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-polarauto">--polarauto</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-comment">-comment &lt;comment&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-rows">--rows</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-dpi">-dpi &lt;dpi&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-stacked">--stacked</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-drange">-drange &lt;drange&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ticklines">--ticklines</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ecolors">-ecolors &lt;ecolors&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-weatherfile">--weatherfile</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-epositions">-epositions &lt;epositions&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xgrid">--xgrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-estep">-estep &lt;estep&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xheader">--xheader</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ew">-ew &lt;ew&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ygrid">--ygrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-fcol">-fcol &lt;fcol&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ylog">--ylog</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-fg">-fg &lt;fg&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-alpha">-alpha &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-height">-height &lt;height&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-axes">-axes &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-labels">-labels &lt;labels&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-background">-background &lt;PATH&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-labelweight">-labelweight &lt;labelweight&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bg">-bg &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-opts">-opts, --opts</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bottom">-bottom &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-outf">-outf &lt;outf&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-brng">-brng &lt;FLOATS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-positions">-positions &lt;positions&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-bwidth">-bwidth &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-rwidth">-rwidth &lt;rwidth&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-colors">-colors &lt;COLORS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-step">-step &lt;step&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-comment">-comment &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-width">-width &lt;width&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-dpi">-dpi &lt;INTEGER&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xlabels">-xlabels &lt;xlabels&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-drange">-drange &lt;INTS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xticks">-xticks &lt;xticks&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ecolors">-ecolors &lt;COLORS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-y-vals">-y_vals &lt;y_vals&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-epositions">-epositions &lt;FLOATS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-yticks">-yticks &lt;yticks&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-estep">-estep &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-ew">-ew &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-fcol">-fcol &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-fg">-fg &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-height">-height &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-labels">-labels &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-labelweight">-labelweight &lt;CHOICE&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-opts">-opts</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-outf">-outf &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-positions">-positions &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-rwidth">-rwidth &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-step">-step &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-width">-width &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xlabels">-xlabels &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-xticks">-xticks &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-y-vals">-y_vals &lt;INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-bar-yticks">-yticks &lt;INTEGER&gt;</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-bar-arg-dataf">DATAF</a>
 </li>
@@ -1121,85 +1719,127 @@
     cl_plot-box command line option
 
       <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-areaonly">--areaonly, --no-areaonly</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-areaonly">--areaonly</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-clbg">--clbg</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-box-debug">--debug</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-front">--front, --no-front</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-front">--front</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-header">--header, --no-header</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-header">--header</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-legend">--legend, --no-legend</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-inline">--inline</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-polar">--polar, --no-polar</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-legend">--legend</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-rows">--rows, --no-rows</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-mean">--mean</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ticklines">--ticklines, --no-ticklines</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-mean">--median</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-weatherfile">--weatherfile, --no-weatherfile</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-areaonly">--no-areaonly</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xgrid">--xgrid, --no-xgrid</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-clbg">--no-clbg</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xheader">--xheader, --no-xheader</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-front">--no-front</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ygrid">--ygrid, --no-ygrid</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-header">--no-header</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ylog">--ylog, --no-ylog</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-inline">--no-inline</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-alpha">-alpha &lt;alpha&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-legend">--no-legend</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-axes">-axes &lt;axes&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-notch">--no-notch</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-background">-background &lt;background&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-rows">--no-rows</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-bg">-bg &lt;bg&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ticklines">--no-ticklines</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-bottom">-bottom &lt;bottom&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-weatherfile">--no-weatherfile</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-colors">-colors &lt;colors&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xgrid">--no-xgrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-comment">-comment &lt;comment&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xheader">--no-xheader</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-dpi">-dpi &lt;dpi&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ygrid">--no-ygrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-drange">-drange &lt;drange&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ylog">--no-ylog</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ecolors">-ecolors &lt;ecolors&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-notch">--notch</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-epositions">-epositions &lt;epositions&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-opts">--opts</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-estep">-estep &lt;estep&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-rows">--rows</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fcol">-fcol &lt;fcol&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ticklines">--ticklines</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fg">-fg &lt;fg&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-weatherfile">--weatherfile</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-height">-height &lt;height&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xgrid">--xgrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-labels">-labels &lt;labels&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xheader">--xheader</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-labelweight">-labelweight &lt;labelweight&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ygrid">--ygrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-opts">-opts, --opts</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ylog">--ylog</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-outf">-outf &lt;outf&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-alpha">-alpha &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-positions">-positions &lt;positions&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-axes">-axes &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-rwidth">-rwidth &lt;rwidth&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-background">-background &lt;PATH&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-step">-step &lt;step&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-bg">-bg &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-width">-width &lt;width&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-clw">-clw &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xlabels">-xlabels &lt;xlabels&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-colors">-colors &lt;COLORS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xticks">-xticks &lt;xticks&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-comment">-comment &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-y-vals">-y_vals &lt;y_vals&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-dpi">-dpi &lt;INTEGER&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-box-yticks">-yticks &lt;yticks&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-drange">-drange &lt;INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fcol">-fcol &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fg">-fg &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-fillalpha">-fillalpha &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-height">-height &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-labels">-labels &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-labelweight">-labelweight &lt;CHOICE&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-lw">-lw &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-mark">-mark &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-mew">-mew &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-ms">-ms &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-opts">-opts</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-outf">-outf &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-positions">-positions &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-rwidth">-rwidth &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-series">-series &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-step">-step &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-width">-width &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-xlabels">-xlabels &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-y-vals">-y_vals &lt;INTS INTS,INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-box-yticks">-yticks &lt;INTEGER&gt;</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-box-arg-dataf">DATAF</a>
 </li>
@@ -1210,310 +1850,531 @@
       <ul>
         <li><a href="cl_plot.html#cmdoption-cl-plot-colors-debug">--debug</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-radf">--radf, --no-radf</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-ru">--mat</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-rgb">--rgb, --no-tgb</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-radf">--no-radf</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-ru">--ru, --mat</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-rgb">--no-tgb</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-opts">-opts, --opts</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-opts">--opts</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-outf">-outf &lt;outf&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-radf">--radf</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-rgb">--rgb</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-ru">--ru</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-mpal">-mpal &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-mpaldiv">-mpaldiv &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-opts">-opts</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-colors-outf">-outf &lt;TEXT&gt;</a>
 </li>
       </ul></li>
       <li>
     cl_plot-heatmap command line option
 
       <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-areaonly">--areaonly, --no-areaonly</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-areaonly">--areaonly</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-debug">--debug</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dst">--dst, --no-dst</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dst">--dst</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-front">--front, --no-front</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-front">--front</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-legend">--legend, --no-legend</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-legend">--legend</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-ticklines">--ticklines, --no-ticklines</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-areaonly">--no-areaonly</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-weatherfile">--weatherfile, --no-weatherfile</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dst">--no-dst</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-alpha">-alpha &lt;alpha&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-front">--no-front</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-background">-background &lt;background&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-legend">--no-legend</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-bg">-bg &lt;bg&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-ticklines">--no-ticklines</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-colors">-colors &lt;colors&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-weatherfile">--no-weatherfile</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-comment">-comment &lt;comment&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-opts">--opts</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dpi">-dpi &lt;dpi&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-ticklines">--ticklines</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dpy">-dpy &lt;dpy&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-weatherfile">--weatherfile</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-drange">-drange &lt;drange&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-alpha">-alpha &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-fg">-fg &lt;fg&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-background">-background &lt;PATH&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-gridc">-gridc &lt;gridc&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-bg">-bg &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-height">-height &lt;height&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-colors">-colors &lt;COLORS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-hpd">-hpd &lt;hpd&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-comment">-comment &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-labels">-labels &lt;labels&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dpi">-dpi &lt;INTEGER&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-labelweight">-labelweight &lt;labelweight&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-dpy">-dpy &lt;INTEGER&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-lw">-lw &lt;lw&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-drange">-drange &lt;INTS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-opts">-opts, --opts</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-fg">-fg &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-outf">-outf &lt;outf&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-gridc">-gridc &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-plotidx">-plotidx &lt;plotidx&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-height">-height &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-positions">-positions &lt;positions&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-hpd">-hpd &lt;INTEGER&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-pph">-pph &lt;pph&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-labels">-labels &lt;TEXTS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-sh">-sh &lt;sh&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-labelweight">-labelweight &lt;CHOICE&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-step">-step &lt;step&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-lw">-lw &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-ticks">-ticks &lt;ticks&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-opts">-opts</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-vmax">-vmax &lt;vmax&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-outf">-outf &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-vmin">-vmin &lt;vmin&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-plotidx">-plotidx &lt;INTEGER&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-width">-width &lt;width&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-positions">-positions &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-pph">-pph &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-sh">-sh &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-step">-step &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-ticks">-ticks &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-vmax">-vmax &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-vmin">-vmin &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-width">-width &lt;FLOAT&gt;</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-heatmap-arg-dataf">DATAF</a>
+</li>
+      </ul></li>
+      <li>
+    cl_plot-histo command line option
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-areaonly">--areaonly</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-debug">--debug</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-density">--density</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-front">--front</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-header">--header</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-legend">--legend</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-areaonly">--no-areaonly</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-density">--no-density</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-front">--no-front</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-header">--no-header</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-legend">--no-legend</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-polar">--no-polar</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-rows">--no-rows</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-stacked">--no-stacked</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-tails">--no-tails</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ticklines">--no-ticklines</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-weatherfile">--no-weatherfile</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xgrid">--no-xgrid</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xheader">--no-xheader</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ygrid">--no-ygrid</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ylog">--no-ylog</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-opts">--opts</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-polar">--polar</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-rows">--rows</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-stacked">--stacked</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-tails">--tails</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ticklines">--ticklines</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-weatherfile">--weatherfile</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xgrid">--xgrid</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xheader">--xheader</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ygrid">--ygrid</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ylog">--ylog</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-alpha">-alpha &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-autobin">-autobin &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-axes">-axes &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-background">-background &lt;PATH&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bg">-bg &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bins">-bins &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bottom">-bottom &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-brange">-brange &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bwidth">-bwidth &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-colors">-colors &lt;COLORS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-comment">-comment &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-dpi">-dpi &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-drange">-drange &lt;INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ecolors">-ecolors &lt;COLORS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-epositions">-epositions &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-estep">-estep &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-fcol">-fcol &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-fg">-fg &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-height">-height &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-labels">-labels &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-labelweight">-labelweight &lt;CHOICE&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-opts">-opts</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-outf">-outf &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-positions">-positions &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-rwidth">-rwidth &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-step">-step &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-width">-width &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xlabels">-xlabels &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xticks">-xticks &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-y-vals">-y_vals &lt;INTS INTS,INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-yticks">-yticks &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-arg-dataf">DATAF</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
-    cl_plot-histo command line option
-
-      <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-areaonly">--areaonly, --no-areaonly</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-debug">--debug</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-density">--density, --no-density</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-front">--front, --no-front</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-header">--header, --no-header</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-legend">--legend, --no-legend</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-polar">--polar, --no-polar</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-rows">--rows, --no-rows</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-stacked">--stacked, --no-stacked</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-tails">--tails, --no-tails</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ticklines">--ticklines, --no-ticklines</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-weatherfile">--weatherfile, --no-weatherfile</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xgrid">--xgrid, --no-xgrid</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xheader">--xheader, --no-xheader</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ygrid">--ygrid, --no-ygrid</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ylog">--ylog, --no-ylog</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-alpha">-alpha &lt;alpha&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-autobin">-autobin &lt;autobin&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-axes">-axes &lt;axes&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-background">-background &lt;background&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bg">-bg &lt;bg&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bins">-bins &lt;bins&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bottom">-bottom &lt;bottom&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-brange">-brange &lt;brange&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-bwidth">-bwidth &lt;bwidth&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-colors">-colors &lt;colors&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-comment">-comment &lt;comment&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-dpi">-dpi &lt;dpi&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-drange">-drange &lt;drange&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-ecolors">-ecolors &lt;ecolors&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-epositions">-epositions &lt;epositions&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-estep">-estep &lt;estep&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-fcol">-fcol &lt;fcol&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-fg">-fg &lt;fg&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-height">-height &lt;height&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-labels">-labels &lt;labels&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-labelweight">-labelweight &lt;labelweight&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-opts">-opts, --opts</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-outf">-outf &lt;outf&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-positions">-positions &lt;positions&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-rwidth">-rwidth &lt;rwidth&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-step">-step &lt;step&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-width">-width &lt;width&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xlabels">-xlabels &lt;xlabels&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-xticks">-xticks &lt;xticks&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-y-vals">-y_vals &lt;y_vals&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-yticks">-yticks &lt;yticks&gt;</a>
-</li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-histo-arg-dataf">DATAF</a>
-</li>
-      </ul></li>
-      <li>
     cl_plot-scatter command line option
 
       <ul>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-areaonly">--areaonly, --no-areaonly</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-areaonly">--areaonly</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-debug">--debug</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-flipxy">--flipxy, --no-flipxy</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-diagonal">--diagonal</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-front">--front, --no-front</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-flipxy">--flipxy</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-header">--header, --no-header</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-front">--front</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-legend">--legend, --no-legend</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-header">--header</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-polar">--polar, --no-polar</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-legend">--legend</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-polarauto">--polarauto, --no-polarauto</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-matchxy">--matchxy</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-reverse">--reverse, --no-reverse</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-areaonly">--no-areaonly</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-rows">--rows, --no-rows</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-diagonal">--no-diagonal</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ticklines">--ticklines, --no-ticklines</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-flipxy">--no-flipxy</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-weatherfile">--weatherfile, --no-weatherfile</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-front">--no-front</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xgrid">--xgrid, --no-xgrid</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-header">--no-header</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xlog">--xlog, --no-xlog</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-legend">--no-legend</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ygrid">--ygrid, --no-ygrid</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-matchxy">--no-matchxy</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ylog">--ylog, --no-ylog</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-polar">--no-polar</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-alpha">-alpha &lt;alpha&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-polarauto">--no-polarauto</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-autox">-autox &lt;autox&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-reverse">--no-reverse</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-axes">-axes &lt;axes&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-rows">--no-rows</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-background">-background &lt;background&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ticklines">--no-ticklines</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-bg">-bg &lt;bg&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-weatherfile">--no-weatherfile</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-bottom">-bottom &lt;bottom&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xgrid">--no-xgrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-c-vals">-c_vals &lt;c_vals&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xlog">--no-xlog</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-cmax">-cmax &lt;cmax&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ygrid">--no-ygrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-cmin">-cmin &lt;cmin&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ylog">--no-ylog</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-colors">-colors &lt;colors&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-opts">--opts</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-comment">-comment &lt;comment&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-polar">--polar</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-criteria">-criteria &lt;criteria&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-polarauto">--polarauto</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-dpi">-dpi &lt;dpi&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-reverse">--reverse</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-drange">-drange &lt;drange&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-rows">--rows</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ecolors">-ecolors &lt;ecolors&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ticklines">--ticklines</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-epositions">-epositions &lt;epositions&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-weatherfile">--weatherfile</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-estep">-estep &lt;estep&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xgrid">--xgrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-fcol">-fcol &lt;fcol&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xlog">--xlog</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-fg">-fg &lt;fg&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ygrid">--ygrid</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-height">-height &lt;height&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ylog">--ylog</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-labels">-labels &lt;labels&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-alpha">-alpha &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-labelweight">-labelweight &lt;labelweight&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-autox">-autox &lt;FLOATS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-lw">-lw &lt;lw&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-axes">-axes &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-m-vals">-m_vals &lt;m_vals&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-background">-background &lt;PATH&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mew">-mew &lt;mew&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-bg">-bg &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mmax">-mmax &lt;mmax&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-bottom">-bottom &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mmin">-mmin &lt;mmin&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-c-vals">-c_vals &lt;INTS INTS,INTS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mrk">-mrk &lt;mrk&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-cmax">-cmax &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ms">-ms &lt;ms&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-cmin">-cmin &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-opts">-opts, --opts</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-colors">-colors &lt;COLORS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-outf">-outf &lt;outf&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-comment">-comment &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-pery">-pery &lt;pery&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-criteria">-criteria &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-positions">-positions &lt;positions&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-dpi">-dpi &lt;INTEGER&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-step">-step &lt;step&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-drange">-drange &lt;INTS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-weax">-weax &lt;weax&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ecolors">-ecolors &lt;COLORS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-width">-width &lt;width&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-epositions">-epositions &lt;FLOATS&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-x-vals">-x_vals &lt;x_vals&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-estep">-estep &lt;INTEGER&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xticks">-xticks &lt;xticks&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-fcol">-fcol &lt;FLOAT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-y-vals">-y_vals &lt;y_vals&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-fg">-fg &lt;TEXT&gt;</a>
 </li>
-        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-yticks">-yticks &lt;yticks&gt;</a>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-height">-height &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-labels">-labels &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-labelweight">-labelweight &lt;CHOICE&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-lw">-lw &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-m-vals">-m_vals &lt;INTS INTS,INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mew">-mew &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mmax">-mmax &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mmin">-mmin &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-mrk">-mrk &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-ms">-ms &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-opts">-opts</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-outf">-outf &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-pery">-pery &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-positions">-positions &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-step">-step &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-weax">-weax &lt;INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-width">-width &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-x-vals">-x_vals &lt;INTS INTS,INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-xticks">-xticks &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-y-vals">-y_vals &lt;INTS INTS,INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-yticks">-yticks &lt;INTEGER&gt;</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-arg-dataf">DATAF</a>
+</li>
+      </ul></li>
+      <li>
+    cl_plot-violin command line option
+
+      <ul>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-areaonly">--areaonly</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-clbg">--clbg</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-debug">--debug</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-front">--front</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-header">--header</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-inline">--inline</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-legend">--legend</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-mean">--mean</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-median">--median</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-areaonly">--no-areaonly</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-clbg">--no-clbg</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-front">--no-front</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-header">--no-header</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-inline">--no-inline</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-legend">--no-legend</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-mean">--no-mean</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-median">--no-median</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-rows">--no-rows</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ticklines">--no-ticklines</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-weatherfile">--no-weatherfile</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xgrid">--no-xgrid</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xheader">--no-xheader</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ygrid">--no-ygrid</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ylog">--no-ylog</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-opts">--opts</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-rows">--rows</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ticklines">--ticklines</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-weatherfile">--weatherfile</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xgrid">--xgrid</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xheader">--xheader</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ygrid">--ygrid</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-ylog">--ylog</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-alpha">-alpha &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-axes">-axes &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-background">-background &lt;PATH&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-bg">-bg &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-clw">-clw &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-colors">-colors &lt;COLORS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-comment">-comment &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-dpi">-dpi &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-drange">-drange &lt;INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-fcol">-fcol &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-fg">-fg &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-fillalpha">-fillalpha &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-height">-height &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-labels">-labels &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-labelweight">-labelweight &lt;CHOICE&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-lw">-lw &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-opts">-opts</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-outf">-outf &lt;TEXT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-positions">-positions &lt;FLOATS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-rwidth">-rwidth &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-series">-series &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-step">-step &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-width">-width &lt;FLOAT&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-xlabels">-xlabels &lt;TEXTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-y-vals">-y_vals &lt;INTS INTS,INTS&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-yticks">-yticks &lt;INTEGER&gt;</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-arg-dataf">DATAF</a>
 </li>
       </ul></li>
       <li><a href="clipt.plot.html#module-clipt.plot">clipt.plot (module)</a>
@@ -1547,6 +2408,8 @@
         <li><a href="cl_plot.html#cmdoption-cl-plot-histo-arg-dataf">cl_plot-histo command line option</a>
 </li>
         <li><a href="cl_plot.html#cmdoption-cl-plot-scatter-arg-dataf">cl_plot-scatter command line option</a>
+</li>
+        <li><a href="cl_plot.html#cmdoption-cl-plot-violin-arg-dataf">cl_plot-violin command line option</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1597,10 +2460,10 @@
 </li>
       <li><a href="clipt.plot.html#clipt.plot.plot_criteria">plot_criteria() (in module clipt.plot)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="clipt.plot.html#clipt.plot.plot_graph">plot_graph() (in module clipt.plot)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="clipt.plot.html#clipt.plot.plot_heatmap">plot_heatmap() (in module clipt.plot)</a>
 </li>
       <li><a href="clipt.plot.html#clipt.plot.plot_histo">plot_histo() (in module clipt.plot)</a>
@@ -1610,6 +2473,8 @@
       <li><a href="clipt.plot.html#clipt.plot.plot_scatter">plot_scatter() (in module clipt.plot)</a>
 </li>
       <li><a href="clipt.plot.html#clipt.plot.plot_setup">plot_setup() (in module clipt.plot)</a>
+</li>
+      <li><a href="clipt.plot.html#clipt.plot.plot_violin">plot_violin() (in module clipt.plot)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1652,7 +2517,7 @@
       &copy;2018, Stephen Wasilewski.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
