@@ -403,8 +403,14 @@ def histo(ctx, dataf, **kwargs):
               callback=clk.tup_int, help="index for xvals")
 @click.option('-y_vals', default="-1", callback=clk.tup_int,
               help="index for yvals")
+@click.option('-area', default=None, callback=clk.tup_int, multiple=True,
+              help="give as single value (fills to y-min) or 2 values "
+              "(fills between) order given should match y_vals. colors"
+              " match line colors, but use the -falpha option")
 @click.option('-c_vals', default=None, callback=clk.tup_int,
               help="optional index for color vals, only uses 1 index")
+@click.option('-falpha', type=float, default=0.5,
+              help="alpha for -area(s)")
 @click.option('-m_vals', default=None, callback=clk.tup_int,
               help="optional index for marker size vals, only uses 1 index"
                    " values should be prescaled to marker size output")
@@ -472,12 +478,18 @@ def scatter(ctx, dataf, **kwargs):
                 msd = mgr.read_all_data(dataf, **a1)[1]
             else:
                 msd = None
+            areas = []
+            if kwargs['area'] is not None:
+                a1['x_vals'] = []
+                for a in kwargs['area']:
+                    a1['y_vals'] = a
+                    areas.append(mgr.read_all_data(dataf, **a1)[1])
             labels = ruplot.get_labels(labels, kwargs['labels'])
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
             a4.pop('labels', None)
-            ax = ruplot.tick_from_arg(ax, xs, ys, a4, kwargs)
+            ax = ruplot.tick_from_arg(ax, xs, ys + areas, a4, kwargs)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
             a5['positions'] = kwargs['epositions']
@@ -487,7 +499,8 @@ def scatter(ctx, dataf, **kwargs):
             a6.pop('labels', None)
             a6['legend'] = kwargs['legend'] and not kwargs['areaonly']
             ax, handles = ruplot.plot_scatter(fig, ax, xs, ys, labels, cmap,
-                                              emap=emap, cs=cs, msd=msd, **a6)
+                                              emap=emap, cs=cs, msd=msd,
+                                              areas=areas, **a6)
             if kwargs['diagonal']:
                 ax.plot(ax.get_xlim(), ax.get_ylim(), lw=0.6, ls='--', color='black', ms=0)
             if kwargs['outf']:

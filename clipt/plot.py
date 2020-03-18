@@ -507,7 +507,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                  mrk='o', step=None, fcol=0.0, mew=0.0, emap=None,
                  flipxy=False, cs=None, cmin=None, cmax=None,
                  msd=None, mmin=None, mmax=None, legend=True, polar=False,
-                 **kwargs):
+                 areas=None, falpha=0.5, **kwargs):
     """adds scatterplots/lines to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(ys)):
@@ -541,6 +541,13 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
             cinc = fcol + i*inc
         c = colormap.to_rgba(cinc)
         mec = emap.to_rgba(cinc)
+        if i < len(areas):
+            if len(areas[i]) < 2:
+                y2 = ax.axes.get_xlim()[0]
+            else:
+                y2 = areas[i][1]
+            ax.fill_between(x, areas[i][0], y2, alpha=falpha, color=c, zorder=-1,
+                            linestyle='--', linewidth=lwa/2)
         if cs is not None:
             if cmax is None:
                 cmax = max(flat(cs))
