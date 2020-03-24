@@ -32,8 +32,28 @@ def plot(ctx, config, outconfig, configalias, inputalias):
 
 main = plot # backwards compatibility
 
+
+coloropt = [
+          click.option('-fcol', default=0.0, type=float,
+                       help="colormap position for first color"),
+          click.option('-colors', default='med',
+                       callback=clk.color_inp,
+                       help="cmap name* or space seperated list of rgb tuples "
+                       "0,0,0 120,120,120 etc. if fewer than # series picks ."
+                       "from gradient includes ru_colors: 'blu', 'org', 'pur'"
+                       ", 'red', 'blg', 'mag', 'brn', 'grn', 'yel', 'ggr', "
+                       "'dark', 'med', 'light', 'xlight'"),
+          click.option('-positions', default=None,
+                       callback=clk.split_float,
+                       help="if cmap is a list positions are the mapping "
+                       "points else positions are the sample points used to "
+                       "remap"),
+          click.option('-step', default=None, type=int,
+                       help="steps for color map"),
+]
+
 # used by all
-shared = [
+shared = coloropt + [
           click.option('-drange', callback=clk.split_int,
                        help="index range for data series, if None gets all"),
           click.option('--ticklines/--no-ticklines', default=False,
@@ -47,23 +67,9 @@ shared = [
                        help="background color"),
           click.option('--legend/--no-legend', default=True,
                        help="include legend in plot"),
-          click.option('-colors', default='med',
-                       callback=clk.color_inp,
-                       help="cmap name* or space seperated list of rgb tuples "
-                       "0,0,0 120,120,120 etc. if fewer than # series picks ."
-                       "from gradient includes ru_colors: 'blu', 'org', 'pur'"
-                       ", 'red', 'blg', 'mag', 'brn', 'grn', 'yel', 'ggr', "
-                       "'dark', 'med', 'light', 'xlight'"),
           click.option('-comment', default='#',
                        help='regex "^[{}].*" indicating comment line '
                        'indicator'),
-          click.option('-positions', default=None,
-                       callback=clk.split_float,
-                       help="if cmap is a list positions are the mapping "
-                       "points else positions are the sample points used to "
-                       "remap"),
-          click.option('-step', default=None, type=int,
-                       help="steps for color map"),
           click.option('-labelweight', default='bold', type=click.Choice(['ultralight', 'light', 'normal', 'regular', 'book', 'medium', 'roman', 'semibold', 'demibold', 'demi', 'bold', 'heavy', 'extra bold', 'black']),
                        help="text weight for axes labels"),
           click.option('-width', default=10.5, type=float,
@@ -94,8 +100,6 @@ shared = [
 
 # used by bar, scatter, histo
 sharedA = [
-           click.option('-fcol', default=0.0, type=float,
-                        help="colormap position for first color"),
            click.option('--xgrid/--no-xgrid', default=False,
                         help="plot x grid lines"),
            click.option('--ygrid/--no-ygrid', default=False,
@@ -549,8 +553,6 @@ def scatter(ctx, dataf, **kwargs):
 @click.option('--xheader/--no-xheader', default=False,
               help="indicates that data has a header column to get x-axis "
               "labels (overridden by xlabels)")
-@click.option('-fcol', default=0.0, type=float,
-              help="colormap position for first color")
 @click.option('--xgrid/--no-xgrid', default=False,
               help="plot x grid lines")
 @click.option('--ygrid/--no-ygrid', default=False,
@@ -653,8 +655,6 @@ def box(dataf, **kwargs):
 @click.option('--xheader/--no-xheader', default=False,
               help="indicates that data has a header column to get x-axis "
               "labels (overridden by xlabels)")
-@click.option('-fcol', default=0.0, type=float,
-              help="colormap position for first color")
 @click.option('--xgrid/--no-xgrid', default=False,
               help="plot x grid lines")
 @click.option('--ygrid/--no-ygrid', default=False,
@@ -732,6 +732,59 @@ def violin(dataf, **kwargs):
     return 'violin', kwargs
 
 
+@plot.command('previewpal')
+@click.option('-n', default=4,
+              help="number of series to draw from colormap")
+@click.option('--colorbar/--series', default=False,
+              help="whether to preview colorbar (continuous) or series"
+              " (category) scale)")
+@click.option('-outf', default='previewpal.png')
+@click.option('--opts', '-opts', is_flag=True,
+             help="check parsed options")
+@click.option('--debug', is_flag=True,
+             help="show traceback on exceptions")
+@clk.shared_decs(coloropt)
+def previewpal(colors='med', step=None, positions=None, fcol=0.0, n=4,
+               **kwargs):
+    """
+    create plot color palettes and formatted rgbs
+    """
+    if kwargs['opts']:
+        kwargs['opts'] = False
+        clk.echo_args(colors, fcol, n, positions, step, **kwargs)
+    else:
+        try:
+            cmap = ruplot.get_colors(colors, step=step, positions=positions)
+            ax, fig = ruplot.plot_setup(areaonly=True)
+            if kwargs['colorbar']:
+                ruplot.add_colorbar(fig, cmap, axes = [0, 0, 1, 1])
+                ax.remove()
+            else:
+                if step is not None:
+                    inc = (1.-fcol)/step
+                else:
+                    try:
+                        inc = old_div((1.-fcol),(n-1))
+                    except ZeroDivisionError:
+                        inc = 1
+                for i in range(n):
+                    if step is not None or inc > 1:
+                        cinc = (fcol + i*inc) % 1
+                    else:
+                        cinc = fcol + i*inc
+                    c = cmap.to_rgba(cinc)
+                    try:
+                        p = .05 + i * .9/(n-1)
+                    except ZeroDivisionError:
+                        p = .5
+                    ax.plot([p,p], [0,1], color=c, lw=4)
+            ruplot.plot_graph(fig, kwargs['outf'], width=4, height=2,
+                              areaonly=True)
+        except click.Abort:
+            raise
+        except Exception as ex:
+            clk.print_except(ex, kwargs['debug'])
+    return 'previewpal', kwargs
 
 
 @plot.command('colors')
@@ -751,6 +804,7 @@ def violin(dataf, **kwargs):
               help="check parsed options")
 @click.option('--debug', is_flag=True,
               help="show traceback on exceptions")
+@clk.shared_decs(coloropt)
 def colors(**kwargs):
     """
     create plot color palettes and formatted rgbs
@@ -805,7 +859,7 @@ def colors(**kwargs):
             raise
         except Exception as ex:
             clk.print_except(ex, kwargs['debug'])
-    return 'box', kwargs
+    return 'colors', kwargs
 
 
 @plot.resultcallback()

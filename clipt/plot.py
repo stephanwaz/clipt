@@ -319,7 +319,7 @@ def plot_legend(handles, bbox_to_anchor=(1.05, 1), loc=2,
 def add_colorbar(fig, pc, axes=[0.3, 0.0, 0.4, 0.02],
                  ticks=None, ticklabels=None, orientation='horizontal'):
     """add colorbar scale to figure below plot"""
-    cbaxes = fig.add_axes(axes)
+    cbaxes = fig.add_axes(axes, label='colorbar')
     if ticklabels is not None:
         if ticks is None:
             vmin, vmax = pc.get_clim()
@@ -1015,12 +1015,14 @@ def cmap_tune(colormap, step=None, positions=None, name='custom'):
     if positions is not None:
         cmap2 = []
         pos2 = []
-        for i, p in enumerate(positions):
-            inc = i/float(len(positions)-1)
-            cmap2.append(colormap.to_rgba(p))
-            pos2.append(inc)
-        colormap = cmap_from_list(cmap2, None, pos2, name)
-    if step is not None:
+        segments = len(positions) - 1
+        iperseg = int(2000/segments)
+        for i,p in enumerate(positions[0:-1]):
+            inc = (positions[i+1] - p)/iperseg
+            incs = np.arange(p,positions[i+1] + inc, inc)
+            cmap2 += list(colormap.to_rgba(incs))
+        colormap = cmap_from_list(cmap2, step, None, name)
+    elif step is not None:
         cmap2 = []
         for i in range(step):
             inc = i/float(step-1)
