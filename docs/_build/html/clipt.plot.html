@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>clipt.plot &#8212; clipt (1.0.3) 1.0.3 documentation</title>
+    <title>clipt.plot &#8212; clipt (1.0.4) 1.0.4 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cl_plot" href="cl_plot.html" />
-    <link rel="prev" title="clipt (1.0.3)" href="index.html" />
+    <link rel="prev" title="clipt (1.0.4)" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -27,7 +27,7 @@
     
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">clipt (1.0.3)</a></h1>
+<h1 class="logo"><a href="index.html">clipt (1.0.4)</a></h1>
 
 
 
@@ -242,25 +242,25 @@ matplotlib.cm.ScalarMappable</p></li>
 
 <dl class="function">
 <dt id="clipt.plot.plot_bar">
-<code class="sig-prename descclassname">clipt.plot.</code><code class="sig-name descname">plot_bar</code><span class="sig-paren">(</span><em class="sig-param">ax, xs, ys, labels, colormap, stacked=False, rwidth=0.8, step=None, bwidth=0.9, brng=[0, 1], bottom=0, polar=False, polar0=False, emap=None, ew=[0], **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clipt/plot.html#plot_bar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clipt.plot.plot_bar" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">clipt.plot.</code><code class="sig-name descname">plot_bar</code><span class="sig-paren">(</span><em class="sig-param">ax, xs, ys, labels, colormap, stacked=False, rwidth=0.8, step=None, bwidth=0.9, fcol=0.0, brng=[0, 1], bottom=0, polar=False, polar0=False, emap=None, ew=[0], **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clipt/plot.html#plot_bar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clipt.plot.plot_bar" title="Permalink to this definition">¶</a></dt>
 <dd><p>adds bar plots to ax and returns ax and handles for legend</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="clipt.plot.plot_box">
-<code class="sig-prename descclassname">clipt.plot.</code><code class="sig-name descname">plot_box</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">data</em>, <em class="sig-param">labels</em>, <em class="sig-param">colormap</em>, <em class="sig-param">ylim</em>, <em class="sig-param">rwidth=0.8</em>, <em class="sig-param">step=None</em>, <em class="sig-param">mark='x'</em>, <em class="sig-param">mew=0.5</em>, <em class="sig-param">ms=3.0</em>, <em class="sig-param">lw=1.0</em>, <em class="sig-param">clw=1.0</em>, <em class="sig-param">clbg=True</em>, <em class="sig-param">fillalpha=1.0</em>, <em class="sig-param">notch=False</em>, <em class="sig-param">series=1</em>, <em class="sig-param">bg='white'</em>, <em class="sig-param">inline=False</em>, <em class="sig-param">mean=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clipt/plot.html#plot_box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clipt.plot.plot_box" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">clipt.plot.</code><code class="sig-name descname">plot_box</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">data</em>, <em class="sig-param">labels</em>, <em class="sig-param">colormap</em>, <em class="sig-param">ylim</em>, <em class="sig-param">rwidth=0.8</em>, <em class="sig-param">step=None</em>, <em class="sig-param">mark='x'</em>, <em class="sig-param">mew=0.5</em>, <em class="sig-param">ms=3.0</em>, <em class="sig-param">lw=1.0</em>, <em class="sig-param">fcol=0.0</em>, <em class="sig-param">clw=1.0</em>, <em class="sig-param">clbg=True</em>, <em class="sig-param">fillalpha=1.0</em>, <em class="sig-param">notch=False</em>, <em class="sig-param">series=1</em>, <em class="sig-param">bg='white'</em>, <em class="sig-param">inline=False</em>, <em class="sig-param">mean=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clipt/plot.html#plot_box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clipt.plot.plot_box" title="Permalink to this definition">¶</a></dt>
 <dd><p>adds box plots to ax and returns ax and handles for legend</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="clipt.plot.plot_violin">
-<code class="sig-prename descclassname">clipt.plot.</code><code class="sig-name descname">plot_violin</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">data</em>, <em class="sig-param">labels</em>, <em class="sig-param">colormap</em>, <em class="sig-param">ylim</em>, <em class="sig-param">rwidth=0.8</em>, <em class="sig-param">step=None</em>, <em class="sig-param">lw=1.0</em>, <em class="sig-param">clw=1.0</em>, <em class="sig-param">clbg=True</em>, <em class="sig-param">fillalpha=1.0</em>, <em class="sig-param">median=True</em>, <em class="sig-param">series=1</em>, <em class="sig-param">bg='white'</em>, <em class="sig-param">inline=False</em>, <em class="sig-param">mean=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clipt/plot.html#plot_violin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clipt.plot.plot_violin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">clipt.plot.</code><code class="sig-name descname">plot_violin</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">data</em>, <em class="sig-param">labels</em>, <em class="sig-param">colormap</em>, <em class="sig-param">ylim</em>, <em class="sig-param">rwidth=0.8</em>, <em class="sig-param">step=None</em>, <em class="sig-param">lw=1.0</em>, <em class="sig-param">clw=1.0</em>, <em class="sig-param">clbg=True</em>, <em class="sig-param">fcol=0.0</em>, <em class="sig-param">fillalpha=1.0</em>, <em class="sig-param">median=True</em>, <em class="sig-param">series=1</em>, <em class="sig-param">bg='white'</em>, <em class="sig-param">inline=False</em>, <em class="sig-param">mean=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clipt/plot.html#plot_violin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clipt.plot.plot_violin" title="Permalink to this definition">¶</a></dt>
 <dd><p>adds violin plots to ax and returns ax and handles for legend</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="clipt.plot.plot_histo">
-<code class="sig-prename descclassname">clipt.plot.</code><code class="sig-name descname">plot_histo</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">data</em>, <em class="sig-param">labels</em>, <em class="sig-param">colormap</em>, <em class="sig-param">ylim</em>, <em class="sig-param">stacked=False</em>, <em class="sig-param">rwidth=0.8</em>, <em class="sig-param">step=None</em>, <em class="sig-param">bwidth=0.9</em>, <em class="sig-param">bins='auto'</em>, <em class="sig-param">brange=None</em>, <em class="sig-param">tails=False</em>, <em class="sig-param">ylog=False</em>, <em class="sig-param">density=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clipt/plot.html#plot_histo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clipt.plot.plot_histo" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">clipt.plot.</code><code class="sig-name descname">plot_histo</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">data</em>, <em class="sig-param">labels</em>, <em class="sig-param">colormap</em>, <em class="sig-param">ylim</em>, <em class="sig-param">stacked=False</em>, <em class="sig-param">rwidth=0.8</em>, <em class="sig-param">step=None</em>, <em class="sig-param">inc=0.0</em>, <em class="sig-param">bwidth=0.9</em>, <em class="sig-param">bins='auto'</em>, <em class="sig-param">brange=None</em>, <em class="sig-param">tails=False</em>, <em class="sig-param">ylog=False</em>, <em class="sig-param">density=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clipt/plot.html#plot_histo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#clipt.plot.plot_histo" title="Permalink to this definition">¶</a></dt>
 <dd><p>adds histo plots to ax and returns ax and handles for legend</p>
 </dd></dl>
 
