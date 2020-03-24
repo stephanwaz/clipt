@@ -515,7 +515,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
             labels.append("series{:02d}".format(i))
     handles = []
     if step is not None:
-        inc = old_div((1.-fcol),(step-1))
+        inc = old_div((1.-fcol), step)
     else:
         try:
             inc = old_div((1.-fcol),(len(ys)-1))
@@ -615,7 +615,7 @@ def plot_heatmap(fig, ax, data, colormap, vmin=None, vmax=None,
 
 
 def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
-             bwidth=.9, brng=[0, 1], bottom=0, polar=False, polar0=False,
+             bwidth=.9, fcol=0.0, brng=[0, 1], bottom=0, polar=False, polar0=False,
              emap=None, ew=[0], **kwargs):
     """adds bar plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
@@ -629,10 +629,10 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
     else:
         nlab = len(labels)
     if step is not None:
-        inc = 1./(step-1)
+        inc = old_div((1.-fcol), step)
     else:
         try:
-            inc = 1./(len(ys)-1)
+            inc = old_div((1.-fcol),(len(ys)-1))
         except ZeroDivisionError:
             inc = 1
     xl = ax.axes.get_xlim()
@@ -670,7 +670,7 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
 
 
 def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
-             mew=0.5, ms=3.0, lw=1.0, clw=1.0, clbg=True, fillalpha=1.0, notch=False,
+             mew=0.5, ms=3.0, lw=1.0, fcol=0.0, clw=1.0, clbg=True, fillalpha=1.0, notch=False,
              series=1, bg='white', inline=False, mean=False, **kwargs):
     """adds box plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
@@ -679,10 +679,10 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
             labels.append("series{:02d}".format(i))
     nlab = len(labels)
     if step is not None:
-        inc = 1./(step-1)
+        inc = old_div((1.-fcol), step)
     else:
         try:
-            inc = 1./(series-1)
+            inc = old_div((1.-fcol),(len(ys)-1))
         except ZeroDivisionError:
             inc = 1
     chunksize = int(len(data)/series)
@@ -723,7 +723,7 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
 
 
 def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
-                clw=1.0, clbg=True, fillalpha=1.0, median=True,
+                clw=1.0, clbg=True, fcol=0.0, fillalpha=1.0, median=True,
                 series=1, bg='white', inline=False, mean=False, **kwargs):
     """adds violin plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
@@ -732,10 +732,10 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
             labels.append("series{:02d}".format(i))
     nlab = len(labels)
     if step is not None:
-        inc = 1./(step-1)
+        inc = old_div((1.-fcol), step)
     else:
         try:
-            inc = 1./(series-1)
+            inc = old_div((1.-fcol),(len(ys)-1))
         except ZeroDivisionError:
             inc = 1
     chunksize = int(len(data)/series)
@@ -773,17 +773,20 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
 
 
 def plot_histo(ax, data, labels, colormap, ylim, stacked=False, rwidth=.8,
-               step=None, bwidth=.9, bins='auto', brange=None, tails=False,
+               step=None, inc=0.0, bwidth=.9, bins='auto', brange=None, tails=False,
                ylog=False, density=False, **kwargs):
     """adds histo plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(data)):
         if i >= nlab:
             labels.append("series{:02d}".format(i))
-    try:
-        inc = 1./(len(data)-1)
-    except ZeroDivisionError:
-        inc = 1
+    if step is not None:
+        inc = old_div((1.-fcol), step)
+    else:
+        try:
+            inc = old_div((1.-fcol),(len(ys)-1))
+        except ZeroDivisionError:
+            inc = 1
     c = [colormap.to_rgba(i*inc) for i in range(len(data))]
     if brange and tails:
         data = [np.clip(np.array(y), brange[0], brange[1]) for y in data]
