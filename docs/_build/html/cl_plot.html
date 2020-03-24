@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>cl_plot &#8212; clipt (1.0.2) 1.0.2 documentation</title>
+    <title>cl_plot &#8212; clipt (1.0.3) 1.0.3 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -27,7 +27,7 @@
     
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">clipt (1.0.2)</a></h1>
+<h1 class="logo"><a href="index.html">clipt (1.0.3)</a></h1>
 
 
 
@@ -44,6 +44,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#cl-plot-colors">colors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cl-plot-heatmap">heatmap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cl-plot-histo">histo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cl-plot-previewpal">previewpal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cl-plot-scatter">scatter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cl-plot-violin">violin</a></li>
 </ul>
@@ -721,6 +722,18 @@ series1 ,series2, etc.. category1, 0,0,… category2, 0,0,… etc…,…</p>
 <p class="rubric">Options</p>
 <p class="rubric">VALUE OPTIONS:</p>
 <dl class="option">
+<dt id="cmdoption-cl-plot-colors-colors">
+<code class="sig-name descname">-colors</code><code class="sig-prename descclassname"> &lt;COLORS&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-colors-colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>cmap name* or space seperated list of rgb tuples 0,0,0 120,120,120 etc. if fewer than # series picks .from gradient includes ru_colors: ‘blu’, ‘org’, ‘pur’, ‘red’, ‘blg’, ‘mag’, ‘brn’, ‘grn’, ‘yel’, ‘ggr’, ‘dark’, ‘med’, ‘light’, ‘xlight’  [default: med]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-colors-fcol">
+<code class="sig-name descname">-fcol</code><code class="sig-prename descclassname"> &lt;FLOAT&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-colors-fcol" title="Permalink to this definition">¶</a></dt>
+<dd><p>colormap position for first color  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
 <dt id="cmdoption-cl-plot-colors-mpal">
 <code class="sig-name descname">-mpal</code><code class="sig-prename descclassname"> &lt;TEXT&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-colors-mpal" title="Permalink to this definition">¶</a></dt>
 <dd><p>matplotlib palette to print r,g,b vals</p>
@@ -736,6 +749,18 @@ series1 ,series2, etc.. category1, 0,0,… category2, 0,0,… etc…,…</p>
 <dt id="cmdoption-cl-plot-colors-outf">
 <code class="sig-name descname">-outf</code><code class="sig-prename descclassname"> &lt;TEXT&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-colors-outf" title="Permalink to this definition">¶</a></dt>
 <dd><p>output file</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-colors-positions">
+<code class="sig-name descname">-positions</code><code class="sig-prename descclassname"> &lt;FLOATS&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-colors-positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping points else positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-colors-step">
+<code class="sig-name descname">-step</code><code class="sig-prename descclassname"> &lt;INTEGER&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-colors-step" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
 </dd></dl>
 
 <p class="rubric">FLAGS (DEFAULT TRUE):</p>
@@ -834,6 +859,12 @@ DST=False, ticks=None, labels=None, <a href="#id1"><span class="problematic" id=
 <dt id="cmdoption-cl-plot-heatmap-drange">
 <code class="sig-name descname">-drange</code><code class="sig-prename descclassname"> &lt;INTS&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-heatmap-drange" title="Permalink to this definition">¶</a></dt>
 <dd><p>index range for data series, if None gets all</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-heatmap-fcol">
+<code class="sig-name descname">-fcol</code><code class="sig-prename descclassname"> &lt;FLOAT&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-heatmap-fcol" title="Permalink to this definition">¶</a></dt>
+<dd><p>colormap position for first color  [default: 0.0]</p>
 </dd></dl>
 
 <dl class="option">
@@ -1301,6 +1332,71 @@ DST=False, ticks=None, labels=None, <a href="#id1"><span class="problematic" id=
 </dd></dl>
 
 </div>
+<div class="section" id="cl-plot-previewpal">
+<h2>previewpal<a class="headerlink" href="#cl-plot-previewpal" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cl_plot previewpal <span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p>create plot color palettes and formatted rgbs</p>
+<p class="rubric">Options</p>
+<p class="rubric">VALUE OPTIONS:</p>
+<dl class="option">
+<dt id="cmdoption-cl-plot-previewpal-colors">
+<code class="sig-name descname">-colors</code><code class="sig-prename descclassname"> &lt;COLORS&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-previewpal-colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>cmap name* or space seperated list of rgb tuples 0,0,0 120,120,120 etc. if fewer than # series picks .from gradient includes ru_colors: ‘blu’, ‘org’, ‘pur’, ‘red’, ‘blg’, ‘mag’, ‘brn’, ‘grn’, ‘yel’, ‘ggr’, ‘dark’, ‘med’, ‘light’, ‘xlight’  [default: med]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-previewpal-fcol">
+<code class="sig-name descname">-fcol</code><code class="sig-prename descclassname"> &lt;FLOAT&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-previewpal-fcol" title="Permalink to this definition">¶</a></dt>
+<dd><p>colormap position for first color  [default: 0.0]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-previewpal-n">
+<code class="sig-name descname">-n</code><code class="sig-prename descclassname"> &lt;INTEGER&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-previewpal-n" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of series to draw from colormap  [default: 4]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-previewpal-outf">
+<code class="sig-name descname">-outf</code><code class="sig-prename descclassname"> &lt;TEXT&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-previewpal-outf" title="Permalink to this definition">¶</a></dt>
+<dd><p>[default: previewpal.png]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-previewpal-positions">
+<code class="sig-name descname">-positions</code><code class="sig-prename descclassname"> &lt;FLOATS&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-previewpal-positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>if cmap is a list positions are the mapping points else positions are the sample points used to remap</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-previewpal-step">
+<code class="sig-name descname">-step</code><code class="sig-prename descclassname"> &lt;INTEGER&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-previewpal-step" title="Permalink to this definition">¶</a></dt>
+<dd><p>steps for color map</p>
+</dd></dl>
+
+<p class="rubric">FLAGS (DEFAULT FALSE):</p>
+<dl class="option">
+<dt id="cmdoption-cl-plot-previewpal-colorbar">
+<code class="sig-name descname">--colorbar</code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--series</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-previewpal-colorbar" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether to preview colorbar (continuous) or series (category) scale)  [default: False]</p>
+</dd></dl>
+
+<p class="rubric">HELP:</p>
+<dl class="option">
+<dt id="cmdoption-cl-plot-previewpal-opts">
+<code class="sig-name descname">-opts</code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--opts</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-previewpal-opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>check parsed options  [default: False]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-previewpal-debug">
+<code class="sig-name descname">--debug</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-cl-plot-previewpal-debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>show traceback on exceptions  [default: False]</p>
+</dd></dl>
+
+</div>
 <div class="section" id="cl-plot-scatter">
 <h2>scatter<a class="headerlink" href="#cl-plot-scatter" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cl_plot scatter <span class="o">[</span>OPTIONS<span class="o">]</span> DATAF
@@ -1325,6 +1421,12 @@ column of data.  use the argument -rows to get data by rows instead.</p>
 <dt id="cmdoption-cl-plot-scatter-alpha">
 <code class="sig-name descname">-alpha</code><code class="sig-prename descclassname"> &lt;FLOAT&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-scatter-alpha" title="Permalink to this definition">¶</a></dt>
 <dd><p>transparency for background  [default: 0.5]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-scatter-area">
+<code class="sig-name descname">-area</code><code class="sig-prename descclassname"> &lt;INTS INTS,INTS&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-scatter-area" title="Permalink to this definition">¶</a></dt>
+<dd><p>give as single value (fills to y-min) or 2 values (fills between) order given should match y_vals. colors match line colors, but use the -falpha option</p>
 </dd></dl>
 
 <dl class="option">
@@ -1421,6 +1523,12 @@ column of data.  use the argument -rows to get data by rows instead.</p>
 <dt id="cmdoption-cl-plot-scatter-estep">
 <code class="sig-name descname">-estep</code><code class="sig-prename descclassname"> &lt;INTEGER&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-scatter-estep" title="Permalink to this definition">¶</a></dt>
 <dd><p>steps for color map</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cl-plot-scatter-falpha">
+<code class="sig-name descname">-falpha</code><code class="sig-prename descclassname"> &lt;FLOAT&gt;</code><a class="headerlink" href="#cmdoption-cl-plot-scatter-falpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>alpha for -area(s)  [default: 0.5]</p>
 </dd></dl>
 
 <dl class="option">
