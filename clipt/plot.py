@@ -503,6 +503,22 @@ def plot_criteria(ax, x, y, criteria, flipxy=False,
         ax.plot(filtx, filty, **kwargs)
 
 
+def color_inc_i(fcol, i, n, step):
+    if step is not None:
+        try:
+            fcol = int(step*fcol % step)/step
+        except ZeroDivisionError:
+            fcol = 0
+        cinc = (fcol + (i+.5)/step) % 1
+    else:
+        try:
+            inc = old_div((1.-fcol),(n-1))
+            cinc = fcol + i*inc
+        except ZeroDivisionError:
+            cinc = fcol + i
+    return cinc
+
+
 def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                  mrk='o', step=None, fcol=0.0, mew=0.0, emap=None,
                  flipxy=False, cs=None, cmin=None, cmax=None,
@@ -514,13 +530,6 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         if i >= nlab:
             labels.append("series{:02d}".format(i))
     handles = []
-    if step is not None:
-        inc = old_div((1.-fcol), step)
-    else:
-        try:
-            inc = old_div((1.-fcol),(len(ys)-1))
-        except ZeroDivisionError:
-            inc = 1
     if emap is None:
         emap = colormap
     for i, (x, y, l) in enumerate(zip(xs, ys, labels)):
@@ -535,10 +544,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
             msa = get_nth(ms, i)
         mka = get_nth_loop(mrk, i)
         mewa = get_nth_loop(mew, i)
-        if step is not None or inc > 1:
-            cinc = (fcol + i*inc) % 1
-        else:
-            cinc = fcol + i*inc
+        cinc = color_inc_i(fcol, i, len(ys), step)
         c = colormap.to_rgba(cinc)
         mec = emap.to_rgba(cinc)
         if i < len(areas):
@@ -628,13 +634,6 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
         nlab = 1
     else:
         nlab = len(labels)
-    if step is not None:
-        inc = old_div((1.-fcol), step)
-    else:
-        try:
-            inc = old_div((1.-fcol),(len(ys)-1))
-        except ZeroDivisionError:
-            inc = 1
     xl = ax.axes.get_xlim()
     xlim = [xl[0]+brng[0]*(xl[1]-xl[0]), xl[0]+brng[1]*(xl[1]-xl[0])]
     xrng = abs(xlim[1]-xlim[0])/float(len(xs[0]))
@@ -651,9 +650,12 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
         off0 = old_div(xrng,2)-old_div(width*(nlab-1),2) + xlim[0]
     w2 = width*bwidth
     bot = 0
+    n = len(ys)
     for i, (x, y, l) in enumerate(zip(xs, ys, labels)):
-        c = colormap.to_rgba(i*inc)
-        e = emap.to_rgba(i*inc)
+        cinc = color_inc_i(fcol, i, n, step)
+        c = colormap.to_rgba(cinc)
+        einc = color_inc_i(fcol, i, n, estep)
+        e = emap.to_rgba(einc)
         ewa = get_nth_loop(ew, i)
         plotargs = {'label': l, 'color': c, 'linewidth': ewa, 'edgecolor': e}
         plotargs.update(kwargs)
@@ -678,18 +680,11 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
         if i >= nlab:
             labels.append("series{:02d}".format(i))
     nlab = len(labels)
-    if step is not None:
-        inc = old_div((1.-fcol), step)
-    else:
-        try:
-            inc = old_div((1.-fcol),(len(ys)-1))
-        except ZeroDivisionError:
-            inc = 1
     chunksize = int(len(data)/series)
     handles = []
-    
     for i in range(series):
-        c = colormap.to_rgba(i*inc)
+        cinc = color_inc_i(fcol, i, nlab, step)
+        c = colormap.to_rgba(cinc)
         if clbg:
             medianc = bg
         else:
@@ -731,17 +726,11 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
         if i >= nlab:
             labels.append("series{:02d}".format(i))
     nlab = len(labels)
-    if step is not None:
-        inc = old_div((1.-fcol), step)
-    else:
-        try:
-            inc = old_div((1.-fcol),(len(ys)-1))
-        except ZeroDivisionError:
-            inc = 1
     chunksize = int(len(data)/series)
     handles = []
     for i in range(series):
-        c = colormap.to_rgba(i*inc)
+        cinc = color_inc_i(fcol, i, nlab, step)
+        c = colormap.to_rgba(cinc)
         if clbg:
             medianc = bg
         else:
@@ -773,21 +762,15 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
 
 
 def plot_histo(ax, data, labels, colormap, ylim, stacked=False, rwidth=.8,
-               step=None, inc=0.0, bwidth=.9, bins='auto', brange=None, tails=False,
-               ylog=False, density=False, **kwargs):
+               step=None, fcol=0.0, bwidth=.9, bins='auto', brange=None,
+               tails=False, ylog=False, density=False, **kwargs):
     """adds histo plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(data)):
         if i >= nlab:
             labels.append("series{:02d}".format(i))
-    if step is not None:
-        inc = old_div((1.-fcol), step)
-    else:
-        try:
-            inc = old_div((1.-fcol),(len(ys)-1))
-        except ZeroDivisionError:
-            inc = 1
-    c = [colormap.to_rgba(i*inc) for i in range(len(data))]
+    n = len(data)
+    c = [colormap.to_rgba(color_inc_i(fcol, i, n, step)) for i in range(n)]
     if brange and tails:
         data = [np.clip(np.array(y), brange[0], brange[1]) for y in data]
     plotargs = {'linewidth': 0}

@@ -744,34 +744,29 @@ def violin(dataf, **kwargs):
 @click.option('--debug', is_flag=True,
              help="show traceback on exceptions")
 @clk.shared_decs(coloropt)
-def previewpal(colors='med', step=None, positions=None, fcol=0.0, n=4,
-               **kwargs):
+def previewpal(**kwargs):
     """
     create plot color palettes and formatted rgbs
     """
     if kwargs['opts']:
         kwargs['opts'] = False
-        clk.echo_args(colors, fcol, n, positions, step, **kwargs)
+        clk.echo_args(**kwargs)
     else:
         try:
+            step = kwargs['step']
+            positions = kwargs['positions']
+            fcol = kwargs['fcol']
+            n = kwargs['n']
+            colors = kwargs['colors']
             cmap = ruplot.get_colors(colors, step=step, positions=positions)
             ax, fig = ruplot.plot_setup(areaonly=True)
             if kwargs['colorbar']:
                 ruplot.add_colorbar(fig, cmap, axes = [0, 0, 1, 1])
                 ax.remove()
             else:
-                if step is not None:
-                    inc = (1.-fcol)/step
-                else:
-                    try:
-                        inc = old_div((1.-fcol),(n-1))
-                    except ZeroDivisionError:
-                        inc = 1
+                inc = ruplot.color_inc(fcol, step, n)
                 for i in range(n):
-                    if step is not None or inc > 1:
-                        cinc = (fcol + i*inc) % 1
-                    else:
-                        cinc = fcol + i*inc
+                    cinc = ruplot.color_inc_i(fcol, i, n, step)
                     c = cmap.to_rgba(cinc)
                     try:
                         p = .05 + i * .9/(n-1)
