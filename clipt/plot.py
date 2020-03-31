@@ -549,7 +549,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         mec = emap.to_rgba(cinc)
         if i < len(areas):
             if len(areas[i]) < 2:
-                y2 = ax.axes.get_xlim()[0]
+                y2 = ax.axes.get_ylim()[0]
             else:
                 y2 = areas[i][1]
             ax.fill_between(x, areas[i][0], y2, alpha=falpha, color=c, zorder=-1,
