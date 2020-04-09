@@ -82,6 +82,8 @@ shared = coloropt + [
                        help="background image for graph area"),
           click.option('-alpha', type=float, default=.5,
                        help="transparency for background"),
+          click.option('-format', default='.png',
+                       help="output file format for default naming (overridden by outf)"),
           click.option('--front/--no-front', default=False,
                        help="plot background in front of data"),
           click.option('--opts', '-opts', is_flag=True,
@@ -222,7 +224,7 @@ def bar(ctx, dataf, **kwargs):
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
-                outf = dataf[0].rsplit(".", 1)[0] + ".png"
+                outf = dataf[0].rsplit(".", 1)[0] + kwargs['format']
             a7 = mgr.kwarg_match(ruplot.plot_graph, kwargs)
             ruplot.plot_graph(fig, outf, handles=handles, **a7)
         except click.Abort:
@@ -292,7 +294,7 @@ def heatmap(ctx, dataf, **kwargs):
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
-                outf = dataf.rsplit(".", 1)[0] + ".png"
+                outf = dataf.rsplit(".", 1)[0] + kwargs['format']
             a7 = mgr.kwarg_match(ruplot.plot_graph, kwargs)
             ruplot.plot_graph(fig, outf, **a7)
         except click.Abort:
@@ -384,7 +386,7 @@ def histo(ctx, dataf, **kwargs):
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
-                outf = dataf[0].rsplit(".", 1)[0] + ".png"
+                outf = dataf[0].rsplit(".", 1)[0] + kwargs['format']
             a7 = mgr.kwarg_match(ruplot.plot_graph, kwargs)
             ruplot.plot_graph(fig, outf, handles=handles, **a7)
         except click.Abort:
@@ -452,6 +454,11 @@ def histo(ctx, dataf, **kwargs):
 @click.option('-criteria',
               help="plot markers based on criteria (either x=VAL or y=VAL)"
               "assumes single solution")
+@click.option('-y2', callback=clk.split_int,
+              help="idx positions (order from -y_vals) to plot on secondary y-axis")
+@click.option('-axes2', default="y,ymin,ymax",
+              help="enter as ymin,ymax - default uses"
+              "min and max of data from y2")
 @click.option('-lw', default="2", callback=clk.split_float,
               help="line weight if fewer than # series uses last")
 @clk.shared_decs(shared + sharedA + sharedB)
@@ -493,6 +500,13 @@ def scatter(ctx, dataf, **kwargs):
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
             a4.pop('labels', None)
+            if kwargs['y2'] is not None:
+                axes = kwargs['axes']
+                kwargs['axes'] = axes.rsplit(',', 3)[0] + ',' + kwargs['axes2']
+                ax2 = ax.twinx()
+                ax2 = ruplot.tick_from_arg(ax2, xs, [ys[i] for i in kwargs['y2']], a4, kwargs)
+                fig.sca(ax2)
+                kwargs['axes'] = axes
             ax = ruplot.tick_from_arg(ax, xs, ys + areas, a4, kwargs)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
@@ -502,19 +516,23 @@ def scatter(ctx, dataf, **kwargs):
             a6 = mgr.kwarg_match(ruplot.plot_scatter, kwargs)
             a6.pop('labels', None)
             a6['legend'] = kwargs['legend'] and not kwargs['areaonly']
-            ax, handles = ruplot.plot_scatter(fig, ax, xs, ys, labels, cmap,
-                                              emap=emap, cs=cs, msd=msd,
-                                              areas=areas, **a6)
+            ax, handles, handles2 = ruplot.plot_scatter(fig, ax, xs, ys, labels, cmap,
+                                                        emap=emap, cs=cs, msd=msd,
+                                                        areas=areas, **a6)
             if kwargs['diagonal']:
                 ax.plot(ax.get_xlim(), ax.get_ylim(), lw=0.6, ls='--', color='black', ms=0)
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
-                outf = dataf[0].rsplit(".", 1)[0] + ".png"
+                outf = dataf[0].rsplit(".", 1)[0] + kwargs['format']
             a7 = mgr.kwarg_match(ruplot.plot_graph, kwargs)
             if cs is not None:
                 a7['legend'] = False
-            ruplot.plot_graph(fig, outf, handles=handles, **a7)
+            if len(handles2) > 0:
+                bba = (1.1, 1)
+            else:
+                bba = (1.05, 1)
+            ruplot.plot_graph(fig, outf, handles=handles, handles2=handles2, bbox_to_anchor=bba, **a7)
         except click.Abort:
             raise
         except Exception as ex:
@@ -620,7 +638,7 @@ def box(dataf, **kwargs):
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
-                outf = dataf[0].rsplit(".", 1)[0] + ".png"
+                outf = dataf[0].rsplit(".", 1)[0] + kwargs['format']
             a7 = mgr.kwarg_match(ruplot.plot_graph, kwargs)
             ruplot.plot_graph(fig, outf, handles=handles, **a7)
         except click.Abort:
@@ -722,7 +740,7 @@ def violin(dataf, **kwargs):
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
-                outf = dataf[0].rsplit(".", 1)[0] + ".png"
+                outf = dataf[0].rsplit(".", 1)[0] + kwargs['format']
             a7 = mgr.kwarg_match(ruplot.plot_graph, kwargs)
             ruplot.plot_graph(fig, outf, handles=handles, **a7)
         except click.Abort:

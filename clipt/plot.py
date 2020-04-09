@@ -108,6 +108,21 @@ def get_labels(labels, mlab):
     return labels
 
 
+def ax_limits(x):
+    def smin(x):
+        try:
+            return min(x)
+        except Exception:
+            return None
+
+    def smax(x):
+        try:
+            return max(x)
+        except Exception:
+            return None
+    return smin(x), smax(x)
+
+
 def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False, pery=False):
     """parse axes string argument xname,xmin,xmax,yname,ymin,ymax"""
     def smin(x):
@@ -129,7 +144,7 @@ def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False, pery=False
             y = []
     else:
         y = flat(ys)
-    axes = ['X', smin(x), smax(x), 'Y', smin(y), smax(y)]
+    axes = ['X', *ax_limits(x), 'Y', *ax_limits(y)]
     try:
         ax = arg.split(",")
         for i, v in enumerate(ax):
@@ -236,8 +251,11 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
         xmax = max(xmax, ymax)
         ymin = xmin
         ymax = xmax
+    tcol = colors.to_rgba(tcol)
     ax.xaxis.grid(linestyle="-", linewidth=0.3, color=tcol)
     ax.yaxis.grid(linestyle="-", linewidth=0.3, color=tcol, zorder=1)
+    ax.xaxis.grid(linestyle="--", linewidth=0.3, color=tcol, alpha=.2, which='minor')
+    ax.yaxis.grid(linestyle="--", linewidth=0.3, color=tcol, alpha=.2, zorder=1, which='minor')
     ax.xaxis.grid(xgrid)
     ax.yaxis.grid(ygrid)
     ax.set_xlim(left=xmin, right=xmax)
@@ -300,17 +318,35 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     if bottom is None:
         bottom = 0
     if yticks is not None:
-        ax.set_yticks(np.append(np.arange(bottom+ymin, ymax+bottom,
-                      old_div((ymax-ymin),(yticks))),ymax+bottom))
+        if yscale != 'log':
+            ax.set_yticks(np.append(np.arange(bottom+ymin, ymax+bottom,
+                          old_div((ymax-ymin),(yticks))),ymax+bottom))
+        else:
+            decs = np.ceil(np.log10(ymax) - np.log10(ymin))
+            maj = np.power(10, np.log10(ymin) + np.arange(decs+1))
+            minors = np.meshgrid(1 + np.arange(yticks-1)*10/yticks, maj[:-1])
+            minors = (minors[0] * minors[1]).flatten()
+            ax.set_yticks(maj)
+            ax.set_yticks(minors, minor=True)
+            ax.yaxis.grid(ygrid, which='minor')
     if xticks is not None:
-        ax.set_xticks(np.append(np.arange(xmin, xmax, old_div((xmax-xmin),(xticks))),xmax))
+        if xscale != 'log':
+            ax.set_xticks(np.append(np.arange(xmin, xmax, old_div((xmax-xmin),(xticks))),xmax))
+        else:
+            decs = np.ceil(np.log10(xmax) - np.log10(xmin))
+            maj = np.power(10, np.log10(xmin) + np.arange(decs+1))
+            minors = np.meshgrid(1 + np.arange(xticks-1)*10/xticks, maj[:-1])
+            minors = (minors[0] * minors[1]).flatten()
+            ax.set_xticks(maj)
+            ax.set_xticks(minors, minor=True)
+            ax.xaxis.grid(xgrid, which='minor')
     return ax
 
 
-def plot_legend(handles, bbox_to_anchor=(1.05, 1), loc=2,
-                fg='black', bg='white'):
+def plot_legend(ax, handles, bbox_to_anchor=(1.05, 1), loc=2,
+                fg='black', bg='white', title=None):
     """add legend to figure"""
-    leg = plt.legend(handles=handles, frameon=False,
+    leg = ax.legend(handles=handles, frameon=False, title=title,
                      bbox_to_anchor=bbox_to_anchor, loc=loc, facecolor=bg)
     for text in leg.get_texts():
         text.set_color(fg)
@@ -337,13 +373,18 @@ def add_colorbar(fig, pc, axes=[0.3, 0.0, 0.4, 0.02],
 
 
 def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
-               handles=[], dpi=200, bbox_to_anchor=(1.05, 1),
+               handles=[], handles2=[], dpi=200, bbox_to_anchor=(1.05, 1),
                loc=2, legend=False, background=None,
                front=False, alpha=.5, areaonly=False, polar=False):
     """add legend and save image of plot"""
     fig.set_size_inches(width, height)
     if legend and not areaonly:
-        plot_legend(handles=handles, bbox_to_anchor=bbox_to_anchor,
+        try:
+            plot_legend(fig.axes[1], handles=handles2, bbox_to_anchor=(bbox_to_anchor[0], 0),
+                        loc=3, bg=bg, fg=fg, title='right axis')
+        except IndexError:
+            pass
+        plot_legend(fig.axes[0], handles=handles, bbox_to_anchor=bbox_to_anchor,
                     loc=loc, bg=bg, fg=fg)
     ax = fig.axes[0]
     if areaonly:
@@ -520,10 +561,10 @@ def color_inc_i(fcol, i, n, step):
 
 
 def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
-                 mrk='o', step=None, fcol=0.0, mew=0.0, emap=None,
-                 flipxy=False, cs=None, cmin=None, cmax=None,
-                 msd=None, mmin=None, mmax=None, legend=True, polar=False,
-                 areas=None, falpha=0.5, **kwargs):
+                 mrk='o', step=None, fcol=0.0, mew=0.0, emap=None, estep=None,
+                 flipxy=False, cs=None, cmin=None, cmax=None, y2=None,
+                 msd=None, mmin=None, mmax=None, legend=True,
+                 polar=False, areas=None, falpha=0.5, **kwargs):
     """adds scatterplots/lines to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(ys)):
@@ -532,7 +573,15 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
     handles = []
     if emap is None:
         emap = colormap
+    if y2 is None:
+        y2 = []
+    else:
+        ax2 = fig.axes[1]
     for i, (x, y, l) in enumerate(zip(xs, ys, labels)):
+        if i in y2:
+            axT = ax2
+        else:
+            axT = ax
         lwa = get_nth(lw, i)
         if msd is not None:
             if mmax is None:
@@ -546,13 +595,14 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         mewa = get_nth_loop(mew, i)
         cinc = color_inc_i(fcol, i, len(ys), step)
         c = colormap.to_rgba(cinc)
-        mec = emap.to_rgba(cinc)
+        ecinc = color_inc_i(fcol, i, len(ys), estep)
+        mec = emap.to_rgba(ecinc)
         if i < len(areas):
             if len(areas[i]) < 2:
-                y2 = ax.axes.get_ylim()[0]
+                ya2 = axT.axes.get_ylim()[0]
             else:
-                y2 = areas[i][1]
-            ax.fill_between(x, areas[i][0], y2, alpha=falpha, color=c, zorder=-1,
+                ya2 = areas[i][1]
+            axT.fill_between(x, areas[i][0], ya2, alpha=falpha, color=c, zorder=-1,
                             linestyle='--', linewidth=lwa/2)
         if cs is not None:
             if cmax is None:
@@ -564,7 +614,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                         'vmin': cmin, 'vmax': cmax, 'c': cs[i], 'edgecolors': mec,
                         'norm': colormap.norm}
             plotargs.update(kwargs)
-            ax.scatter(x, y, **plotargs)
+            axT.scatter(x, y, **plotargs)
             if legend:
                 pc = cmx.ScalarMappable(norm=colormap.norm, cmap=colormap.cmap)
                 if polar:
@@ -576,22 +626,26 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                         'marker': mka, 'linewidth': mewa, 'c': [c],
                         'edgecolors': mec}
             plotargs.update(kwargs)
-            ax.scatter(x, y, **plotargs)
+            axT.scatter(x, y, **plotargs)
         else:
             plotargs = {'linewidth': lwa, 'markersize': msa, 'label': l,
                         'marker': mka, 'color': c, 'mfc': c, 'mec': mec,
                         'mew': mewa}
             plotargs.update(kwargs)
             if flipxy:
-                ax.plot(y, x, **plotargs)
+                axT.plot(y, x, **plotargs)
             else:
-                ax.plot(x, y, **plotargs)
+                axT.plot(x, y, **plotargs)
         if criteria:
             copts = {'linewidth': 0, 'mfc': c, 'mew': 0,
                      'markersize': lwa*2.5, 'marker': 'o'}
             plot_criteria(ax, x, y, criteria, flipxy, copts)
-    handles, labels = ax.get_legend_handles_labels()
-    return ax, handles
+    handles, _ = ax.get_legend_handles_labels()
+    try:
+        handles2, _ = ax2.get_legend_handles_labels()
+    except UnboundLocalError:
+        handles2 = []
+    return ax, handles, handles2
 
 
 def plot_heatmap(fig, ax, data, colormap, vmin=None, vmax=None,
