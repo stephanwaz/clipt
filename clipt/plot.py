@@ -580,8 +580,13 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
     for i, (x, y, l) in enumerate(zip(xs, ys, labels)):
         if i in y2:
             axT = ax2
+            ax2.set_zorder(ax.get_zorder()+1)
         else:
             axT = ax
+            try:
+                ax.set_zorder(ax2.get_zorder()+1)
+            except UnboundLocalError:
+                pass
         lwa = get_nth(lw, i)
         if msd is not None:
             if mmax is None:
@@ -802,16 +807,25 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
         for vp in vplot['bodies']:
             vp.set_facecolor(c)
             vp.set_alpha(fillalpha)
-        for vp in [ vplot[i] for i in ['cmins', 'cmaxes', 'cbars', 'cmeans']]:
-            vp.set_edgecolor(c)
-            vp.set_linewidth(lw)
-        for vp in [ vplot[i] for i in ['cmedians']]:
-            vp.set_edgecolor(c)
-            vp.set_linewidth(clw)
-        vplot['cmeans'].set_linestyle(':')
+        for j in ['cmins', 'cmaxes', 'cbars', 'cmeans', 'cmedians']:
+            try:
+                vp = vplot[j]
+            except KeyError:
+                pass
+            else:
+                if j == 'cmedians':
+                    vp.set_edgecolor(medianc)
+                    vp.set_linewidth(clw)
+                else:
+                    vp.set_edgecolor(c)
+                    vp.set_linewidth(lw)
+                
+                if j == 'cmeans':
+                    vp.set_linestyle(':')
         handles.append(Patch(color=c, label=labels[i]))
     lims = ax.dataLim
-    ax.set_xlim(left=lims.x0-rwidth, right=lims.x1+rwidth)
+    print(rwidth)
+    ax.set_xlim(left=-.5, right=len(data)-.5)
     return ax, handles
 
 

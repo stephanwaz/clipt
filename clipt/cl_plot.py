@@ -665,10 +665,10 @@ def box(dataf, **kwargs):
 @click.option('-clw', default=1.,
               help="linewidth for median line")
 @click.option('-series', default=1,
-              help="number of series to plot data in")
+              help="number of series to pl ot data in")
 @click.option('--clbg/--no-clbg', default=True,
               help="median line uses -bg")
-@click.option('-fillalpha', default=1.0,
+@click.option('-fillalpha', default=.5,
               help="alpha for fill color (matches line color)")
 @click.option('--xheader/--no-xheader', default=False,
               help="indicates that data has a header column to get x-axis "
