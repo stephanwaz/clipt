@@ -293,6 +293,8 @@ def heatmap(ctx, dataf, **kwargs):
 @click.argument('dataf', callback=clk.are_files)
 @click.option('-y_vals', default="-1", callback=clk.tup_int,
               help="index for yvals")
+@click.option('-weights', default=None, callback=clk.tup_int,
+              help="index for weights (if given, must be 1:1 match with y_vals)")
 @click.option('-axes', default="X,0,1,Y,0,ymax",
               help="enter as xname,xmin,xmax,yname,ymin,ymax - default uses"
               "min and max of data enter xmin etc to maintain autoscale")
@@ -337,6 +339,11 @@ def histo(ctx, dataf, **kwargs):
             a1['autox'] = axext['xdata']
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
             labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys), **kwargs)
+            if kwargs['weights'] is not None:
+                a1['y_vals'] = kwargs['weights']
+                _, weights, _ = mgr.read_all_data(dataf, **a1)
+            else:
+                weights = None
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
@@ -351,6 +358,7 @@ def histo(ctx, dataf, **kwargs):
                 a6['bins'] = kwargs['autobin']
             elif len(kwargs['bins']) == 1:
                 a6['bins'] = int(kwargs['bins'][0])
+            a6['weights'] = weights
             ax, handles = ruplot.plot_histo(ax, ys, labels, cmap,
                                             axext['ydata'], **a6)
             if kwargs['outf']:

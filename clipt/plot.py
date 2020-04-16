@@ -853,7 +853,7 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
 
 def plot_histo(ax, data, labels, colormap, ylim, stacked=False, rwidth=.8,
                step=None, fcol=0.0, bwidth=.9, bins='auto', brange=None,
-               tails=False, ylog=False, density=False, **kwargs):
+               tails=False, ylog=False, density=False, weights=None, **kwargs):
     """adds histo plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(data)):
@@ -865,7 +865,7 @@ def plot_histo(ax, data, labels, colormap, ylim, stacked=False, rwidth=.8,
         data = [np.clip(np.array(y), brange[0], brange[1]) for y in data]
     plotargs = {'linewidth': 0}
     plotargs.update(kwargs)
-    histo = plt.hist(data, bins=bins, log=ylog, range=brange, label=labels,
+    histo = plt.hist(data, bins=bins, log=ylog, range=brange, label=labels, weights=weights,
                      color=c, rwidth=rwidth, stacked=stacked, density=density, **plotargs)
     handles, labels = ax.get_legend_handles_labels()
     if ylim[1] is None:
