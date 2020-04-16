@@ -27,6 +27,7 @@ from matplotlib.patches import Circle, Patch
 import matplotlib.colors as colors
 import matplotlib.cm as cmx
 from matplotlib.transforms import Bbox
+import clasp.script_tools as mgr
 
 
 daycount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
@@ -85,7 +86,7 @@ def tick_from_arg(ax, xs, ys, a4, kwargs):
     return ax
 
 
-def get_labels(labels, mlab):
+def get_user_labels(labels, mlab):
     """returns data based on standard argument parsing
 
     Parameters
@@ -107,6 +108,38 @@ def get_labels(labels, mlab):
                 labels.append(l)
     return labels
 
+
+def get_labels(dataf, labs, a1, ycnt, xheader=False, xlabels=None,
+               labels=None, rows=False, drange=None, y_vals=[-1,],
+               **kwargs):
+    if xheader:
+        a1['y_vals'] = [0]
+        a1['x_vals'] = []
+        a1['coerce'] = False
+        a1['xheader'] = False
+        a1['drange'] = None
+        a1['rows'] = False
+        _, xlabs, _ = mgr.read_data(dataf[0], **a1)
+        xlabs = xlabs[0]
+    else:
+        xlabs = []
+    xlabs = get_user_labels(xlabs, xlabels)
+    labs = get_user_labels(labs, labels)
+    if rows:
+        if drange is not None:
+            la = [labs[i] for i in drange]
+        else:
+            la = labs[:ycnt]
+        labs = []
+        for i in y_vals:
+            try:
+                labs.append(xlabs[i[1]])
+            except TypeError:
+                labs.append(xlabs[i])
+        xlabs = la
+    elif drange is not None:
+        xlabs = [xlabs[i] for i in drange]
+    return labs, xlabs
 
 def ax_limits(x):
     def smin(x):

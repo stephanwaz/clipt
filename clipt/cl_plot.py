@@ -190,22 +190,7 @@ def bar(ctx, dataf, **kwargs):
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
             a1['autox'] = axext['xdata']
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
-            if kwargs['xheader']:
-                a1['y_vals'] = [0]
-                a1['x_vals'] = []
-                a1['coerce'] = False
-                a1['xheader'] = False
-                a1['rows'] = False
-                _, xlabels, _ = mgr.read_data(dataf[0], **a1)
-                xlabels = xlabels[0]
-            else:
-                xlabels = []
-            xlabels = ruplot.get_labels(xlabels, kwargs['xlabels'])
-            labels = ruplot.get_labels(labels, kwargs['labels'])
-            if kwargs['rows']:
-                la = labels[:len(ys[0])]
-                labels = xlabels
-                xlabels = la
+            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys), **kwargs)
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
@@ -351,22 +336,7 @@ def histo(ctx, dataf, **kwargs):
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
             a1['autox'] = axext['xdata']
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
-            if kwargs['xheader']:
-                a1['y_vals'] = [0]
-                a1['x_vals'] = []
-                a1['coerce'] = False
-                a1['xheader'] = False
-                a1['rows'] = False
-                _, xlabels, _ = mgr.read_data(dataf[0], **a1)
-                xlabels = xlabels[0]
-            else:
-                xlabels = []
-            xlabels = ruplot.get_labels(xlabels, kwargs['xlabels'])
-            labels = ruplot.get_labels(labels, kwargs['labels'])
-            if kwargs['rows']:
-                la = labels
-                labels = xlabels
-                xlabels = la
+            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys), **kwargs)
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
@@ -495,7 +465,7 @@ def scatter(ctx, dataf, **kwargs):
                 for a in kwargs['area']:
                     a1['y_vals'] = a
                     areas.append(mgr.read_all_data(dataf, **a1)[1])
-            labels = ruplot.get_labels(labels, kwargs['labels'])
+            labels = ruplot.get_user_labels(labels, kwargs['labels'])
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
@@ -607,22 +577,7 @@ def box(dataf, **kwargs):
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
             a1['autox'] = [0, 1]
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
-            if kwargs['xheader']:
-                a1['y_vals'] = [0]
-                a1['x_vals'] = []
-                a1['coerce'] = False
-                a1['xheader'] = False
-                a1['rows'] = False
-                _, xlabels, _ = mgr.read_data(dataf[0], **a1)
-                xlabels = xlabels[0]
-            else:
-                xlabels = []
-            xlabels = ruplot.get_labels(xlabels, kwargs['xlabels'])
-            labels = ruplot.get_labels(labels, kwargs['labels'])
-            if kwargs['rows']:
-                la = labels
-                labels = xlabels
-                xlabels = la
+            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys), **kwargs)
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
@@ -709,22 +664,7 @@ def violin(dataf, **kwargs):
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
             a1['autox'] = [0, 1]
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
-            if kwargs['xheader']:
-                a1['y_vals'] = [0]
-                a1['x_vals'] = []
-                a1['coerce'] = False
-                a1['xheader'] = False
-                a1['rows'] = False
-                _, xlabels, _ = mgr.read_data(dataf[0], **a1)
-                xlabels = xlabels[0]
-            else:
-                xlabels = []
-            xlabels = ruplot.get_labels(xlabels, kwargs['xlabels'])
-            labels = ruplot.get_labels(labels, kwargs['labels'])
-            if kwargs['rows']:
-                la = labels
-                labels = xlabels
-                xlabels = la
+            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys), **kwargs)
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
