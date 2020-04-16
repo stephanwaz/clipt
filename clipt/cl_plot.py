@@ -203,7 +203,7 @@ def bar(ctx, dataf, **kwargs):
             xlabels = ruplot.get_labels(xlabels, kwargs['xlabels'])
             labels = ruplot.get_labels(labels, kwargs['labels'])
             if kwargs['rows']:
-                la = labels
+                la = labels[:len(ys[0])]
                 labels = xlabels
                 xlabels = la
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
@@ -733,7 +733,7 @@ def violin(dataf, **kwargs):
             ax = ruplot.tick_from_arg(ax, [0, len(ys)], ys, a4, kwargs)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
-            a6 = mgr.kwarg_match(ruplot.plot_box, kwargs)
+            a6 = mgr.kwarg_match(ruplot.plot_violin, kwargs)
             a6.pop('labels', None)
             ax, handles = ruplot.plot_violin(ax, ys, labels, cmap,
                                              axext['ydata'], **a6)

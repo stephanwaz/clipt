@@ -91,7 +91,7 @@ def get_labels(labels, mlab):
     Parameters
     ----------
     labels: list
-        labels retruned by read_all_data
+        labels returned by read_all_data
     mlab: list
         manual labels for data
     Returns
@@ -123,19 +123,8 @@ def ax_limits(x):
     return smin(x), smax(x)
 
 
-def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False, pery=False):
+def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False, pery=False, **kwargs):
     """parse axes string argument xname,xmin,xmax,yname,ymin,ymax"""
-    def smin(x):
-        try:
-            return min(x)
-        except Exception:
-            return None
-
-    def smax(x):
-        try:
-            return max(x)
-        except Exception:
-            return None
     x = flat(xs)
     if stacked:
         try:
@@ -169,7 +158,7 @@ def get_axes(arg, xs, ys, polar=False, polarauto=True, stacked=False, pery=False
     return naxes
 
 
-def plot_setup(fg='black', bg='white', polar=False, areaonly=False, params={}):
+def plot_setup(fg='black', bg='white', polar=False, areaonly=False, params={}, **kwargs):
     """
     setup plot with uniform styling and create axes for plot
 
@@ -206,11 +195,11 @@ def plot_setup(fg='black', bg='white', polar=False, areaonly=False, params={}):
 
 
 def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
-          xgrid=False, ygrid=False, xscale='linear', yscale='linear',
+          xgrid=True, ygrid=True, xscale='linear', yscale='linear',
           annualx=False, dayy=False, pery=False, ticklines=False, pph=1,
           bottom=None, bg='white', xlabels=None, dpy=365, hpd=24, sh=0,
-          polar=False, xticks=None, yticks=None, labelweight='bold',
-          matchxy=False):
+          polar=False, xticks=None, yticks=None, labelweight='ultralight',
+          matchxy=False, **kwargs):
     """
     setup ticks/axes for plot
 
@@ -320,7 +309,7 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     if yticks is not None:
         if yscale != 'log':
             ax.set_yticks(np.append(np.arange(bottom+ymin, ymax+bottom,
-                          old_div((ymax-ymin),(yticks))),ymax+bottom))
+                          (ymax-ymin)/yticks),ymax+bottom))
         else:
             decs = np.ceil(np.log10(ymax) - np.log10(ymin))
             maj = np.power(10, np.log10(ymin) + np.arange(decs+1))
@@ -331,7 +320,7 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
             ax.yaxis.grid(ygrid, which='minor')
     if xticks is not None:
         if xscale != 'log':
-            ax.set_xticks(np.append(np.arange(xmin, xmax, old_div((xmax-xmin),(xticks))),xmax))
+            ax.set_xticks(np.append(np.arange(xmin, xmax, (xmax-xmin)/xticks),xmax))
         else:
             decs = np.ceil(np.log10(xmax) - np.log10(xmin))
             maj = np.power(10, np.log10(xmin) + np.arange(decs+1))
@@ -372,10 +361,10 @@ def add_colorbar(fig, pc, axes=[0.3, 0.0, 0.4, 0.02],
         t.set_visible(False)
 
 
-def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
+def plot_graph(fig, saveimage, width=5, height=5, bg='white', fg='black',
                handles=[], handles2=[], dpi=200, bbox_to_anchor=(1.05, 1),
                loc=2, legend=False, background=None,
-               front=False, alpha=.5, areaonly=False, polar=False):
+               front=False, alpha=.5, areaonly=False, polar=False, **kwargs):
     """add legend and save image of plot"""
     fig.set_size_inches(width, height)
     if legend and not areaonly:
@@ -410,7 +399,7 @@ def plot_graph(fig, saveimage, width=10.5, height=5, bg='white', fg='black',
     plt.close()
 
 
-def get_colors(cmap, step=None, positions=None, funcs=[]):
+def get_colors(cmap, step=None, positions=None, funcs=[], **kwargs):
     """get colormap from cmap name, color list or CliptColors spec
 
     Parameters
@@ -564,7 +553,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                  mrk='o', step=None, fcol=0.0, mew=0.0, emap=None, estep=None,
                  flipxy=False, cs=None, cmin=None, cmax=None, y2=None,
                  msd=None, mmin=None, mmax=None, legend=True,
-                 polar=False, areas=None, falpha=0.5, **kwargs):
+                 polar=False, areas=[], falpha=0.5, **kwargs):
     """adds scatterplots/lines to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(ys)):
@@ -679,7 +668,7 @@ def plot_heatmap(fig, ax, data, colormap, vmin=None, vmax=None,
     return ax
 
 
-def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None,
+def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None, estep=None,
              bwidth=.9, fcol=0.0, brng=[0, 1], bottom=0, polar=False, polar0=False,
              emap=None, ew=[0], **kwargs):
     """adds bar plots to ax and returns ax and handles for legend"""

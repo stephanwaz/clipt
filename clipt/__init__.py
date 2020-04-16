@@ -8,6 +8,13 @@ __version__ = '1.0.6'
 __all__ = ['plot', 'cl_plot']
 
 
+import matplotlib
+backend = matplotlib.get_backend()
+import clipt.plot as mplt
+matplotlib.use(backend)
+
+
+
 def get_root(inside=True, pyenv=False):
     """return root directory of clipt install"""
 
