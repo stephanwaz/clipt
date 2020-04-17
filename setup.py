@@ -57,6 +57,6 @@ setup(
     tests_require=test_requirements,
     url='https://bitbucket.org/stephenwasilewski/clipt',
     project_urls= {'documentation': 'https://clipt.readthedocs.io/'},
-    version='1.0.6',
+    version='1.0.7',
     zip_safe=True,
 )
