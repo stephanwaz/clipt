@@ -28,6 +28,7 @@ import matplotlib.colors as colors
 import matplotlib.cm as cmx
 from matplotlib.transforms import Bbox
 import clasp.script_tools as mgr
+from hdrstats import hdrstats as hs
 
 
 daycount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
@@ -139,6 +140,7 @@ def get_labels(dataf, labs, a1, ycnt, xheader=False, xlabels=None,
         xlabs = la
     elif drange is not None:
         xlabs = [xlabs[i] for i in drange]
+    print(labs, xlabs)
     return labs, xlabs
 
 def ax_limits(x):
@@ -599,7 +601,22 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         y2 = []
     else:
         ax2 = fig.axes[1]
-    for i, (x, y, l) in enumerate(zip(xs, ys, labels)):
+    if cs is None:
+        cvals = (None,) * len(xs)
+    else:
+        if cmax is None:
+            cmax = max(flat(cs))
+        if cmin is None:
+            cmin = min(flat(cs))
+        j = 0
+        cvals = []
+        for i in range(len(ys)):
+            if get_nth(ms, i) > 0:
+                cvals.append(get_nth(cs, j))
+                j += 1
+            else:
+                cvals.append(None)
+    for i, (x, y, l, cs) in enumerate(zip(xs, ys, labels, cvals)):
         if i in y2:
             axT = ax2
             ax2.set_zorder(ax.get_zorder()+1)
@@ -632,13 +649,9 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
             axT.fill_between(x, areas[i][0], ya2, alpha=falpha, color=c, zorder=-1,
                             linestyle='--', linewidth=lwa/2)
         if cs is not None:
-            if cmax is None:
-                cmax = max(flat(cs))
-            if cmin is None:
-                cmin = min(flat(cs))
             plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
                         'marker': mka, 'cmap': colormap.cmap, 'linewidth': mewa,
-                        'vmin': cmin, 'vmax': cmax, 'c': cs[i], 'edgecolors': mec,
+                        'vmin': cmin, 'vmax': cmax, 'c': cs, 'edgecolors': mec,
                         'norm': colormap.norm}
             plotargs.update(kwargs)
             axT.scatter(x, y, **plotargs)
@@ -798,9 +811,9 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
     return ax, handles
 
 
-def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
-                clw=1.0, clbg=True, fcol=0.0, fillalpha=1.0, median=True,
-                series=1, bg='white', inline=False, mean=False, **kwargs):
+def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, kernelwidth=.5,
+                clw=1.0, clbg=True, fcol=0.0, fillalpha=1.0, median=True, conf=None, confm=None,
+                series=1, bg='white', inline=False, mean=False, weights=None, **kwargs):
     """adds violin plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(series):
@@ -822,10 +835,32 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
         else:
             x = np.arange(i, len(data), series)
             sw = 1
-        
-        vplot = ax.violinplot(data[i*chunksize:i*chunksize+chunksize],
-                              showmeans=mean, showmedians=median,
-                              widths=rwidth*sw, positions=x)
+        ds = np.array(data[i*chunksize:i*chunksize+chunksize])
+        if weights is not None:
+            ws = np.array(weights[i*chunksize:i*chunksize+chunksize])
+        else:
+            ws = (None,) * len(ds)
+        vstats = []
+        for d, w in zip(ds, ws):
+            vstats.append(hs.kernel(d, w=w, n=1000, bws=kernelwidth))
+        vplot = ax.violin(vstats, showmeans=mean, showmedians=median,
+                          widths=rwidth*sw, positions=x)
+        if confm is not None:
+            bstats = hs.conf_box(ds, ws, confm)
+            plotargs = {
+                'boxprops' : {'linewidth':clw, 'color':c, 'linestyle':'--', 'dash_joinstyle':'miter'},
+                'medianprops' : {'linewidth':0,},
+                'whiskerprops': {'linewidth':0,}
+            }
+            blot = ax.bxp(bstats, widths=rwidth*sw/2, positions=x, showfliers=False, showcaps=False, **plotargs)
+        if conf is not None:
+            bstats = hs.quant_box(ds, ws, conf)
+            plotargs = {
+                'boxprops' : {'linewidth':lw, 'color':c},
+                'medianprops' : {'linewidth':0,},
+                'whiskerprops': {'linewidth':0,}
+            }
+            blot = ax.bxp(bstats, widths=rwidth*sw/4, positions=x, showfliers=False, showcaps=False, **plotargs)
         for vp in vplot['bodies']:
             vp.set_facecolor(c)
             vp.set_alpha(fillalpha)
@@ -844,9 +879,8 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0,
                 
                 if j == 'cmeans':
                     vp.set_linestyle(':')
+                    vp.set_linewidth(clw)
         handles.append(Patch(color=c, label=labels[i]))
-    lims = ax.dataLim
-    print(rwidth)
     ax.set_xlim(left=-.5, right=len(data)-.5)
     return ax, handles
 

@@ -190,7 +190,7 @@ def bar(ctx, dataf, **kwargs):
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
             a1['autox'] = axext['xdata']
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
-            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys), **kwargs)
+            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys[0]), **kwargs)
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
@@ -338,7 +338,7 @@ def histo(ctx, dataf, **kwargs):
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
             a1['autox'] = axext['xdata']
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
-            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys), **kwargs)
+            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys[0]), **kwargs)
             if kwargs['weights'] is not None:
                 a1['y_vals'] = kwargs['weights']
                 _, weights, _ = mgr.read_all_data(dataf, **a1)
@@ -392,7 +392,7 @@ def histo(ctx, dataf, **kwargs):
               "(fills between) order given should match y_vals. colors"
               " match line colors, but use the -falpha option")
 @click.option('-c_vals', default=None, callback=clk.tup_int,
-              help="optional index for color vals, only uses 1 index")
+              help="optional index for color vals")
 @click.option('-falpha', type=float, default=0.5,
               help="alpha for -area(s)")
 @click.option('-m_vals', default=None, callback=clk.tup_int,
@@ -459,7 +459,7 @@ def scatter(ctx, dataf, **kwargs):
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
             if kwargs['c_vals'] is not None:
                 a1['y_vals'] = kwargs['c_vals']
-                cs = mgr.read_all_data(dataf, **a1)[1]
+                _, cs, _ = mgr.read_all_data(dataf, **a1)
             else:
                 cs = None
             if kwargs['m_vals'] is not None:
@@ -585,13 +585,13 @@ def box(dataf, **kwargs):
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
             a1['autox'] = [0, 1]
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
-            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys), **kwargs)
+            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys[0]), **kwargs)
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
             a4.pop('labels', None)
             a4['xlabels'] = xlabels
-            ax = ruplot.tick_from_arg(ax, [0, len(ys)], ys, a4, kwargs)
+            ax = ruplot.tick_from_arg(ax, [0, len(ys[0])], ys, a4, kwargs)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
             a6 = mgr.kwarg_match(ruplot.plot_box, kwargs)
@@ -615,7 +615,9 @@ def box(dataf, **kwargs):
 @click.argument('dataf', callback=clk.are_files)
 @click.option('-y_vals', default="-1", callback=clk.tup_int,
               help="index for yvals")
-@click.option('-axes', default="X,0,1,Y,0,ymax",
+@click.option('-weights', default=None, callback=clk.tup_int,
+              help="index for weights (if given, must be 1:1 match with y_vals)")
+@click.option('-axes', default="X,0,1,Y,ymin,ymax",
               help="enter as xname,xmin,xmax,yname,ymin,ymax - default uses"
               "min and max of data enter xmin etc to maintain autoscale")
 @click.option('-rwidth', default=0.95, type=float,
@@ -631,6 +633,12 @@ def box(dataf, **kwargs):
               help="number of series to pl ot data in")
 @click.option('--clbg/--no-clbg', default=True,
               help="median line uses -bg")
+@click.option('-conf', default=None, type=float,
+              help="plot confidence interval on data")
+@click.option('-confm', default=None, type=float,
+              help="plot confidence interval on mean of data")
+@click.option('-kernelwidth', '-kw', default=.5,
+              help="scale factor to apply to kernel bandwidth selector (1 uses scotts rule)")
 @click.option('-fillalpha', default=.5,
               help="alpha for fill color (matches line color)")
 @click.option('--xheader/--no-xheader', default=False,
@@ -672,19 +680,28 @@ def violin(dataf, **kwargs):
             a1 = mgr.kwarg_match(mgr.read_data, kwargs)
             a1['autox'] = [0, 1]
             xs, ys, labels = mgr.read_all_data(dataf, **a1)
-            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys), **kwargs)
+            labels, xlabels = ruplot.get_labels(dataf, labels, a1, len(ys[0]), **kwargs)
+            if kwargs['weights'] is not None:
+                a1['y_vals'] = kwargs['weights']
+                _, weights, _ = mgr.read_all_data(dataf, **a1)
+            else:
+                weights = None
             a3 = mgr.kwarg_match(ruplot.plot_setup, kwargs)
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
             a4.pop('labels', None)
             a4['xlabels'] = xlabels
-            ax = ruplot.tick_from_arg(ax, [0, len(ys)], ys, a4, kwargs)
+            ax = ruplot.tick_from_arg(ax, [0, len(ys[0])], ys, a4, kwargs)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
             a6 = mgr.kwarg_match(ruplot.plot_violin, kwargs)
             a6.pop('labels', None)
+            a6['weights'] = weights
             ax, handles = ruplot.plot_violin(ax, ys, labels, cmap,
                                              axext['ydata'], **a6)
+            a4['xdata'] = ax.get_xlim()
+            a4['ydata'] = ax.get_ylim()
+            ax = ruplot.ticks(ax, **a4)
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
