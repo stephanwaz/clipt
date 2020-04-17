@@ -1,6 +1,7 @@
 numpy
 matplotlib
 clasp
+hdrstats
 
 pip
 bumpversion==0.5.3
