@@ -140,7 +140,6 @@ def get_labels(dataf, labs, a1, ycnt, xheader=False, xlabels=None,
         xlabs = la
     elif drange is not None:
         xlabs = [xlabs[i] for i in drange]
-    print(labs, xlabs)
     return labs, xlabs
 
 def ax_limits(x):
@@ -404,8 +403,10 @@ def plot_graph(fig, saveimage, width=5, height=5, bg='white', fg='black',
     fig.set_size_inches(width, height)
     if legend and not areaonly:
         try:
-            plot_legend(fig.axes[1], handles=handles2, bbox_to_anchor=(bbox_to_anchor[0], 0),
-                        loc=3, bg=bg, fg=fg, title='right axis')
+            if isinstance(fig.axes[1], matplotlib.axes.SubplotBase):
+                plot_legend(fig.axes[1], handles=handles2,
+                            bbox_to_anchor=(bbox_to_anchor[0], 0),
+                            loc=3, bg=bg, fg=fg, title='right axis')
         except IndexError:
             pass
         plot_legend(fig.axes[0], handles=handles, bbox_to_anchor=bbox_to_anchor,
