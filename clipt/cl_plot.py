@@ -572,7 +572,8 @@ def scatter(ctx, dataf, **kwargs):
               help="indicates that data has a header row to get "
               "series labels (overridden by labels)")
 @clk.shared_decs(shared)
-def box(dataf, **kwargs):
+@click.pass_context
+def box(ctx, dataf, **kwargs):
     """
     create boxplot from data files.
     """
@@ -608,7 +609,7 @@ def box(dataf, **kwargs):
             raise
         except Exception as ex:
             clk.print_except(ex, kwargs['debug'])
-    return 'box', kwargs
+    return 'box', kwargs, ctx
 
 
 @plot.command('violin')
@@ -667,7 +668,8 @@ def box(dataf, **kwargs):
               help="indicates that data has a header row to get "
               "series labels (overridden by labels)")
 @clk.shared_decs(shared)
-def violin(dataf, **kwargs):
+@click.pass_context
+def violin(ctx, dataf, **kwargs):
     """
     create violinplot from data files.
     """
@@ -712,7 +714,7 @@ def violin(dataf, **kwargs):
             raise
         except Exception as ex:
             clk.print_except(ex, kwargs['debug'])
-    return 'violin', kwargs
+    return 'violin', kwargs, ctx
 
 
 @plot.command('previewpal')
