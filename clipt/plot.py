@@ -136,7 +136,11 @@ def get_labels(dataf, labs, a1, ycnt, xheader=False, xlabels=None,
             try:
                 labs.append(xlabs[i[1]])
             except TypeError:
-                labs.append(xlabs[i])
+                try:
+                    labs.append(xlabs[i])
+                except IndexError:
+                    pass
+                
         xlabs = la
     elif drange is not None:
         xlabs = [xlabs[i] for i in drange]
@@ -233,7 +237,7 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
           annualx=False, dayy=False, pery=False, ticklines=False, pph=1,
           bottom=None, bg='white', xlabels=None, dpy=365, hpd=24, sh=0,
           polar=False, xticks=None, yticks=None, labelweight='ultralight',
-          matchxy=False, **kwargs):
+          matchxy=False, xrotate='a', **kwargs):
     """
     setup ticks/axes for plot
 
@@ -319,7 +323,9 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
             ax.set_xlim(left=xmin, right=xmax)
         else:
             ax.set_xticks(np.arange(xmin+old_div(inc,2), xmax+old_div(inc,2), inc))
-            if max([len(i) for i in xlabels]) > 10:
+            rots = dict(a='auto', h='horizontal', v='vertical')
+            ro = rots[xrotate]
+            if ro=='auto' and max([len(i) for i in xlabels]) > 10:
                 ro = 'vertical'
             else:
                 ro = 'horizontal'

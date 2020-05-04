@@ -67,6 +67,8 @@ shared = coloropt + [
                        help="background color"),
           click.option('--legend/--no-legend', default=True,
                        help="include legend in plot"),
+          click.option('-xrotate', default='auto', callback=clk.char0, type=click.Choice(['auto', 'horiz', 'vert', 'a', 'h', 'v'], case_sensitive=False),
+                       help="orientation of x-axis labels"),
           click.option('-comment', default='#',
                        help='regex "^[{}].*" indicating comment line '
                        'indicator'),
@@ -485,7 +487,9 @@ def scatter(ctx, dataf, **kwargs):
                 ax2 = ruplot.tick_from_arg(ax2, xs, [ys[i] for i in kwargs['y2']], a4, kwargs)
                 fig.sca(ax2)
                 kwargs['axes'] = axes
-            ax = ruplot.tick_from_arg(ax, xs, ys + areas, a4, kwargs)
+                ax = ruplot.tick_from_arg(ax, xs, [ys[i] for i in range(len(ys)) if i not in kwargs['y2']] + areas, a4, kwargs)
+            else:
+                ax = ruplot.tick_from_arg(ax, xs, ys + areas, a4, kwargs)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
             a5['positions'] = kwargs['epositions']
