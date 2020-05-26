@@ -646,6 +646,8 @@ def box(ctx, dataf, **kwargs):
               help="scale factor to apply to kernel bandwidth selector (1 uses scotts rule)")
 @click.option('-fillalpha', default=.5,
               help="alpha for fill color (matches line color)")
+@click.option('-weightlimit', default=0.0,
+              help="exclude values below weight limit from plot (useful to remove artificial whiskers)")
 @click.option('--xheader/--no-xheader', default=False,
               help="indicates that data has a header column to get x-axis "
               "labels (overridden by xlabels)")

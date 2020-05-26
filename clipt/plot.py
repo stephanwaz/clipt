@@ -360,7 +360,10 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
             ax.yaxis.grid(ygrid, which='minor')
     if xticks is not None:
         if xscale != 'log':
-            ax.set_xticks(np.append(np.arange(xmin, xmax, (xmax-xmin)/xticks),xmax))
+            if xticks == 0:
+                ax.set_xticks([])
+            else:
+                ax.set_xticks(np.append(np.arange(xmin, xmax, (xmax-xmin)/xticks),xmax))
         else:
             decs = np.ceil(np.log10(xmax) - np.log10(xmin))
             maj = np.power(10, np.log10(xmin) + np.arange(decs+1))
@@ -465,6 +468,13 @@ def get_colors(cmap, step=None, positions=None, funcs=[], **kwargs):
     """
     efuncs = funcs + [cmap_from_mpl, cmap_from_clipt, cmap_from_list]
     e = []
+    try:
+        alpha = int(cmap.rsplit('_', 1)[1])
+    except (IndexError, ValueError, AttributeError):
+        alpha = None
+    else:
+        cmap0 = cmap
+        cmap = cmap.rsplit('_', 1)[0]
     for func in efuncs:
         try:
             colormap = func(cmap, step, positions)
@@ -474,6 +484,11 @@ def get_colors(cmap, step=None, positions=None, funcs=[], **kwargs):
             continue
     else:
         raise ValueError("\n\n".join(e))
+    if alpha is not None:
+        clist = colormap.cmap(np.arange(colormap.cmap.N))
+        clist[:,-1] = alpha/100
+        cmap = colors.LinearSegmentedColormap.from_list(cmap0, clist)
+        colormap.cmap = cmap
     return colormap
 
 
@@ -820,7 +835,7 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
 
 def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, kernelwidth=.5,
                 clw=1.0, clbg=True, fcol=0.0, fillalpha=1.0, median=True, conf=None, confm=None,
-                series=1, bg='white', inline=False, mean=False, weights=None, **kwargs):
+                series=1, bg='white', inline=False, mean=False, weights=None, weightlimit=0.0, **kwargs):
     """adds violin plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(series):
@@ -849,7 +864,7 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
             ws = (None,) * len(ds)
         vstats = []
         for d, w in zip(ds, ws):
-            vstats.append(hs.kernel(d, w=w, n=1000, bws=kernelwidth))
+            vstats.append(hs.kernel(d, w=w, n=1000, bws=kernelwidth, t=weightlimit))
         vplot = ax.violin(vstats, showmeans=mean, showmedians=median,
                           widths=rwidth*sw, positions=x)
         if confm is not None:
