@@ -299,14 +299,14 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     elif pery:
         ax = ticks_y_per(ax, ydata, pery, tcol)
     for tick in ax.yaxis.get_major_ticks():
-        tick.label.set_fontsize(7)
-        tick.label.set_color(tcol)
+        tick.label1.set_fontsize(7)
+        tick.label1.set_color(tcol)
     for t in ax.yaxis.get_ticklines() + ax.yaxis.get_ticklines(minor=True):
         t.set_visible(ticklines and not ygrid)
         t.set_color(tcol)
     for tick in ax.xaxis.get_major_ticks():
-        tick.label.set_fontsize(7)
-        tick.label.set_color(tcol)
+        tick.label1.set_fontsize(7)
+        tick.label1.set_color(tcol)
     for t in ax.xaxis.get_ticklines() + ax.xaxis.get_ticklines(minor=True):
         t.set_visible(ticklines and not xgrid)
         t.set_color(tcol)
