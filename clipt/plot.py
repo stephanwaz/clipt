@@ -1203,3 +1203,17 @@ def get_nth_loop(li, i):
         return li[i % len(li)]
     except Exception:
         return li
+
+
+def quick_scatter(xs, ys, outf=None, colors='viridis', **kwargs):
+    ax, fig = plot_setup()
+    cmap = get_colors(colors)
+    plot_scatter(fig, ax, xs, ys, [], cmap, **kwargs)
+    ticks(ax, flat(xs), flat(ys))
+    if outf is None:
+        fig.set_size_inches(5,5)
+        plt.tight_layout()
+        plt.show()
+    else:
+        plot_graph(fig, outf)
+        
