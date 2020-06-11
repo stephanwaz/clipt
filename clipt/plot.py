@@ -269,8 +269,8 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     ticklines: bool
         if not grid, show ticklines
     """
-    xmin = xdata[0]
-    xmax = xdata[-1]
+    xmin = min(xdata)
+    xmax = max(xdata)
     ymin = min(ydata)
     ymax = max(ydata)
     if matchxy:
@@ -1205,11 +1205,11 @@ def get_nth_loop(li, i):
         return li
 
 
-def quick_scatter(xs, ys, outf=None, colors='viridis', **kwargs):
+def quick_scatter(xs, ys, outf=None, colors='viridis', tkwargs={}, **kwargs):
     ax, fig = plot_setup()
     cmap = get_colors(colors)
     plot_scatter(fig, ax, xs, ys, [], cmap, **kwargs)
-    ticks(ax, flat(xs), flat(ys))
+    ticks(ax, flat(xs), flat(ys), **tkwargs)
     if outf is None:
         fig.set_size_inches(5,5)
         plt.tight_layout()
