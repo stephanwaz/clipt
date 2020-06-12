@@ -570,6 +570,8 @@ def scatter(ctx, dataf, **kwargs):
               help="plot mean line or median line")
 @click.option('--notch/--no-notch', default=False,
               help="plot notch for 95\% confidence interval")
+@click.option('--fliers/--no-fliers', default=True,
+              help="plot notch for 95\% confidence interval")
 @click.option('--inline/--no-inline', default=False,
               help="keep boxes inline")
 @click.option('--header/--no-header', default=False,
@@ -601,6 +603,7 @@ def box(ctx, dataf, **kwargs):
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
             a6 = mgr.kwarg_match(ruplot.plot_box, kwargs)
             a6.pop('labels', None)
+            a6['xlabels'] = xlabels
             ax, handles = ruplot.plot_box(ax, ys, labels, cmap,
                                             axext['ydata'], **a6)
             if kwargs['outf']:
