@@ -69,7 +69,7 @@ def tick_from_arg(ax, xs, ys, a4, kwargs):
         a4['tcol'] = kwargs['fg']
     except Exception:
         pass
-    for i in ['polar', 'stacked', 'polarautp']:
+    for i in ['polar', 'stacked', 'polarauto']:
         try:
             kwargs[i] = kwargs[i]
         except Exception:
