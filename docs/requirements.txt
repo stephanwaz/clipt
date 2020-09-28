@@ -1,0 +1,7 @@
+Sphinx==3.0.4
+sphinx-click
+sphinxcontrib-programoutput
+numpy
+matplotlib
+clasp
+hdrstats
