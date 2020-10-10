@@ -38,7 +38,7 @@ coloropt = [
                        help="colormap position for first color"),
           click.option('-colors', default='med',
                        callback=clk.color_inp,
-                       help="cmap name* or space seperated list of rgb tuples "
+                       help="cmap name or space seperated list of rgb tuples "
                        "0,0,0 120,120,120 etc. if fewer than # series picks ."
                        "from gradient includes ru_colors: 'blu', 'org', 'pur'"
                        ", 'red', 'blg', 'mag', 'brn', 'grn', 'yel', 'ggr', "
