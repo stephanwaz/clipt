@@ -836,9 +836,7 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
                              positions=x , manage_ticks=False, showmeans=mean, meanline=not notch,
                              **plotargs)
         handles.append(Patch(color=c, label=labels[i]))
-    # ax.set_xlim(left=-.5, right=len(data)-.5)
-    lims = ax.dataLim
-    ax.set_xlim(left=lims.x0-1/2, right=lims.x1+1/2)
+    ax.set_xlim(left=-.5, right=len(data)-.5)
     if xlabels is not None and len(xlabels) > 0:
         series_ticks(ax, np.arange(len(data)), xlabels, xrotate='a')
     return ax, handles
@@ -846,7 +844,8 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
 
 def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, kernelwidth=.5,
                 clw=1.0, clbg=True, fcol=0.0, fillalpha=1.0, median=True, conf=None, confm=None,
-                series=1, bg='white', inline=False, mean=False, weights=None, weightlimit=0.0, **kwargs):
+                series=1, bg='white', inline=False, mean=False, weights=None, weightlimit=0.0,
+                fliers=False, **kwargs):
     """adds violin plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(series):
@@ -874,26 +873,42 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
         else:
             ws = (None,) * len(ds)
         vstats = []
+        flies = []
         for d, w in zip(ds, ws):
-            vstats.append(hs.kernel(d, w=w, n=1000, bws=kernelwidth, t=weightlimit))
+            if fliers:
+                qr = np.quantile(d, (.25, .75))
+                iqr = (qr[1] - qr[0]) * 1.5
+                filt = np.logical_and(d >= qr[0] - iqr, d <= qr[1] + iqr)
+                df = d[filt]
+                flies.append(d[np.logical_not(filt)])
+            else:
+                df = d
+            vstats.append(hs.kernel(df, w=w, n=1000, bws=kernelwidth, t=weightlimit))
         vplot = ax.violin(vstats, showmeans=mean, showmedians=median,
                           widths=rwidth*sw, positions=x)
         if confm is not None:
             bstats = hs.conf_box(ds, ws, confm)
             plotargs = {
                 'boxprops' : {'linewidth':clw, 'color':c, 'linestyle':'--', 'dash_joinstyle':'miter'},
-                'medianprops' : {'linewidth':0,},
-                'whiskerprops': {'linewidth':0,}
+                'medianprops' : {'linewidth': 0},
+                'whiskerprops': {'linewidth': 0},
             }
-            blot = ax.bxp(bstats, widths=rwidth*sw/2, positions=x, showfliers=False, showcaps=False, **plotargs)
+            ax.bxp(bstats, widths=rwidth*sw/4, positions=x, showfliers=False, showcaps=False, **plotargs)
         if conf is not None:
             bstats = hs.quant_box(ds, ws, conf)
+            if fliers:
+                for j in range(len(bstats)):
+                    bstats[j]['fliers'] = flies[j]
             plotargs = {
                 'boxprops' : {'linewidth':lw, 'color':c},
                 'medianprops' : {'linewidth':0,},
-                'whiskerprops': {'linewidth':0,}
+                'whiskerprops': {'linewidth':0,},
+                'flierprops': {'marker': 'x', 'markeredgecolor': c,
+                               'markeredgewidth': 0.5,
+                               'markersize': 3.0
+                               }
             }
-            blot = ax.bxp(bstats, widths=rwidth*sw/4, positions=x, showfliers=False, showcaps=False, **plotargs)
+            ax.bxp(bstats, widths=rwidth*sw/2, positions=x, showfliers=fliers, showcaps=False, **plotargs)
         for vp in vplot['bodies']:
             vp.set_facecolor(c)
             vp.set_alpha(fillalpha)

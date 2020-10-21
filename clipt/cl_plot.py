@@ -671,6 +671,8 @@ def box(ctx, dataf, **kwargs):
               help="plot mean dot")
 @click.option('--median/--no-median', default=True,
               help="plot median line")
+@click.option('--fliers/--no-fliers', default=False,
+              help="plot outliers as fliers")
 @click.option('--inline/--no-inline', default=False,
               help="keep violins inline")
 @click.option('--header/--no-header', default=False,
