@@ -879,8 +879,10 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
                 qr = np.quantile(d, (.25, .75))
                 iqr = (qr[1] - qr[0]) * 1.5
                 filt = np.logical_and(d >= qr[0] - iqr, d <= qr[1] + iqr)
+                # df = np.maximum(np.minimum(d, qr[1] + iqr), qr[0] - iqr)
                 df = d[filt]
                 flies.append(d[np.logical_not(filt)])
+                # print(np.stack((np.arange(len(d))[np.logical_not(filt)], flies[-1])).T)
             else:
                 df = d
             vstats.append(hs.kernel(df, w=w, n=1000, bws=kernelwidth, t=weightlimit))
