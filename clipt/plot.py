@@ -862,10 +862,11 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
         else:
             medianc = c
         if inline:
-            x = np.arange(2, len(data), series)
+            x = np.arange(1, len(data), series)
             sw = series
         else:
-            x = np.arange(i, len(data), series)
+            bwidth = 1 - (1-rwidth)/2
+            x = np.arange(i*bwidth + 1 - bwidth, len(data), series)
             sw = 1
         ds = np.array(data[i*chunksize:i*chunksize+chunksize])
         if weights is not None:
@@ -875,17 +876,18 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
         vstats = []
         flies = []
         for d, w in zip(ds, ws):
+            vs = hs.kernel(d, w=w, n=1000, bws=kernelwidth, t=weightlimit)
             if fliers:
                 qr = np.quantile(d, (.25, .75))
                 iqr = (qr[1] - qr[0]) * 1.5
                 filt = np.logical_and(d >= qr[0] - iqr, d <= qr[1] + iqr)
                 # df = np.maximum(np.minimum(d, qr[1] + iqr), qr[0] - iqr)
                 df = d[filt]
+                vs['min'] = np.min(df)
+                vs['max'] = np.max(df)
                 flies.append(d[np.logical_not(filt)])
                 # print(np.stack((np.arange(len(d))[np.logical_not(filt)], flies[-1])).T)
-            else:
-                df = d
-            vstats.append(hs.kernel(df, w=w, n=1000, bws=kernelwidth, t=weightlimit))
+            vstats.append(vs)
         vplot = ax.violin(vstats, showmeans=mean, showmedians=median,
                           widths=rwidth*sw, positions=x)
         if confm is not None:
@@ -906,8 +908,8 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
                 'medianprops' : {'linewidth':0,},
                 'whiskerprops': {'linewidth':0,},
                 'flierprops': {'marker': 'x', 'markeredgecolor': c,
-                               'markeredgewidth': 0.5,
-                               'markersize': 3.0
+                               'markeredgewidth': lw*0.5,
+                               'markersize': lw*4
                                }
             }
             ax.bxp(bstats, widths=rwidth*sw/2, positions=x, showfliers=fliers, showcaps=False, **plotargs)
