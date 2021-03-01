@@ -322,7 +322,9 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     for t in ax.xaxis.get_ticklines() + ax.xaxis.get_ticklines(minor=True):
         t.set_visible(ticklines and not xgrid)
         t.set_color(tcol)
-    if bottom is not None and bottom > 0:
+    if bottom is None:
+        bottom = 0
+    if bottom > 0:
         ylim = [ymin, ymax]
         ylimb = [i+bottom for i in ylim]
         ax.set_ylim(bottom=ylim[0], top=ylimb[1])
@@ -337,7 +339,7 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
             locs = np.arange(xmin+old_div(inc,2), xmax+old_div(inc,2), inc)
             series_ticks(ax, locs, xlabels, xrotate=xrotate)
     if polar:
-        if bottom is not None and bottom > 0:
+        if bottom > 0:
             ci = Circle((0, 0), zorder=2, radius=bottom, fill=True,
                         linewidth=0.3, edgecolor=tcol, facecolor=bg,
                         transform=ax.transData._b)
@@ -346,10 +348,8 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
                     fill=False, linewidth=0, edgecolor='blue',
                     facecolor='blue', transform=ax.transData._b)
         ax.add_artist(ci)
-        ax.yaxis.set_ticklabels([])
+        # ax.yaxis.set_ticklabels([])
         ax.axes.set_ylabel("")
-    if bottom is None:
-        bottom = 0
     if yticks is not None:
         if yscale != 'log':
             ax.set_yticks(np.append(np.arange(bottom+ymin, ymax+bottom,
@@ -430,7 +430,7 @@ def plot_graph(fig, saveimage, width=5, height=5, bg='white', fg='black',
         ax.axes.set_ylabel("")
         ax.xaxis.set_ticklabels([])
         ax2 = fig.add_axes([0, 0, 1, 1])
-        plargs = dict(bbox_inches=None, aspect='auto', pad_inches=0)
+        plargs = dict(bbox_inches=0, aspect='auto', pad_inches=0)
     else:
         ax2 = fig.add_subplot(1, 1, 1, label='background')
         plargs = dict(bbox_inches='tight')
@@ -610,6 +610,13 @@ def color_inc_i(fcol, i, n, step):
     return cinc
 
 
+class WedgeMark(object):
+
+    def __init__(self, wedge, d):
+        self.mrk = wedge
+        self.scale = np.max(np.abs(np.concatenate((np.sin(d*np.pi/180), np.cos(d*np.pi/180)))))
+
+
 def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                  mrk='o', step=None, fcol=0.0, mew=0.0, emap=None, estep=None,
                  flipxy=False, cs=None, cmin=None, cmax=None, y2=None,
@@ -620,7 +627,6 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
     for i in range(len(ys)):
         if i >= nlab:
             labels.append("series{:02d}".format(i))
-    handles = []
     if emap is None:
         emap = colormap
     if y2 is None:
@@ -637,10 +643,9 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         j = 0
         cvals = []
         for i in range(len(ys)):
-            if get_nth(ms, i) > 0:
-                cvals.append(get_nth(cs, j))
-                j += 1
-            else:
+            try:
+                cvals.append(cs[i])
+            except IndexError:
                 cvals.append(None)
     for i, (x, y, l, cs) in enumerate(zip(xs, ys, labels, cvals)):
         if i in y2:
@@ -667,6 +672,11 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         c = colormap.to_rgba(cinc)
         ecinc = color_inc_i(fcol, i, len(ys), estep)
         mec = emap.to_rgba(ecinc)
+        if hasattr(mka, "scale"):
+            msa = msa * mka.scale
+            mkt = mka.mrk
+        else:
+            mkt = mka
         if i < len(areas):
             if len(areas[i]) < 2:
                 ya2 = axT.axes.get_ylim()[0]
@@ -676,26 +686,20 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                             linestyle='--', linewidth=lwa/2)
         if cs is not None:
             plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
-                        'marker': mka, 'cmap': colormap.cmap, 'linewidth': mewa,
+                        'marker': mkt, 'cmap': colormap.cmap, 'linewidth': mewa,
                         'vmin': cmin, 'vmax': cmax, 'c': cs, 'edgecolors': mec,
                         'norm': colormap.norm}
             plotargs.update(kwargs)
             axT.scatter(x, y, **plotargs)
-            if legend:
-                pc = cmx.ScalarMappable(norm=colormap.norm, cmap=colormap.cmap)
-                if polar:
-                    add_colorbar(fig, colormap, axes = [1, 0.11, .02, 0.77], orientation='vertical')
-                else:
-                    add_colorbar(fig, colormap, axes = [.92, 0.11, .02, 0.77], orientation='vertical')
         elif msd is not None:
             plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
-                        'marker': mka, 'linewidth': mewa, 'c': [c],
+                        'marker': mkt, 'linewidth': mewa, 'c': [c],
                         'edgecolors': mec}
             plotargs.update(kwargs)
             axT.scatter(x, y, **plotargs)
         else:
             plotargs = {'linewidth': lwa, 'markersize': msa, 'label': l,
-                        'marker': mka, 'color': c, 'mfc': c, 'mec': mec,
+                        'marker': mkt, 'color': c, 'mfc': c, 'mec': mec,
                         'mew': mewa}
             plotargs.update(kwargs)
             if flipxy:
@@ -706,6 +710,13 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
             copts = {'linewidth': 0, 'mfc': c, 'mew': 0,
                      'markersize': lwa*2.5, 'marker': 'o'}
             plot_criteria(ax, x, y, criteria, flipxy, copts)
+    if legend and cs is not None:
+        if polar:
+            add_colorbar(fig, colormap, axes=[1, 0.11, .02, 0.77],
+                         orientation='vertical')
+        else:
+            add_colorbar(fig, colormap, axes=[.92, 0.11, .02, 0.77],
+                         orientation='vertical')
     handles, _ = ax.get_legend_handles_labels()
     try:
         handles2, _ = ax2.get_legend_handles_labels()
@@ -1333,15 +1344,27 @@ def get_nth_loop(li, i):
         return li
 
 
-def quick_scatter(xs, ys, outf=None, colors='viridis', tkwargs={}, **kwargs):
-    ax, fig = plot_setup()
-    cmap = get_colors(colors)
-    plot_scatter(fig, ax, xs, ys, [], cmap, **kwargs)
-    ticks(ax, flat(xs), flat(ys), **tkwargs)
+def quick_scatter(xs, ys, outf=None, colors='viridis', tkwargs=None, ckwargs=None,
+                  polar=False, labels=None, legend=False, width=5, height=5, areaonly=False, **kwargs):
+    if tkwargs is None:
+        tkwargs = {}
+    if ckwargs is None:
+        ckwargs = {}
+    if labels is None:
+        labels = []
+    ax, fig = plot_setup(polar=polar, areaonly=areaonly)
+    cmap = get_colors(colors, **ckwargs)
+    ax, handles, handles2 = plot_scatter(fig, ax, xs, ys, labels, cmap, polar=polar, legend=legend, **kwargs)
+    if 'xdata' not in tkwargs:
+        tkwargs['xdata'] = flat(xs)
+    if 'ydata' not in tkwargs:
+        tkwargs['ydata'] = flat(ys)
+    tkwargs['polar'] = polar
+    ticks(ax, **tkwargs)
     if outf is None:
-        fig.set_size_inches(5,5)
+        fig.set_size_inches(width,height)
         plt.tight_layout()
         plt.show()
     else:
-        plot_graph(fig, outf)
-        
+        plot_graph(fig, outf, width=width, height=height, legend=legend, handles=handles, handles2=handles2, polar=polar, areaonly=areaonly)
+

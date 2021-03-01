@@ -12,9 +12,13 @@
 from __future__ import print_function
 from __future__ import division
 
+import re
+import numpy as np
+
 from past.utils import old_div
 from clasp import click
 import matplotlib.colors as mplc
+from matplotlib.patches import Wedge
 
 import clasp.click_ext as clk
 
@@ -36,7 +40,7 @@ main = plot # backwards compatibility
 coloropt = [
           click.option('-fcol', default=0.0, type=float,
                        help="colormap position for first color"),
-          click.option('-colors', default='med',
+          click.option('-colors', default='viridis',
                        callback=clk.color_inp,
                        help="cmap name or space seperated list of rgb tuples "
                        "0,0,0 120,120,120 etc. if fewer than # series picks ."
@@ -65,16 +69,16 @@ shared = coloropt + [
                        help="foreground color"),
           click.option('-bg', default="white",
                        help="background color"),
-          click.option('--legend/--no-legend', default=True,
+          click.option('--legend/--no-legend', default=False,
                        help="include legend in plot"),
           click.option('-xrotate', default='auto', callback=clk.char0, type=click.Choice(['auto', 'horiz', 'vert', 'a', 'h', 'v'], case_sensitive=False),
                        help="orientation of x-axis labels"),
           click.option('-comment', default='#',
                        help='regex "^[{}].*" indicating comment line '
                        'indicator'),
-          click.option('-labelweight', default='bold', type=click.Choice(['ultralight', 'light', 'normal', 'regular', 'book', 'medium', 'roman', 'semibold', 'demibold', 'demi', 'bold', 'heavy', 'extra bold', 'black']),
+          click.option('-labelweight', default='ultralight', type=click.Choice(['ultralight', 'light', 'normal', 'regular', 'book', 'medium', 'roman', 'semibold', 'demibold', 'demi', 'bold', 'heavy', 'extra bold', 'black']),
                        help="text weight for axes labels"),
-          click.option('-width', default=10.5, type=float,
+          click.option('-width', default=5.0, type=float,
                        help="image width"),
           click.option('-height', default=5.0, type=float,
                        help="image height"),
@@ -104,9 +108,9 @@ shared = coloropt + [
 
 # used by bar, scatter, histo
 sharedA = [
-           click.option('--xgrid/--no-xgrid', default=False,
+           click.option('--xgrid/--no-xgrid', default=True,
                         help="plot x grid lines"),
-           click.option('--ygrid/--no-ygrid', default=False,
+           click.option('--ygrid/--no-ygrid', default=True,
                         help="plot y grid lines"),
            click.option('-yticks', type=int,
                         help="number of y-ticks/gridlines"),
@@ -119,7 +123,7 @@ sharedA = [
                         "file name and index or --header option"),
            click.option('--rows/--no-rows', default=False,
                         help="get data rows instead of columns"),
-           click.option('-ecolors', default="1,1,1", callback=clk.color_inp,
+           click.option('-ecolors', default="viridis", callback=clk.color_inp,
                         help="marker edge colors"),
            click.option('-epositions', default=None,
                         callback=clk.split_float,
@@ -376,6 +380,30 @@ def histo(ctx, dataf, **kwargs):
     return 'histo', kwargs, ctx
 
 
+def wedge_mark(d, s):
+    t1 = d - s/2
+    t2 = d + s/2
+    wd = Wedge(0, 1, t1, t2).get_path()
+    return ruplot.WedgeMark(wd, np.array([t1, d, t2]))
+
+
+def parse_mark(ctx, param, s):
+    if s in [None, 'None', 'none']:
+        result = None
+    else:
+        result = []
+        for part in s.split():
+            try:
+                a = int(part)
+            except ValueError:
+                if re.match(r"w\.\d+\.\d+", part):
+                    a = wedge_mark(*[int(i) for i in part.split(".")[1:]])
+                else:
+                    a = part
+            result.append(a)
+    return result
+
+
 @plot.command('scatter')
 @click.argument('dataf', callback=clk.are_files)
 @click.option('-autox', default=None,
@@ -425,11 +453,11 @@ def histo(ctx, dataf, **kwargs):
               help="label y-axis by percentile with N bins")
 @click.option('--reverse/--no-reverse', default=False,
               help="reverse order of y data (sometimes useful with -autox)")
-@click.option('-ms', default="0", callback=clk.split_float,
+@click.option('-ms', default="2", callback=clk.split_float,
               help="marker size if fewer than # series uses last")
 @click.option('-mew', default="0", callback=clk.split_float,
               help="marker edge width")
-@click.option('-mrk', default='o', callback=clk.split_str,
+@click.option('-mrk', default='o', callback=parse_mark,
               help="marker style if fewer than # series loops")
 @click.option('-criteria',
               help="plot markers based on criteria (either x=VAL or y=VAL)"
@@ -837,9 +865,12 @@ def colors(**kwargs):
             if kwargs['mpal'] is not None:
                 cmap = ruplot.get_colors(kwargs['mpal'])
                 click.echo("\ncolor palette: {} in {} steps:".format(kwargs['mpal'], kwargs['mpaldiv']))
+                mpc = []
                 for i in range(kwargs['mpaldiv']):
                     c = cmap.to_rgba(i/(kwargs['mpaldiv'] - 1.0))
-                    click.echo("{:03d},{:03d},{:03d}".format(*[int(j*255) for j in c[0:3]]))
+                    mpc.append("({},{},{})".format(*[int(j*255) for j in c[0:3]]))
+                print(f"[{','.join(mpc)}]")
+                print(" ".join(mpc).replace("(", "").replace(")", ""))
                 if kwargs['radf']:
                     click.echo("\n ungammad 0-1:")
                     for i in range(kwargs['mpaldiv']):
