@@ -1344,7 +1344,7 @@ def get_nth_loop(li, i):
         return li
 
 
-def quick_scatter(xs, ys, outf=None, colors='viridis', tkwargs=None, ckwargs=None,
+def quick_scatter(xs, ys, ax=None, fig=None, outf=None, colors='viridis', tkwargs=None, ckwargs=None,
                   polar=False, labels=None, legend=False, width=5, height=5, areaonly=False, **kwargs):
     if tkwargs is None:
         tkwargs = {}
@@ -1352,7 +1352,8 @@ def quick_scatter(xs, ys, outf=None, colors='viridis', tkwargs=None, ckwargs=Non
         ckwargs = {}
     if labels is None:
         labels = []
-    ax, fig = plot_setup(polar=polar, areaonly=areaonly)
+    if ax is None or fig is None:
+        ax, fig = plot_setup(polar=polar, areaonly=areaonly)
     cmap = get_colors(colors, **ckwargs)
     ax, handles, handles2 = plot_scatter(fig, ax, xs, ys, labels, cmap, polar=polar, legend=legend, **kwargs)
     if 'xdata' not in tkwargs:
@@ -1362,9 +1363,7 @@ def quick_scatter(xs, ys, outf=None, colors='viridis', tkwargs=None, ckwargs=Non
     tkwargs['polar'] = polar
     ticks(ax, **tkwargs)
     if outf is None:
-        fig.set_size_inches(width,height)
-        plt.tight_layout()
-        plt.show()
+        return ax, fig
     else:
         plot_graph(fig, outf, width=width, height=height, legend=legend, handles=handles, handles2=handles2, polar=polar, areaonly=areaonly)
 
