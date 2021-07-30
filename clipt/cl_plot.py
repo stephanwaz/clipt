@@ -574,6 +574,18 @@ def scatter(ctx, dataf, **kwargs):
               help="linewidth for median line")
 @click.option('-series', default=1,
               help="number of series to plot data in")
+@click.option('-whis', default='1.5', callback=clk.split_float,
+              help="adapted from matplotlib documentation: As a single number,"
+                   "determines the reach of the whiskers to the beyond the "
+                   "first and third quartiles. In other words, where IQR is "
+                   "the interquartile range (Q3-Q1), the upper whisker will "
+                   "extend to last datum less than Q3 + whis*IQR). "
+                   "Similarly, the lower whisker will extend to the first "
+                   "datum greater than Q1 - whis*IQR. Beyond the whiskers, "
+                   "data are considered outliers and are plotted as individual "
+                   "points. As two numbers, set this to an ascending sequence "
+                   "of percentile (e.g., [5, 95]) to set the whiskers at "
+                   "specific percentiles of the data. ignored if --no-fliers")
 @click.option('--clbg/--no-clbg', default=True,
               help="median line uses -bg")
 @click.option('-fillalpha', default=1.0,
@@ -632,6 +644,10 @@ def box(ctx, dataf, **kwargs):
             a6 = mgr.kwarg_match(ruplot.plot_box, kwargs)
             a6.pop('labels', None)
             a6['xlabels'] = xlabels
+            if len(a6['whis']) == 1:
+                a6['whis'] = a6['whis'][0]
+            else:
+                a6['whis'] = (a6['whis'][0], a6['whis'][-1])
             ax, handles = ruplot.plot_box(ax, ys, labels, cmap,
                                             axext['ydata'], **a6)
             if kwargs['outf']:

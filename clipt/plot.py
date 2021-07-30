@@ -30,7 +30,6 @@ from matplotlib.transforms import Bbox
 import clasp.script_tools as mgr
 from hdrstats import hdrstats as hs
 
-
 daycount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
 
 
@@ -348,7 +347,8 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
                     fill=False, linewidth=0, edgecolor='blue',
                     facecolor='blue', transform=ax.transData._b)
         ax.add_artist(ci)
-        # ax.yaxis.set_ticklabels([])
+        if not ygrid:
+            ax.yaxis.set_ticklabels([])
         ax.axes.set_ylabel("")
     if yticks is not None:
         if yscale != 'log':
@@ -802,7 +802,7 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None, 
     return ax, handles
 
 
-def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
+def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x', whis=1.5,
              mew=0.5, ms=3.0, lw=1.0, fcol=0.0, clw=1.0, clbg=True, fillalpha=1.0, notch=False,
              series=1, bg='white', inline=False, mean=False, fliers=True, xlabels=None, **kwargs):
     """adds box plots to ax and returns ax and handles for legend"""
@@ -839,7 +839,7 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x',
             x = np.arange(i, len(data), series)
             sw = 1
         if fliers:
-            whis = 1.5
+            whis = whis
         else:
             whis = (0, 100)
         boxplot = ax.boxplot(data[i*chunksize:i*chunksize+chunksize], notch=notch,
