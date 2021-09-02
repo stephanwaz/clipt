@@ -127,7 +127,10 @@ def get_labels(dataf, labs, a1, ycnt, xheader=False, xlabels=None,
     labs = get_user_labels(labs, labels)
     if rows:
         if drange is not None:
-            la = [labs[i] for i in drange]
+            try:
+                la = [labs[i] for i in drange]
+            except IndexError:
+                la = []
         else:
             la = labs[:ycnt]
         labs = []
@@ -142,7 +145,10 @@ def get_labels(dataf, labs, a1, ycnt, xheader=False, xlabels=None,
                 
         xlabs = la
     elif drange is not None:
-        xlabs = [xlabs[i] for i in drange]
+        try:
+            xlabs = [xlabs[i] for i in drange]
+        except IndexError:
+            xlabs = []
     return labs, xlabs
 
 def ax_limits(x):
@@ -804,7 +810,8 @@ def plot_bar(ax, xs, ys, labels, colormap, stacked=False, rwidth=.8, step=None, 
 
 def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x', whis=1.5,
              mew=0.5, ms=3.0, lw=1.0, fcol=0.0, clw=1.0, clbg=True, fillalpha=1.0, notch=False,
-             series=1, bg='white', inline=False, mean=False, fliers=True, xlabels=None, **kwargs):
+             series=1, sgap=0.5, bg='white', inline=False, mean=False,
+             fliers=True, xlabels=None, **kwargs):
     """adds box plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(series):
@@ -813,6 +820,8 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x', w
     nlab = len(labels)
     chunksize = int(len(data)/series)
     handles = []
+    if series == 1:
+        sgap = 0
     for i in range(series):
         cinc = color_inc_i(fcol, i, nlab, step)
         c = colormap.to_rgba(cinc)
@@ -836,7 +845,7 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x', w
             x = np.arange(2, len(data), series)
             sw = series
         else:
-            x = np.arange(i, len(data), series)
+            x = np.arange(i, len(data), series) + np.linspace(0, sgap*(chunksize - 1), chunksize)
             sw = 1
         if fliers:
             whis = whis
@@ -847,9 +856,15 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x', w
                              positions=x , manage_ticks=False, showmeans=mean, meanline=not notch,
                              **plotargs)
         handles.append(Patch(color=c, label=labels[i]))
-    ax.set_xlim(left=-.5, right=len(data)-.5)
-    if xlabels is not None and len(xlabels) > 0:
-        series_ticks(ax, np.arange(len(data)), xlabels, xrotate='a')
+    if inline:
+        ax.set_xlim(left=-.5, right=len(data)-.5)
+        tickx = np.arange(chunksize) - .5
+    else:
+        ax.set_xlim(left=-.5 - sgap/2, right=len(data) + (chunksize - .5) * sgap - .5)
+        tickx = np.linspace(series/2, len(data) + (chunksize - 1) * sgap - series/2, chunksize) - .5
+    if xlabels is None or len(xlabels) == 0:
+        xlabels = np.arange(chunksize).astype(str)
+    series_ticks(ax, tickx, xlabels, xrotate='a')
     return ax, handles
 
 
