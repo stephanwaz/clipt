@@ -14,7 +14,6 @@ import clipt.plot as mplt
 matplotlib.use(backend)
 
 
-
 def get_root(inside=True, pyenv=False):
     """return root directory of clipt install"""
 

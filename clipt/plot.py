@@ -126,13 +126,13 @@ def get_labels(dataf, labs, a1, ycnt, xheader=False, xlabels=None,
     xlabs = get_user_labels(xlabs, xlabels)
     labs = get_user_labels(labs, labels)
     if rows:
-        if drange is not None:
-            try:
-                la = [labs[i] for i in drange]
-            except IndexError:
-                la = []
-        else:
-            la = labs[:ycnt]
+        # if drange is not None:
+        #     try:
+        #         la = [labs[i] for i in drange]
+        #     except IndexError:
+        #         la = []
+        # else:
+        la = labs[:ycnt]
         labs = []
         for i in y_vals:
             try:
@@ -144,11 +144,11 @@ def get_labels(dataf, labs, a1, ycnt, xheader=False, xlabels=None,
                     pass
                 
         xlabs = la
-    elif drange is not None:
-        try:
-            xlabs = [xlabs[i] for i in drange]
-        except IndexError:
-            xlabs = []
+    # elif drange is not None:
+    #     try:
+    #         xlabs = [xlabs[i] for i in drange]
+    #     except IndexError:
+    #         xlabs = []
     return labs, xlabs
 
 def ax_limits(x):
@@ -241,10 +241,11 @@ def series_ticks(ax, locs, xlabels, xrotate='a'):
     ax.set_xticks(locs)
     rots = dict(a='auto', h='horizontal', v='vertical')
     ro = rots[xrotate]
-    if ro=='auto' and max([len(i) for i in xlabels]) > 10:
-        ro = 'vertical'
-    else:
-        ro = 'horizontal'
+    if ro == 'auto':
+        if max([len(i) for i in xlabels]) > 10:
+            ro = 'vertical'
+        else:
+            ro = 'horizontal'
     ax.set_xticklabels(xlabels, rotation=ro)
     for t in ax.xaxis.get_ticklines():
         t.set_visible(False)
@@ -691,9 +692,11 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
             axT.fill_between(x, areas[i][0], ya2, alpha=falpha, color=c, zorder=-1,
                             linestyle='--', linewidth=lwa/2)
         if cs is not None:
+            colormap.norm.vmax = cmax
+            colormap.norm.vmin = cmin
             plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
                         'marker': mkt, 'cmap': colormap.cmap, 'linewidth': mewa,
-                        'vmin': cmin, 'vmax': cmax, 'c': cs, 'edgecolors': mec,
+                        'c': cs, 'edgecolors': mec,
                         'norm': colormap.norm}
             plotargs.update(kwargs)
             axT.scatter(x, y, **plotargs)
