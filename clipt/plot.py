@@ -433,9 +433,12 @@ def plot_graph(fig, saveimage, width=5, height=5, bg='white', fg='black',
                     loc=loc, bg=bg, fg=fg)
     ax = fig.axes[0]
     if areaonly:
+        fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
         ax.axes.set_xlabel("")
         ax.axes.set_ylabel("")
         ax.xaxis.set_ticklabels([])
+        ax.yaxis.set_ticklabels([])
+        # ax.axis("off")
         ax2 = fig.add_axes([0, 0, 1, 1])
         plargs = dict(bbox_inches=0, aspect='auto', pad_inches=0)
     else:

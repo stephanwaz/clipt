@@ -11,7 +11,11 @@ __all__ = ['plot', 'cl_plot']
 import matplotlib
 backend = matplotlib.get_backend()
 import clipt.plot as mplt
-matplotlib.use(backend)
+
+try:
+    matplotlib.use(backend)
+except ModuleNotFoundError:
+    pass
 
 
 def get_root(inside=True, pyenv=False):

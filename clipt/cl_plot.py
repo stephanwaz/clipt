@@ -273,6 +273,10 @@ def heatmap(ctx, dataf, **kwargs):
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
             a4.pop('labels', None)
+            try:
+                a4['tcol'] = kwargs['fg']
+            except Exception:
+                pass
             ax = ruplot.ticks(ax, annualx=True, dayy=True, **a4)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             colormap = ruplot.get_colors(kwargs['colors'], **a5)
