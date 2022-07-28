@@ -904,7 +904,7 @@ def colors(**kwargs):
     return 'colors', kwargs
 
 
-@plot.resultcallback()
+@plot.result_callback
 @click.pass_context
 def printconfig(ctx, opts, **kwargs):
     """callback to save config file"""
