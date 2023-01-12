@@ -699,8 +699,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
             colormap.norm.vmin = cmin
             plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
                         'marker': mkt, 'cmap': colormap.cmap, 'linewidth': mewa,
-                        'c': cs, 'edgecolors': mec,
-                        'norm': colormap.norm}
+                        'c': cs, 'norm': colormap.norm}
             plotargs.update(kwargs)
             axT.scatter(x, y, **plotargs)
         elif msd is not None:
