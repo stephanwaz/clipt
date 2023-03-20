@@ -4,7 +4,7 @@
 
 __author__ = """Stephen Wasilewski"""
 __email__ = 'stephanwaz@gmail.com'
-__version__ = '1.0.13'
+__version__ = '1.0.14'
 __all__ = ['plot', 'cl_plot']
 
 
