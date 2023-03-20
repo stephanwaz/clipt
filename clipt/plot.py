@@ -440,7 +440,7 @@ def plot_graph(fig, saveimage, width=5, height=5, bg='white', fg='black',
         ax.yaxis.set_ticklabels([])
         # ax.axis("off")
         ax2 = fig.add_axes([0, 0, 1, 1])
-        plargs = dict(bbox_inches=0, aspect='auto', pad_inches=0)
+        plargs = dict(bbox_inches=0, pad_inches=0)
     else:
         ax2 = fig.add_subplot(1, 1, 1, label='background')
         plargs = dict(bbox_inches='tight')
@@ -697,14 +697,14 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
         if cs is not None:
             colormap.norm.vmax = cmax
             colormap.norm.vmin = cmin
-            plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
-                        'marker': mkt, 'cmap': colormap.cmap, 'linewidth': mewa,
-                        'c': cs, 'norm': colormap.norm}
+            plotargs = {'s': msa**2, 'label': l,
+                        'marker': mkt, 'cmap': colormap.cmap, 'linewidths': mewa,
+                        'c': cs, 'norm': colormap.norm, 'edgecolors': mec}
             plotargs.update(kwargs)
             axT.scatter(x, y, **plotargs)
         elif msd is not None:
-            plotargs = {'linewidth': lwa, 's': msa**2, 'label': l,
-                        'marker': mkt, 'linewidth': mewa, 'c': [c],
+            plotargs = {'s': msa**2, 'label': l,
+                        'marker': mkt, 'linewidths': mewa, 'c': [c],
                         'edgecolors': mec}
             plotargs.update(kwargs)
             axT.scatter(x, y, **plotargs)

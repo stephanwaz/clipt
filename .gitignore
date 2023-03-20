@@ -1,0 +1,5 @@
+.eggs
+.idea
+clipt.egg-info
+clipt/__pycache__
+docs/_build
