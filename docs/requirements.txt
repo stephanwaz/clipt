@@ -4,4 +4,4 @@ sphinxcontrib-programoutput
 numpy
 matplotlib
 clasp
-hdrstats
+scipy

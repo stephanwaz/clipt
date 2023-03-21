@@ -26,9 +26,8 @@ from matplotlib import rcParams
 from matplotlib.patches import Circle, Patch
 import matplotlib.colors as colors
 import matplotlib.cm as cmx
-from matplotlib.transforms import Bbox
 import clasp.script_tools as mgr
-from hdrstats import hdrstats as hs
+from scipy import stats
 
 daycount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
 
@@ -873,6 +872,96 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x', w
     return ax, handles
 
 
+def weighted_quantile(d, q, w=None, t=0.0):
+    if w is None:
+        return np.quantile(d, q)
+    else:
+        si = np.argsort(d)
+        d = np.asarray(d)[si]
+        w = np.asarray(w)[si]
+        d = d[w >= t]
+        w = w[w >= t]
+        cw = np.cumsum(w)
+        cw = cw - cw[0]
+        midp = np.asarray(q) * cw[-1]
+        li = np.searchsorted(cw, midp, side='right') - 1
+        ri = np.where(np.isclose(q, 1), li, li+1)
+        dn = np.where(np.isclose(q, 1), 1, (cw[ri] - cw[li]))
+        result = d[li] + (d[ri] - d[li]) * (midp - cw[li])/dn
+        return result
+
+
+def weighted_median(d, w=None, t=0.0):
+    return weighted_quantile(d, .5, w, t)
+
+
+def kernel(d, w=None, mi=None, mx=None, n=1000, t=1e-4, bws=.5):
+    """prepare a gaussian kernel
+
+    bws is a scale factor to the bw_method
+
+    gaussian kernel selection by Scott's rule, see:
+    https://docs.scipy.org/doc/scipy/reference/generated/
+    scipy.stats.gaussian_kde.html
+    """
+    if w is None:
+        neff = len(d)
+    else:
+        d = d[w >= t]
+        w = w[w >= t]
+        neff = np.sum(w)**2 / np.sum(w**2)
+    try:
+        k = stats.gaussian_kde(d, weights=w, bw_method=neff**(-1./(1+4))*bws)
+    except np.linalg.LinAlgError:
+        vstats = {'min': 0, 'max': 0, 'median': 0, 'mean': 0,
+                  'coords': [0], 'vals': [0]}
+    else:
+        if mi is None:
+            mi = np.min(d)
+        if mx is None:
+            mx = np.max(d)
+        inc = (mx - mi)/(n+1)
+        vstats = {'min': mi, 'max': mx, 'median': weighted_median(d, w, t),
+                  'mean': np.average(d, weights=w),
+                  'coords': np.arange(mi, mx + inc/2, inc)
+                  }
+        vstats['vals'] = k(vstats['coords'])
+    return vstats
+
+
+def box_stats(d, wg=None, ci=.75, ciw=.95, t=0.0):
+    qs = np.array([.5 - ciw/2,.5 - ci/2, .5, .5 + ci/2, .5 + ciw/2])
+    ps = [weighted_quantile(d, q, wg, t=t) for q in qs]
+    keys = ['whislo', 'q1', 'med', 'q3', 'whishi']
+    return dict(zip(keys, ps))
+
+
+def bootsamps(samples, d, w=None):
+    i = np.random.choice(np.arange(d.size), size=d.size)
+    if w is not None:
+        return np.average(d[i], weights=w[i])
+    else:
+        return np.average(d[i])
+
+
+def quant_box(x, w=None, ci=.75, ciw=.95):
+    """create box and whiskers for weighted data"""
+    if w is None:
+        w = (None,)*len(x)
+    return [box_stats(d, wg, ci, ciw) for d, wg in zip(x,w)]
+
+def conf_box(x, w=None, ci=.75, ciw=.95, nsamp=100, t=0.0):
+    """bootstrap a confidence interval for the mean of a weighted sample"""
+    bstats = []
+    if w is None:
+        w = (None,)*len(x)
+    for d, wg in zip(x, w):
+        d = np.asarray(d)
+        samples = np.zeros((nsamp, d.size))
+        boots = np.apply_along_axis(bootsamps, 1, samples, d, wg)
+        bstats.append(box_stats(boots, None, ci, ciw, t=t))
+    return bstats
+
 def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, kernelwidth=.5,
                 clw=1.0, clbg=True, fcol=0.0, fillalpha=1.0, median=True, conf=None, confm=None,
                 series=1, bg='white', inline=False, mean=False, weights=None, weightlimit=0.0,
@@ -907,7 +996,7 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
         vstats = []
         flies = []
         for d, w in zip(ds, ws):
-            vs = hs.kernel(d, w=w, n=1000, bws=kernelwidth, t=weightlimit)
+            vs = kernel(d, w=w, n=1000, bws=kernelwidth, t=weightlimit)
             if fliers:
                 qr = np.quantile(d, (.25, .75))
                 iqr = (qr[1] - qr[0]) * 1.5
@@ -922,7 +1011,7 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
         vplot = ax.violin(vstats, showmeans=mean, showmedians=median,
                           widths=rwidth*sw, positions=x)
         if confm is not None:
-            bstats = hs.conf_box(ds, ws, confm)
+            bstats = conf_box(ds, ws, confm)
             plotargs = {
                 'boxprops' : {'linewidth':clw, 'color':c, 'linestyle':'--', 'dash_joinstyle':'miter'},
                 'medianprops' : {'linewidth': 0},
@@ -930,7 +1019,7 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
             }
             ax.bxp(bstats, widths=rwidth*sw/4, positions=x, showfliers=False, showcaps=False, **plotargs)
         if conf is not None:
-            bstats = hs.quant_box(ds, ws, conf)
+            bstats = quant_box(ds, ws, conf)
             if fliers:
                 for j in range(len(bstats)):
                     bstats[j]['fliers'] = flies[j]
