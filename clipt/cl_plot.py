@@ -247,6 +247,9 @@ def bar(ctx, dataf, **kwargs):
               help="opacity of gridlines (color is bg)")
 @click.option('--dst/--no-dst', default=False,
               help="shift data for DST")
+@click.option('--hour12/--hour24', default=True,
+              help="hour axis 12 or 24 hour time")
+@click.option('-lorientation', default='horizontal')
 @click.option('-labels', callback=clk.split_str,
               help="labels for legend")
 @click.option('-ticks', callback=clk.split_float,
@@ -440,6 +443,8 @@ def parse_mark(ctx, param, s):
               help="max for marker size")
 @click.option('-mmin', type=float,
               help="min for marker size")
+@click.option('-markerscale', type=float, default=1.0,
+              help="display scale factor for marker size")
 @click.option('--flipxy/--no-flipxy', default=False,
               help="plot x on vertical axis")
 @click.option('--polarauto/--no-polarauto', default=True,

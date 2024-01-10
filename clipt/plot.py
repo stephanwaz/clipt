@@ -254,7 +254,7 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
           annualx=False, dayy=False, pery=False, ticklines=False, pph=1,
           bottom=None, bg='white', xlabels=None, dpy=365, hpd=24, sh=0,
           polar=False, xticks=None, yticks=None, labelweight='ultralight',
-          matchxy=False, xrotate='a', **kwargs):
+          matchxy=False, xrotate='a', hour12=True, **kwargs):
     """
     setup ticks/axes for plot
 
@@ -312,7 +312,7 @@ def ticks(ax, xdata=[0, 1], ydata=[0, 1], tcol='black', labels=['X', 'Y'],
     if annualx:
         ax = ticks_x_annual(ax, tcol, dpy)
     if dayy:
-        ax = ticks_y_day(ax, tcol, pph, hpd, sh)
+        ax = ticks_y_day(ax, tcol, pph, hpd, sh, hour12=hour12)
     elif pery:
         ax = ticks_y_per(ax, ydata, pery, tcol)
     for tick in ax.yaxis.get_major_ticks():
@@ -397,7 +397,10 @@ def plot_legend(ax, handles, bbox_to_anchor=(1.05, 1), loc=2,
 def add_colorbar(fig, pc, axes=[0.3, 0.0, 0.4, 0.02],
                  ticks=None, ticklabels=None, orientation='horizontal'):
     """add colorbar scale to figure below plot"""
-    cbaxes = fig.add_axes(axes, label='colorbar')
+    if orientation == 'horizontal':
+        cbaxes = fig.add_axes(axes, label='colorbar')
+    else:
+        cbaxes = fig.add_axes([.91, .25, .02, .5], label='colorbar')
     if ticklabels is not None:
         if ticks is None:
             vmin, vmax = pc.get_clim()
@@ -630,7 +633,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                  mrk='o', step=None, fcol=0.0, mew=0.0, emap=None, estep=None,
                  flipxy=False, cs=None, cmin=None, cmax=None, y2=None,
                  msd=None, mmin=None, mmax=None, legend=True,
-                 polar=False, areas=[], falpha=0.5, **kwargs):
+                 polar=False, areas=[], falpha=0.5, markerscale=1, **kwargs):
     """adds scatterplots/lines to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(len(ys)):
@@ -672,7 +675,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
                 mmax = max(flat(msd))
             if mmin is None:
                 mmin = min(flat(msd))
-            msa = np.array([min(mmax,max(mi,mmin)) for mi in msd[i]])
+            msa = np.array([min(mmax,max(mi,mmin)) for mi in msd[i]]) * markerscale
         else:
             msa = get_nth(ms, i)
         mka = get_nth_loop(mrk, i)
@@ -737,7 +740,7 @@ def plot_scatter(fig, ax, xs, ys, labels, colormap, criteria=None, lw=2, ms=0,
 
 def plot_heatmap(fig, ax, data, colormap, vmin=None, vmax=None,
                  dst=False, ticks=None, labels=None, legend=True, hpd=24,
-                 dpy=365, sh=0, **kwargs):
+                 dpy=365, sh=0, lorientation='horizontal', **kwargs):
     """adds heatmap and colorbar to ax returns ax"""
     xlim = ax.axes.get_xlim()
     xrng = abs(xlim[1]-xlim[0])
@@ -757,7 +760,7 @@ def plot_heatmap(fig, ax, data, colormap, vmin=None, vmax=None,
     pc = ax.pcolor(tmtx, cmap=colormap.cmap, vmax=vmax, vmin=vmin, snap=True,
                    **kwargs)
     if legend:
-        add_colorbar(fig, pc, ticks=ticks, ticklabels=labels)
+        add_colorbar(fig, pc, ticks=ticks, ticklabels=labels, orientation=lorientation)
     return ax
 
 
@@ -838,7 +841,7 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x', w
             'boxprops' : {'linewidth':lw,'facecolor':facecolor, 'color':c},
             'capprops' : {'color':c,'linewidth':lw,'solid_capstyle':'butt'},
             'whiskerprops' : {'color':c,'linewidth':lw,'solid_capstyle':'butt'},
-            'medianprops' : {'linewidth':clw*(not mean),'color':medianc,'solid_capstyle':'butt'},
+            'medianprops' : {'linewidth':clw,'color':medianc,'solid_capstyle':'butt'},
             'meanprops' : {'linewidth':clw,'color':medianc,
                            'solid_capstyle':'butt', 'ls':'-', 'marker':'o',
                            'ms':clw*2, 'mfc':medianc, 'mew':0},
@@ -857,7 +860,7 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x', w
             whis = (0, 100)
         boxplot = ax.boxplot(data[i*chunksize:i*chunksize+chunksize], notch=notch,
                              patch_artist=True, widths=rwidth*sw, bootstrap=1000, whis=whis,
-                             positions=x , manage_ticks=False, showmeans=mean, meanline=not notch,
+                             positions=x , manage_ticks=False, showmeans=mean,
                              **plotargs)
         handles.append(Patch(color=c, label=labels[i]))
     if inline:
@@ -1192,12 +1195,15 @@ def ticks_x_annual(ax, fg='black', dpy=365):
     return ax
 
 
-def ticks_y_day(ax, tcol='black', pph=1, hpd=24, sh=0):
+def ticks_y_day(ax, tcol='black', pph=1, hpd=24, sh=0, hour12=True):
     """set yaxis to hours in day"""
-    hlabels = ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM',
-               '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM',
-               '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM',
-               '10PM', '11PM']
+    if hour12:
+        hlabels = ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM',
+                   '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM',
+                   '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM',
+                   '10PM', '11PM']
+    else:
+        hlabels = np.arange(24).astype(int)
     ax.set_yticks(np.arange(0, hpd*pph, pph)+pph*0.5, minor=True)
     ax.set_yticks(np.arange(1, hpd*pph, pph), minor=False)
     ax.set_yticklabels(hlabels[sh:sh+hpd], size=8, minor=True, color=tcol)
