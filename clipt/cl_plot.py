@@ -646,7 +646,7 @@ def box(ctx, dataf, **kwargs):
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
             a4.pop('labels', None)
-            a4['xlabels'] = xlabels
+            a4['xlabels'] = None
             ax = ruplot.tick_from_arg(ax, [0, len(ys[0])], ys, a4, kwargs)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
@@ -756,7 +756,7 @@ def violin(ctx, dataf, **kwargs):
             ax, fig = ruplot.plot_setup(**a3)
             a4 = mgr.kwarg_match(ruplot.ticks, kwargs)
             a4.pop('labels', None)
-            a4['xlabels'] = xlabels
+            a4['xlabels'] = None
             ax = ruplot.tick_from_arg(ax, [0, len(ys[0])], ys, a4, kwargs)
             a5 = mgr.kwarg_match(ruplot.get_colors, kwargs)
             cmap = ruplot.get_colors(kwargs['colors'], **a5)
@@ -765,9 +765,6 @@ def violin(ctx, dataf, **kwargs):
             a6['weights'] = weights
             ax, handles = ruplot.plot_violin(ax, ys, labels, cmap,
                                              axext['ydata'], **a6)
-            a4['xdata'] = ax.get_xlim()
-            a4['ydata'] = ax.get_ylim()
-            ax = ruplot.ticks(ax, **a4)
             if kwargs['outf']:
                 outf = kwargs['outf']
             else:
@@ -844,6 +841,8 @@ def previewpal(**kwargs):
               help="matplotlib palette to print r,g,b vals")
 @click.option('-mpaldiv', default=10,
               help="number of segments")
+@click.option('-mpalp', default="0 1",
+              help="positions", callback=clk.split_float)
 @click.option('--opts', '-opts', is_flag=True,
               help="check parsed options")
 @click.option('--debug', is_flag=True,
@@ -888,7 +887,7 @@ def colors(**kwargs):
                                          for j in i]) for i in v]
                         click.echo("{}:  {}".format(k, "  ".join(fmt)))
             if kwargs['mpal'] is not None:
-                cmap = ruplot.get_colors(kwargs['mpal'])
+                cmap = ruplot.get_colors(kwargs['mpal'], positions=kwargs["mpalp"])
                 click.echo("\ncolor palette: {} in {} steps:".format(kwargs['mpal'], kwargs['mpaldiv']))
                 mpc = []
                 for i in range(kwargs['mpaldiv']):

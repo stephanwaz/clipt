@@ -871,6 +871,9 @@ def plot_box(ax, data, labels, colormap, ylim, rwidth=.8, step=None, mark='x', w
         tickx = np.linspace(series/2, len(data) + (chunksize - 1) * sgap - series/2, chunksize) - .5
     if xlabels is None or len(xlabels) == 0:
         xlabels = np.arange(chunksize).astype(str)
+    elif len(xlabels) != chunksize:
+        xl, xu = ax.get_xlim()
+        tickx = np.linspace(xl+.5, xu-.5, len(xlabels))
     series_ticks(ax, tickx, xlabels, xrotate='a')
     return ax, handles
 
@@ -968,7 +971,7 @@ def conf_box(x, w=None, ci=.75, ciw=.95, nsamp=100, t=0.0):
 def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, kernelwidth=.5,
                 clw=1.0, clbg=True, fcol=0.0, fillalpha=1.0, median=True, conf=None, confm=None,
                 series=1, bg='white', inline=False, mean=False, weights=None, weightlimit=0.0,
-                fliers=False, **kwargs):
+                fliers=False, xlabels=None, **kwargs):
     """adds violin plots to ax and returns ax and handles for legend"""
     nlab = len(labels)
     for i in range(series):
@@ -1016,7 +1019,7 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
         if confm is not None:
             bstats = conf_box(ds, ws, confm)
             plotargs = {
-                'boxprops' : {'linewidth':clw, 'color':c, 'linestyle':'--', 'dash_joinstyle':'miter'},
+                'boxprops' : {'linewidth':lw, 'color':c, 'linestyle':'dashed', 'dash_joinstyle':'miter'},
                 'medianprops' : {'linewidth': 0},
                 'whiskerprops': {'linewidth': 0},
             }
@@ -1057,6 +1060,10 @@ def plot_violin(ax, data, labels, colormap, ylim, rwidth=.8, step=None, lw=1.0, 
                     vp.set_linewidth(clw)
         handles.append(Patch(color=c, label=labels[i]))
     ax.set_xlim(left=-.5, right=len(data)-.5)
+    if xlabels is None or len(xlabels) == 0:
+        xlabels = np.arange(chunksize).astype(str)
+    tickx = np.linspace(0, len(data)-1, len(xlabels))
+    series_ticks(ax, tickx, xlabels, xrotate='a')
     return ax, handles
 
 
